@@ -1,0 +1,48 @@
+<skinpartwidget screenname="InfoBar,SecondInfoBar">
+<variable name="screenname" value="%SCREENNAME%" type="static" />
+
+<if variable="screenname" value="InfoBar">
+ <widget source="HbbtvApplication" render="Pixmap" pixmap="SKINPART/ico_hbbtv_on.png" position="907,670" size="64,24" zPosition="10" alphatest="blend">
+    <convert type="ConditionalShowHide" />
+  </widget>
+</if>
+  <ePixmap pixmap="SKINPART/ico_dolby_off.png" position="1030,671" size="34,23" zPosition="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="Pixmap" pixmap="SKINPART/ico_dolby_on.png" position="1030,671" size="34,23" zPosition="2" alphatest="blend">
+    <convert type="ServiceInfo">IsMultichannel</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+
+  <ePixmap pixmap="SKINPART/ico_format_off.png" position="1141,671" size="43,23" zPosition="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="Pixmap" pixmap="SKINPART/ico_format_on.png" position="1141,671" size="43,22" zPosition="2" alphatest="blend">
+    <convert type="ServiceInfo">IsWidescreen</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <ePixmap pixmap="SKINPART/ico_txt_off.png" position="986,671" size="30,23" zPosition="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="Pixmap" pixmap="SKINPART/ico_txt_on.png" position="986,671" size="30,23" zPosition="2" alphatest="blend">
+    <convert type="ServiceInfo">HasTelext</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <ePixmap pixmap="SKINPART/ico_hd_off.png" position="1080,670" size="49,24" zPosition="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="Pixmap" pixmap="SKINPART/ico_hd_on.png" position="1080,670" size="49,24" zPosition="2" alphatest="blend">
+    <convert type="ServiceInfo">VideoWidth</convert>
+    <convert type="ValueRange">721,1980</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <ePixmap pixmap="SKINPART/ico_crypt_off.png" position="1200,671" size="37,23" zPosition="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="Pixmap" pixmap="SKINPART/ico_crypt_on.png" position="1200,671" size="37,23" zPosition="2" alphatest="blend">
+    <convert type="ServiceInfo">IsCrypted</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <ePixmap pixmap="SKINPART/ico_hbbtv_off.png" position="907,670" size="64,24" zPosition="1" alphatest="blend" />
+  <ePixmap pixmap="SKINPART/subtitle_off.png" position="862,671" size="31,23" alphatest="blend" />
+  <widget source="session.CurrentService" render="Pixmap" pixmap="SKINPART/subtitle_on.png" position="862,671" zPosition="1" size="31,23" alphatest="blend">
+    <convert type="ServiceInfo">SubservicesAvailable</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+<ePixmap pixmap="SKINPART/ico_rec_off.png" position="805,671" size="45,23" zPosition="1" alphatest="blend" />
+  
+
+<widget source="session.RecordState" render="Pixmap" pixmap="SKINPART/ico_rec_on.png" position="805,671" size="45,23" zPosition="2" alphatest="blend">
+<convert type="ConditionalShowHide">Blink</convert>
+</widget>
+</skinpartwidget>  
