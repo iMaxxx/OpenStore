@@ -1,6 +1,6 @@
 #Python
 *.pyc
-
+/OpenStore-Info
 
 
 #Photoshop
