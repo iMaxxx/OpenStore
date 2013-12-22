@@ -97,7 +97,8 @@ class OpenScreen(ConfigListScreen, Screen):
 		self["list2"] =  CategoriesList([])
 		self["list3"] =  CategoriesList([])
 		self["list4"] =  CategoriesList([])
-		
+		self.listnull = CategoriesList([])
+		self.clist = [[],[],[]]
 		self.columns = 4
 		self.rows = 3
 		self.selectedColumn = 1
@@ -161,11 +162,10 @@ class OpenScreen(ConfigListScreen, Screen):
 		selectionEnabled = False
 		i = 1
 
+
 		list[i].append(self.CategoryEntry(9888, _("New"), "/img/categories/new.png"))
-		metrixTools.callOnMainThread(self.setList,list[i],i)
 		i += 1
 		list[i].append(self.CategoryEntry(9777, _("Last Modified"), "/img/categories/recent.png"))
-		metrixTools.callOnMainThread(self.setList,list[i],i)
 		i += 1
 		list[i].append(self.CategoryEntry(9666, _("Top 50 Downloads"), "/img/categories/top50.png"))
 		metrixTools.callOnMainThread(self.setList,list[i],i)
@@ -235,7 +235,14 @@ class OpenScreen(ConfigListScreen, Screen):
 				selectionEnabled = False
 			self["list"+str(i)].selectionEnabled(selectionEnabled)
 			self["list"+str(i)].instance.moveSelectionTo(self.selectedRow-1)
-				
+			if self.selectedRow > len(self["list"+str(i)].list) and self.selectedRow >= 3 and self["list"+str(i)].list != []:
+				self.clist[i-2] = self["list"+str(i)].list
+				self["list"+str(i)].setList([])
+			elif self["list"+str(i)].list == [] and self.selectedRow <= 3:
+				print self.selectedRow
+				print "-------------reset list------------"
+				self["list"+str(i)].setList(self.clist[i-2])
+				self.clist[i-2] = []
 
 
 	def exit(self):
