@@ -79,7 +79,7 @@ class OpenScreen(ConfigListScreen, Screen):
 <widget name="list2" position="350,125" scrollbarMode="showNever" size="290,568" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
 <widget name="list3" position="639,125" scrollbarMode="showNever" size="290,568" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
 <widget name="list4" position="930,125" scrollbarMode="showNever" size="290,568" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
-<eLabel name="new eLabel" position="1214,25" size="5,60" backgroundColor="blue" />
+<eLabel name="" position="1214,25" size="5,60" backgroundColor="blue" />
 <widget position="766,36" size="438,51" name="title" foregroundColor="#00ffffff" font="SetrixHD; 28" valign="center" transparent="1" backgroundColor="#40000000" halign="right" text="Settings" /></screen>
 """
 

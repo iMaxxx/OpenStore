@@ -38,6 +38,7 @@ from Components.Label import Label
 from Components.Language import language
 from os import environ, listdir, remove, rename, system
 from skin import parseColor
+import e2info
 from Components.Pixmap import Pixmap
 from Components.Label import Label
 import gettext
@@ -236,6 +237,14 @@ def getFile(filepath):
 	content = f.read()
 	f.close()
 	return content
+
+def getBrand():
+	boxinfo = e2info.getInfo()
+	return boxinfo['brand']
+
+def getRestrictions():
+	restriction = "%image::"+config.plugins.MyMetrix.image.value+"%brand::"+getBrand()+"%"
+	return restriction
 
 
 		

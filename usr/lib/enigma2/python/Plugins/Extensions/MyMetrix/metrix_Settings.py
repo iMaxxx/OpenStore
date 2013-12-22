@@ -86,11 +86,10 @@ def translateBlock(block):
 #######################################################################			
 
 class OpenScreen(ConfigListScreen, Screen):
-	skin = """
-<screen name="MyMetrix-Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="#b0ffffff">
+	skin = """<screen name="MyMetrix-Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="#b0ffffff">
     <eLabel position="40,40" size="620,640" backgroundColor="#40000000" zPosition="-1" />
   <eLabel position="660,71" size="575,575" backgroundColor="#40111111" zPosition="-1" />
-<widget name="metrixVersion" position="676,464" size="500,46" font="Regular; 20" backgroundColor="#40000000" transparent="1" />
+<widget name="metrixVersion" position="329,640" size="315,35" font="Regular; 20" backgroundColor="#40000000" transparent="1" halign="right" />
 <eLabel font="Regular; 20" foregroundColor="#00ffffff" backgroundColor="#40000000" halign="left" position="75,641" size="250,33" text="%s" transparent="1" />
  <widget name="config" position="54,110" itemHeight="30" scrollbarMode="showOnDemand" size="590,510" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
   <eLabel position="54,51" size="348,50" text="MyMetrix" font="Regular; 40" valign="center" transparent="1" backgroundColor="#40000000" />
@@ -98,10 +97,10 @@ class OpenScreen(ConfigListScreen, Screen):
   <eLabel position="62,639" size="5,40" backgroundColor="#00ff0000" />
   <ePixmap position="671,149" size="550,310" zPosition="3" alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/sponsor.png" />
 
-<widget name="avatar" position="1109,521" size="96,96" />
-<widget name="metrixUpdate" position="675,85" size="500,52" backgroundColor="#40000000" foregroundColor="#00ffffff" transparent="1" font="Regular; 20" />
-
-<widget name="username" position="692,543" size="400,50" font="Regular; 30" transparent="1" halign="right" backgroundColor="#40000000" foregroundColor="#00ffffff" />
+<widget name="avatar" position="1109,526" size="96,96" />
+<eLabel text="Sponsor" position="675,85" size="500,52" backgroundColor="#40000000" foregroundColor="#00ffffff" transparent="1" font="Regular; 30" />
+<eLabel text="www.open-store.net" position="675,492" size="426,45" backgroundColor="#40000000" foregroundColor="#00ffffff" transparent="1" font="Regular; 24" />
+<widget name="username" position="692,553" size="400,50" font="Regular; 30" transparent="1" halign="right" backgroundColor="#40000000" foregroundColor="#00ffffff" />
 
 </screen>
 """ %(_("Discard"), _("Settings"))
@@ -118,10 +117,8 @@ class OpenScreen(ConfigListScreen, Screen):
 		self["avatar"] = Pixmap()
 		self["username"] = Label()
 		self["metrixVersion"] = Label(_(self.version + " - open-store.net"))
-		self["metrixUpdate"] = Label(_(" "))
 		if config.plugins.MetrixUpdater.Reboot.value == 1:
-			self["metrixVersion"] = Label(_(self.version + " - live.mymetrix.de (Reboot required)"))
-		self["metrixUpdate"] = Label(_(" "))
+			self["metrixVersion"] = Label(self.version + _(" - (Reboot required)"))
 		list = []
 		
 		
@@ -189,6 +186,7 @@ class OpenScreen(ConfigListScreen, Screen):
 		else:
 			self.picPath = metrixDefaults.PLUGIN_DIR + "images/user.png"
 			self["username"].setText(_(config.plugins.MetrixConnect.username.value))
+		#self.UpdatePicture()
 		self.ShowPicture()
 
 

@@ -176,7 +176,10 @@ class OpenScreen(ConfigListScreen, Screen ):
 	def getPackages(self,isactive=""):
 		menu = []
 		try:
-			data = metrixCore.getWeb(self.url,True,{'orderby':self.orderby+" "+self.limit,'category_id':str(self.category_id)})
+			params = {'restrictions':metrixTools.getRestrictions(),
+					  'orderby':self.orderby+" "+self.limit,
+					  'category_id':str(self.category_id)}
+			data = metrixCore.getWeb(self.url,True,params)
 
 			dom = parseString(data)
 			for design in dom.getElementsByTagName('entry'):

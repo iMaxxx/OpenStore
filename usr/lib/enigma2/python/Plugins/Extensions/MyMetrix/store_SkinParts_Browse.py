@@ -174,17 +174,20 @@ class OpenScreen(ConfigListScreen, Screen):
 		
 	def getSkinParts(self,isactive=""):
 		menu = []
+		print "%image::"+config.plugins.MyMetrix.image.value+"%brand::"+metrixTools.getBrand()+"%"
 		try:
 			if self.pagelength == 0:
 				params = {'screenname':self.screenname,
 						'suite_id':self.suite_id,
 						'developer':str(config.plugins.MyMetrix.Store.SkinPart_Developer.value),
+						'restrictions':metrixTools.getRestrictions(),
 						'orderby':self.orderby,
 						'type':str(self.type)}
 			else:
 				params = {'screenname':self.screenname,
 						'suite_id':self.suite_id,
 						'orderby':self.orderby,
+						'restrictions':metrixTools.getRestrictions(),
 						'developer':str(config.plugins.MyMetrix.Store.SkinPart_Developer.value),
 						'pagelength':str(self.pagelength),
 						'type':str(self.type),

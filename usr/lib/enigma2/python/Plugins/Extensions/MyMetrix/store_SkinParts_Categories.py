@@ -162,7 +162,7 @@ class OpenScreen(ConfigListScreen, Screen):
 				self.session.open(store_SkinParts_Browse.OpenScreen,"%","%",_("Last Modified"),"date_modified desc",False,20)
 			elif returnValue == "mostdownloaded":
 				self.session.open(store_SkinParts_Browse.OpenScreen,"%","%",_("Top 50 Downloads"),"downloads desc",False,50)
-			elif returnValue == "bundles":
+			elif returnValue == "bundle":
 				self.session.open(store_SkinParts_Browse.OpenScreen,"%","%",_("Bundles"),"date desc",False,50,"bundle")
 			elif returnValue is "Extensions":
 				self.session.open(store_Packages_Browse.OpenScreen,"2017",_("Skin Extensions"))
