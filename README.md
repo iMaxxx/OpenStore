@@ -1,22 +1,23 @@
 OpenStore - www.open-store.net
 =========
 
+## Screenshots
 
-OpenStore Plugin - Explore The Variety Of Your Set-Top-Box
+### OpenStore Plugin - Explore The Variety Of Your Set-Top-Box
 ![alt tag](http://open-store.net/info/Screenshots/Plugin/OpenStore1.jpg)
 
 =========
 
-MetrixHD - Skin for Enigma2 
+### MetrixHD - Skin for Enigma2 
 ![alt tag](http://open-store.net/info/Screenshots/Skin/InfoBar.jpg?raw=true)
 
 =========
 
-MyMetrix Plugin to customize your skin
+### MyMetrix Plugin to customize your skin
 ![alt tag](http://open-store.net/info/Screenshots/Plugin/SkinPartsSettingsPage.jpg?raw=true)
 
 
-Major Changes:
+## Major Changes:
 - (NEW) ActiveXPicons - Download XPicons from online repositories
 - (NEW) ActiveXPicons - Choose original or 8bit depth for XPicon downloads
 - (NEW) ActiveXPicons - Optional XPicon overwrite mode until next boot
@@ -44,7 +45,7 @@ Major Changes:
 - (FIXED) Refreshing page jumping pages with left/right key
 - many more....
 
-To-Do:
+### To-Do:
 - Build new Updater - depends on new build-number for entries
 - Save information of installed plugins
 - downloadable plugin icons
