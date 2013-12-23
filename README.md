@@ -17,7 +17,7 @@ OpenStore - www.open-store.net
 ![alt tag](http://open-store.net/info/Screenshots/Plugin/SkinPartsSettingsPage.jpg?raw=true)
 
 
-## Major Changes:
+## Major Changes
 - (NEW) ActiveXPicons - Download XPicons from online repositories
 - (NEW) ActiveXPicons - Choose original or 8bit depth for XPicon downloads
 - (NEW) ActiveXPicons - Optional XPicon overwrite mode until next boot
