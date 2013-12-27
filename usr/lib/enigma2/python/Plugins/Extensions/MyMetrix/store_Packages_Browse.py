@@ -48,7 +48,7 @@ from xml.dom.minidom import parseString
 import gettext
 from Components.GUIComponent import GUIComponent
 from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryText,MultiContentEntryPixmapAlphaTest
+from Components.MultiContent import MultiContentEntryText,MultiContentEntryPixmapAlphaTest,MultiContentEntryPixmapAlphaBlend
 from enigma import eListbox, RT_HALIGN_LEFT, RT_HALIGN_RIGHT
 from enigma import eTimer, eDVBDB,eConsoleAppContainer
 from enigma import ePicLoad,eListboxPythonMultiContent,gFont,addFont, loadPic, loadPNG
@@ -79,39 +79,44 @@ def _(txt):
 		
 
 class OpenScreen(ConfigListScreen, Screen ):
-	skin = """<screen name="MyMetrix-Store-Browse" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	skin = """<screen name="MyMetrix-Store-Browse" position="0,5" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
 <eLabel position="0,0" size="1280,720" backgroundColor="#b0ffffff" zPosition="-50" />
 <eLabel position="40,40" size="620,640" backgroundColor="#40111111" zPosition="-1" />
-<eLabel position="660,60" size="575,600" backgroundColor="#40222222" zPosition="-1" />
+<eLabel position="660,60" size="575,600" backgroundColor="#40222222" zPosition="-2" />
 <eLabel position="644,40" size="5,60" backgroundColor="#000000ff" />
 <widget position="500,61" size="136,40" name="sort" foregroundColor="#00bbbbbb" font="Regular; 25" valign="center" backgroundColor="#40000000" transparent="1" halign="right" />
-  <eLabel font="Regular; 20" foregroundColor="#00ffffff" backgroundColor="#40000000" halign="left" position="695,619" size="174,33" text="%s" transparent="1" />
+  <widget font="Regular; 20" foregroundColor="#00ffffff" backgroundColor="#40000000" halign="left" position="680,620" size="160,33" name="greenbutton" transparent="1" />
  <widget name="menu" position="40,117" scrollbarMode="showNever" size="620,560" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
   <widget position="55,55" size="470,50" name="title" noWrap="1" foregroundColor="#00ffffff" font="SetrixHD; 33" valign="center" transparent="1" backgroundColor="#40000000" />
-  <widget position="679,585" size="533,32" name="isInstalled" foregroundColor="#00ffffff" font="Regular; 20" valign="center" halign="left" transparent="1" backgroundColor="#40000000" />
-  <eLabel position="681,620" size="5,40" backgroundColor="#0000ff00" />
-<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/star.png" position="1192,619" size="32,34" zPosition="1" alphatest="blend" />
-  <eLabel font="Regular; 20" foregroundColor="#00ffffff" backgroundColor="#40000000" halign="left" position="899,618" size="170,33" text="%s" transparent="1" />
-<widget name="helperimage" position="669,150" size="550,310" zPosition="1" alphatest="blend" />
+  <widget position="672,585" size="540,32" name="isInstalled" foregroundColor="#00ffffff" font="Regular; 20" valign="center" halign="left" transparent="1" backgroundColor="#40000000" />
+  <eLabel position="669,620" size="5,40" backgroundColor="#0000ff00" />
+<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/star.png" position="1197,440" size="32,34" zPosition="1" alphatest="blend" />
+  <widget font="Regular; 20" foregroundColor="#00ffffff" backgroundColor="#40000000" halign="left" position="874,620" size="160,33" name="yellowbutton" transparent="1" />
+<widget name="helperimage" position="669,150" size="550,310" zPosition="-1" alphatest="blend" />
 <widget position="674,62" size="546,50" name="itemname" foregroundColor="#00ffffff" font="SetrixHD; 35" valign="center" transparent="1" backgroundColor="#40000000" noWrap="1" />
- <widget position="1073,617" size="113,40" name="votes" foregroundColor="#00ffffff" font="Regular; 25" valign="center" halign="right" transparent="1" backgroundColor="#40000000" noWrap="1" />
-<eLabel position="885,620" zPosition="1" size="5,40" backgroundColor="#00ffff00" />
-<widget position="674,462" size="545,121" name="description" foregroundColor="#00ffffff" font="Regular; 17" valign="center" halign="left" transparent="1" backgroundColor="#40000000" />
+ <widget position="1112,441" size="81,29" name="votes" foregroundColor="#00ffffff" font="Regular; 25" valign="center" halign="right" transparent="1" backgroundColor="#00000000" noWrap="1" />
+<eLabel position="865,620" zPosition="1" size="5,40" backgroundColor="#00ffff00" />
+<widget position="670,472" size="549,112" name="description" foregroundColor="#00ffffff" font="Regular; 17" valign="center" halign="left" transparent="1" backgroundColor="#40000000" />
 <widget position="674,112" size="341,35" name="author" foregroundColor="#00bbbbbb" font="Regular; 25" valign="center" backgroundColor="#40000000" transparent="1" halign="left" />
 <widget position="1019,113" size="200,35" name="date" foregroundColor="#00999999" font="Regular; 25" valign="center" backgroundColor="#40000000" transparent="1" halign="right" zPosition="1" />
- </screen>
-""" %(_("Install "), _("Vote"))
+ <eLabel position="1055,620" zPosition="1" size="5,40" backgroundColor="#00ff0000" />
+<widget font="Regular; 20" foregroundColor="#00ffffff" backgroundColor="#40000000" halign="left" position="1064,620" size="160,33" name="redbutton" transparent="1" />
+</screen>
+"""
 
-	def __init__(self, session,category_id = "%",category_name=_("Plugins"),updates="0", limit = ""):
+	def __init__(self, session,category_id = "%",category_name=_("Plugins"),onlyupdates=False, limit = "",onlyinstalled=False):
 		Screen.__init__(self, session)
 		self.limit = limit
-		self["title"] = Label(_("OpenStore // "+category_name))
+		self["title"] = Label("OpenStore // "+_(category_name))
 		self.orderby="date_created desc"
 		self.url = metrixDefaults.URL_GET_PACKAGES
 		self["itemname"] = Label()
 		self["author"] = Label()
 		self["votes"] = Label()
 		self["date"] = Label()
+		self["yellowbutton"] = Label()
+		self["redbutton"] = Label()
+		self["greenbutton"] = Label()
 		self["sort"] = Label(_("New"))
 		self["description"] = Label()
 		self["isInstalled"] = Label()
@@ -121,6 +126,8 @@ class OpenScreen(ConfigListScreen, Screen ):
 		self.image_token = ""
 		self.storage_id = ""
 		self.file_id = ""
+		self.onlyupdates = onlyupdates
+		self.onlyinstalled = onlyinstalled
 		self.file_token = ""
 		self.currentgroup = 'Packages'
 		self.image = metrixDefaults.URI_IMAGE_LOADING
@@ -141,6 +148,7 @@ class OpenScreen(ConfigListScreen, Screen ):
 			"up": self.keyUp,
 			"green": self.installPackage,
 			"blue": self.changeSort,
+			"red": self.removePackage,
 			"down": self.keyDown,
 			"right": self.pageDown,
 			"left": self.pageUp,
@@ -162,8 +170,10 @@ class OpenScreen(ConfigListScreen, Screen ):
 				self.getPackages()
 			if self.getEntry == True:
 				self.getEntry = False
-				self.image = metrixTools.webPixmap(self["menu"].l.getCurrentSelection()[0][8],'openStoreImage',{'width':550})
-				#self.icon = metrixTools.webPixmap(self["menu"].l.getCurrentSelection()[0][9],'openStoreIcon',{'width':100})
+				try:
+					self.image = metrixTools.webPixmap(self["menu"].l.getCurrentSelection()[0][8],'openStoreImage',{'width':550})
+				except:
+					pass
 				metrixTools.callOnMainThread(self.refreshMeta)
 			if self.action_downloadPackage == True:
 				self.action_downloadPackage = False
@@ -180,9 +190,12 @@ class OpenScreen(ConfigListScreen, Screen ):
 					  'orderby':self.orderby+" "+self.limit,
 					  'category_id':str(self.category_id)}
 			data = metrixCore.getWeb(self.url,True,params)
-
+			if "<exception status=""error""" in data:
+				raise Exception("Error loading data")
 			dom = parseString(data)
 			for design in dom.getElementsByTagName('entry'):
+				isinstalled = False
+				updateavailable = False
 				item_id = str(design.getAttributeNode('id').nodeValue)
 				name = str(design.getAttributeNode('name').nodeValue)
 				author = str(design.getAttributeNode('author').nodeValue)
@@ -196,62 +209,79 @@ class OpenScreen(ConfigListScreen, Screen ):
 				icon_link = str(design.getAttributeNode('icon_link').nodeValue)
 				downloads = str(design.getAttributeNode('downloads').nodeValue)
 				total_votes = str(design.getAttributeNode('total_votes').nodeValue)
+				build = int(design.getAttributeNode('build').nodeValue)
 				description = str(design.getAttributeNode('description').nodeValue)
 				previouspackage = str(design.getAttributeNode('previouspackage').nodeValue)
 				path = metrixDefaults.pathRoot()+"packages/"+item_id
-				menu.append(self.PackagesListEntry(item_id,name,author,rating,date,version,total_votes,item_type,image_link,icon_link,description,file_link,downloads,previouspackage,date_modified))
+				localbuild = int(metrixDefaults.cfg(metrixDefaults.CONFIG_INSTALLEDPACKAGES,item_id,"build","int"))
+				# add when not only updates or (only updates and online build is higher)
+				if not localbuild == metrixDefaults.NONEINT:
+					isinstalled = True
+				if build > localbuild:
+					updateavailable = True
+				if (not self.onlyupdates and not self.onlyinstalled == True) or (build > localbuild and self.onlyupdates == True) or (self.onlyinstalled and isinstalled == True):
+					menu.append(self.PackagesListEntry(item_id,name,author,rating,date,version,total_votes,item_type,image_link,icon_link,description,file_link,downloads,previouspackage,date_modified,build,isinstalled,updateavailable))
 				metrixTools.callOnMainThread(self.setList,menu)
 			if len(menu) < 1:
-				menu.append(self.PackagesListEntry("-",_("No Packages available!")))
+				self.image = metrixDefaults.PLUGIN_DIR + "images/sponsor.png"
 				metrixTools.callOnMainThread(self.setList,menu)
 		except Exception, e:
 			metrixTools.log('Error getting packages via web',e)
-			menu.append(self.PackagesListEntry("-",_("Error loading data!")))
+			self.image = metrixDefaults.PLUGIN_DIR + "images/sponsor.png"
 			metrixTools.callOnMainThread(self.setList,menu)
+		self.getEntry = True
 
-	def PackagesListEntry(self,item_id,name,author="",rating="",date="",version="",total_votes="",item_type="",image_link="",icon_link="",description="",file_link="",downloads="",previouspackage="0",date_modified=""):
-		res = [[item_id,name,author,rating,date,version,total_votes,item_type,image_link,icon_link,description,file_link,downloads,date_modified]]
+	def PackagesListEntry(self,item_id,name,author="",rating="",date="",version="",total_votes="",item_type="",image_link="",icon_link="",description="",file_link="",downloads="",previouspackage="0",date_modified="",build=0,isinstalled=False,updateavailable=False):
+		res = [[item_id,name,author,rating,date,version,total_votes,item_type,image_link,icon_link,description,file_link,downloads,date_modified,build,isinstalled,updateavailable]]
 		path = metrixDefaults.pathRoot()+"packages/"+str(item_id)
-		if os.path.exists(path):
+		if isinstalled:
 			pngtype = metrixDefaults.PLUGIN_DIR + "images/package-on.png"
+			if updateavailable:
+				res.append(MultiContentEntryText(pos=(70, 4), size=(365, 45), font=0, text=name,color=metrixDefaults.COLOR_UPDATE_AVAILABLE))
+			else:
+				res.append(MultiContentEntryText(pos=(70, 4), size=(365, 45), font=0, text=name,color=metrixDefaults.COLOR_INSTALLED))
 		else:
 			pngtype = metrixDefaults.PLUGIN_DIR + "images/package.png"
+			res.append(MultiContentEntryText(pos=(70, 4), size=(365, 45), font=0, text=name))
 		
 		png = metrixDefaults.PLUGIN_DIR + "images/vote"+rating+".png"
 		pngicon = metrixTools.webPixmap(icon_link,"openStoreIcon"+str(item_id),{'width':54})
-		res.append(MultiContentEntryPixmapAlphaTest(pos=(445, 9), size=(185, 32), png=loadPNG(png)))
-		res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(54, 54), png=loadPNG(pngicon)))
-		res.append(MultiContentEntryText(pos=(70, 4), size=(365, 45), font=0, text=name))
+		res.append(MultiContentEntryPixmapAlphaBlend(pos=(445, 9), size=(185, 32), png=loadPNG(png)))
+		res.append(MultiContentEntryPixmapAlphaBlend(pos=(5, 1), size=(54, 54), png=loadPNG(pngicon)))
 		return res
 		
 	def installPackage(self):
 		self.action_downloadPackage = True
 		
 	def downloadPackage(self):
-		self.updateStatus(_("Installing..."))
+		self.updatestatus(_("Installing..."))
 		download_link = self["menu"].l.getCurrentSelection()[0][11]
+		item_id = self["menu"].l.getCurrentSelection()[0][0]
+		item_build = self["menu"].l.getCurrentSelection()[0][14]
 		type = self["menu"].l.getCurrentSelection()[0][7]
 		if str(type) == "piconrepo": #XPicon Repository
 			config.plugins.MyMetrix.XPiconsRepository.value = self["menu"].l.getCurrentSelection()[0][0]
 			config.plugins.MyMetrix.XPiconsRepositoryName.value = self["menu"].l.getCurrentSelection()[0][1]
 			config.plugins.MyMetrix.save()    
 			configfile.save()
-			self.updateStatus(_("Repo successfully selected!"))
+			self.updatestatus(_("Repo successfully selected!"))
 		else:
 			try:
-				#data = metrixCore.getWeb(download_link, True)
-				instStatus = metrix_PackageTools.installPackage(download_link,True,True)
+				instStatus = metrix_PackageTools.installPackage(download_link,True,True,item_id,item_build)
 				if instStatus:
-					self.updateStatus(_("Installation complete!"))
+					self.updatestatus(_("Installation complete!"))
 					config.plugins.MetrixUpdater.Reboot.value = 1
 					config.plugins.MetrixUpdater.save()    
 					configfile.save()
+					time.sleep(2)
+					self.getCatalog = True
+					self.getEntry = True
 				else:
-					self.updateStatus(_("Error installing package!"))
+					self.updatestatus(_("Error installing package!"))
 			except:
 				pass
 		
-	def updateStatus(self,message):
+	def updatestatus(self,message):
 		metrixTools.callOnMainThread(self["isInstalled"].setText,message)
 				
 
@@ -263,18 +293,42 @@ class OpenScreen(ConfigListScreen, Screen ):
 			self["votes"].setText(str(self["menu"].l.getCurrentSelection()[0][6]))
 			self["date"].setText(str(self["menu"].l.getCurrentSelection()[0][5]))
 			self["description"].setText(str(self["menu"].l.getCurrentSelection()[0][10]))
-			self.currentid = str(self["menu"].l.getCurrentSelection()[0][0])
+			self.currentid = int(self["menu"].l.getCurrentSelection()[0][0])
 			self.currenttype = str(self["menu"].l.getCurrentSelection()[0][7])
-			
-			id = self.currentid
-			type = self.currenttype
-			path = metrixDefaults.pathRoot()+"packages/"+str(self.currentid)+"/"
-			if os.path.exists(path):
-				self["isInstalled"].setText("Already installed!")
+			isinstalled = self["menu"].l.getCurrentSelection()[0][15]
+			updateavailable = self["menu"].l.getCurrentSelection()[0][16]
+			if isinstalled:
+				self["yellowbutton"].setText(_("Vote"))
+				packageName = metrixDefaults.cfg(metrixDefaults.CONFIG_INSTALLEDPACKAGES,self.currentid,"name")
+				if not packageName == "":
+					self["redbutton"].setText(_("Remove"))
+				else:
+					self["redbutton"].setText("")
+				if updateavailable:
+					self["isInstalled"].setText(_("Update available!"))
+					self["greenbutton"].setText(_("Update"))
+				else:
+					self["isInstalled"].setText(_("Already installed!"))
+					self["greenbutton"].setText(_("Reinstall"))
+					
 			else:
+				self["yellowbutton"].setText("")
+				self["redbutton"].setText("")
+				self["greenbutton"].setText(_("Install"))
 				self["isInstalled"].setText("")
-		except:
-			pass
+			path = metrixDefaults.pathRoot()+"packages/"+str(self.currentid)+"/"
+			
+				
+		except Exception, e:
+			self["itemname"].setText(_("No packages available!"))
+			self["author"].setText("")
+			self["votes"].setText("")
+			self["redbutton"].setText("")
+			self["greenbutton"].setText("")
+			self["yellowbutton"].setText("")
+			self["description"].setText("")
+			self["date"].setText("")
+			metrixTools.log("No packages available in this view!",e)
 	
 	def UpdatePicture(self):
 		self.PicLoad.PictureData.get().append(self.DecodePicture)
@@ -288,7 +342,6 @@ class OpenScreen(ConfigListScreen, Screen ):
 				self["author"].setText(_("by " + str(self["menu"].l.getCurrentSelection()[0][2])))
 		except:
 			pass
-		#print "showing image"
 		
 	def DecodePicture(self, PicInfo = ""):
 		#print "decoding picture"
@@ -301,7 +354,7 @@ class OpenScreen(ConfigListScreen, Screen ):
 		
 	def setList(self,menu):
 		self["menu"].setList(menu)
-		self.getEntry = True
+		
 		
 	def refreshMeta(self):
 		self.updateMeta()
@@ -335,10 +388,33 @@ class OpenScreen(ConfigListScreen, Screen ):
 		self.close()
 	
 	def openRating(self):
-		self.session.open(store_SubmitRating.OpenScreen,self.currentid,self.currentgroup)
-		
-		self.getCatalog = True
-		self.getEntry = True
+		isinstalled = self["menu"].l.getCurrentSelection()[0][15]
+		if isinstalled:
+			self.session.open(store_SubmitRating.OpenScreen,self.currentid,self.currentgroup,str(self["menu"].l.getCurrentSelection()[0][1]))
+			self.getCatalog = True
+			self.getEntry = True
+	
+	def removePackage(self):
+		isinstalled = self["menu"].l.getCurrentSelection()[0][15]
+		if isinstalled:
+			self.updatestatus(_("Removing..."))
+			packageName = metrixDefaults.cfg(metrixDefaults.CONFIG_INSTALLEDPACKAGES,self.currentid,"name")
+			if not packageName == "":
+				if metrix_PackageTools.uninstallPackage(packageName,id=self.currentid,silent=True):
+					self.updatestatus(_("Successfully removed!"))
+					time.sleep(2)
+					self.getCatalog = True
+					self.getEntry = True
+				else:
+					self.updatestatus(_("Error removing package!"))
+			else:
+				metrixDefaults.cfgremovesection(metrixDefaults.CONFIG_INSTALLEDPACKAGES,id)
+				self.updatestatus(_("Entry removed!"))
+				time.sleep(2)
+				self.getCatalog = True
+				self.getEntry = True
+					
+				
 		
 
 	def changeSort(self):
