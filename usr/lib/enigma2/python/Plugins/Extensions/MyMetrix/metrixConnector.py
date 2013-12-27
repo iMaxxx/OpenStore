@@ -193,7 +193,11 @@ def runAction(item_id,action,actiontype,param):
 		elif actiontype == "Package":
 			installPackage(param,item_id)
 		elif actiontype == "PackageURL":
-			metrix_PackageTools.installPackage(param,True)
+			data = param.split(";")
+			if len(data) == 1:
+				metrix_PackageTools.installPackage(data[0],True)
+			else:
+				metrix_PackageTools.installPackage(data[0],True,False,data[1],data[2])
 		elif actiontype == "PiconRepo":
 			params = param.split(";")
 			config.plugins.MyMetrix.XPiconsRepository.value = params[0]
