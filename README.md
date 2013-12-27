@@ -41,6 +41,9 @@ OpenStore - www.open-store.net
 - (NEW) Brand and image selection for SkinParts and Packages
 - (NEW) Shows only SkinParts or plugins with matching restrictions
 - (NEW) View all bundles in a new pseudo category
+- (NEW) Uninstall plugins via plugin
+- (NEW) New sections 'Installed' and 'Updates' on OpenStore wall
+- (NEW) Only vote for plugin if installed
 - (FIXED) Multitasking operations now ready for all OE2.0 boxes
 - (FIXED) Refreshing page jumping pages with left/right key
 - many more....
