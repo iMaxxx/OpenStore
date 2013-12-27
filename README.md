@@ -4,17 +4,25 @@ OpenStore - www.open-store.net
 ## Screenshots
 
 ### OpenStore Plugin - Explore The Variety Of Your Set-Top-Box
-![alt tag](http://open-store.net/info/Screenshots/Plugin/OpenStore1.jpg)
+![alt tag](http://open-store.net/info/Screenshots/Plugin/OpenStore/Categories2.jpg)
+![alt tag](http://open-store.net/info/Screenshots/Plugin/OpenStore/Browse2.jpg)
+![alt tag](http://open-store.net/info/Screenshots/Plugin/OpenStore/Browse3.jpg)
+
 
 =========
 
 ### MetrixHD - Skin for Enigma2 
+![alt tag](http://open-store.net/info/Screenshots/Skin/Menu.jpg?raw=true)
+![alt tag](http://open-store.net/info/Screenshots/Skin/ChannelList.jpg?raw=true)
 ![alt tag](http://open-store.net/info/Screenshots/Skin/InfoBar.jpg?raw=true)
 
 =========
 
 ### MyMetrix Plugin to customize your skin
-![alt tag](http://open-store.net/info/Screenshots/Plugin/SkinPartsSettingsPage.jpg?raw=true)
+![alt tag](http://open-store.net/info/Screenshots/Plugin/MyMetrix/MyMetrix.jpg)
+![alt tag](http://open-store.net/info/Screenshots/Plugin/MyMetrix/MyMetrixCategories.jpg)
+![alt tag](http://open-store.net/info/Screenshots/Plugin/MyMetrix/MySkinParts1.jpg)
+![alt tag](http://open-store.net/info/Screenshots/Plugin/MyMetrix/SkinPartsSettingsPage.jpg?raw=true)
 
 
 ## Major Changes Since Version 2.0.14
