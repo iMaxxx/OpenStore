@@ -263,7 +263,6 @@ def isUpdateAvailable(id,local_data_modified,local_version):
 		
 def parseSkinPart(path,xmlfile="data.xml",configfile="config.cfg",screenname="InfoBar",isScreen=True):
 	xml = ""
-	print "parsing: "+path
 	try:
 		raw_xml = metrixTools.getFile(path+"/"+xmlfile)
 		raw_xml = replaceGlobalVariables(raw_xml)
@@ -357,11 +356,10 @@ def widgetActive(path,xmlfile="data.xml",configfile="config.cfg",screenname="Inf
 		
 		try:
 			target = skinpartconfig.get("screen",screenname.lower())
-			print "TARGET: " + target
 			if target == "" or target == None:
 				skinPartNode = False
 		except Exception, e:
-			metrixTools.log("Error getting SkinPart config!",e)	
+			metrixTools.log("No config.cfg found in "+path)	
 	except Exception, e:
 		metrixTools.log("Error parsing SkinPart!",e)
 		skinPartNode = None
