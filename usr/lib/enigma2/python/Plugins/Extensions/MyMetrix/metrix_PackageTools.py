@@ -78,24 +78,48 @@ def syncPackages():
 	except:
 		pass
 	
-def uninstallPackage(packageName):
+def uninstallPackage(packageName,id=0,silent=False):
 	metrixTools.log("Uninstalling package "+packageName,None,"OpenStore")
 	cmdStatus = runCommand("opkg remove '"+packageName+"'")
 	if cmdStatus[0] == True: #Command without errorcode
-		metrixConnector.showInfo(cmdStatus[1])
+		config.plugins.MetrixUpdater.Reboot.value = 1
+		config.plugins.MetrixUpdater.save()    
+		configfile.save()
+		if not id == 0:
+			metrixDefaults.cfgremovesection(metrixDefaults.CONFIG_INSTALLEDPACKAGES,id)
+		if not silent:
+			metrixConnector.showInfo(cmdStatus[1])
+		else:
+			return True
 	else:
-		metrixConnector.showInfo(_("Error uninstalling Package!"),MessageBox.TYPE_ERROR)
+		if not silent:
+			metrixConnector.showInfo(_("Error uninstalling Package!"),MessageBox.TYPE_ERROR)
+		else:
+			return False
 	syncPackages()
 	
-def installPackage(url,force=False,silent=False):
+def installPackage(url,force=False,silent=False,id=0,build=0):
 	metrixTools.log("Installing package "+url,None,"OpenStore")
+
+	cmdStatus = runCommand("opkg list-installed > /tmp/listpreinstalled.tmp")
 	if force:
 		cmdStatus = runCommand("opkg install --force-overwrite '"+url+"'")
 	else:
 		cmdStatus = runCommand("opkg install '"+url+"'")
 	if cmdStatus[0] == True:
-		#
-
+		if not id == 0:
+			cmdStatus = runCommand("opkg list-installed > /tmp/listinstalled.tmp")
+			
+			metrixDefaults.cfgset(metrixDefaults.CONFIG_INSTALLEDPACKAGES,id,"id",id)
+			try:
+				packagename, packageversion = metrixTools.getFileDiff("/tmp/listpreinstalled.tmp","/tmp/listinstalled.tmp").split(" - ")
+				
+				metrixDefaults.cfgset(metrixDefaults.CONFIG_INSTALLEDPACKAGES,id,"name",packagename)
+				metrixDefaults.cfgset(metrixDefaults.CONFIG_INSTALLEDPACKAGES,id,"version",packageversion)
+			except:
+				pass
+			metrixDefaults.cfgset(metrixDefaults.CONFIG_INSTALLEDPACKAGES,id,"build",build)
+			metrixDefaults.cfgset(metrixDefaults.CONFIG_INSTALLEDPACKAGES,id,"url",url)
 		config.plugins.MetrixUpdater.Reboot.value = 1
 		config.plugins.MetrixUpdater.save()    
 		configfile.save()
@@ -107,6 +131,7 @@ def installPackage(url,force=False,silent=False):
 			metrixConnector.showInfo(_("Error installing Package!"),MessageBox.TYPE_ERROR)
 		return False
 	syncPackages()
+	
 	
 def runCommand(command):
 	try:
@@ -120,5 +145,7 @@ def runCommand(command):
 	except Exception, e:
 		metrixTools.log("Error running command",e,"OpenStore")
 		return 0
+	
+
 	
 	
