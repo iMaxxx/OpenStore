@@ -157,13 +157,13 @@ class OpenScreen(ConfigListScreen, Screen):
 			elif returnValue is "MetrixColors":
 				self.session.open(store_MetrixColors_Browse.OpenScreen)
 			elif returnValue == "newest":
-				self.session.open(store_SkinParts_Browse.OpenScreen,"%","%",_("Newest"),"date desc",False,20)
+				self.session.open(store_SkinParts_Browse.OpenScreen,"%","%",_("Newest"),"date desc",False,pagelength=20)
 			elif returnValue == "modified":
-				self.session.open(store_SkinParts_Browse.OpenScreen,"%","%",_("Last Modified"),"date_modified desc",False,20)
+				self.session.open(store_SkinParts_Browse.OpenScreen,"%","%",_("Last Modified"),"date_modified desc",False,pagelength=20)
 			elif returnValue == "mostdownloaded":
-				self.session.open(store_SkinParts_Browse.OpenScreen,"%","%",_("Top 50 Downloads"),"downloads desc",False,50)
+				self.session.open(store_SkinParts_Browse.OpenScreen,"%","%",_("Top 50 Downloads"),"downloads desc",False,pagelength=50)
 			elif returnValue == "bundle":
-				self.session.open(store_SkinParts_Browse.OpenScreen,"%","%",_("Bundles"),"date desc",False,50,"bundle")
+				self.session.open(store_SkinParts_Browse.OpenScreen,"%","%",_("Bundles"),"date desc",False,pagelength=50,type="bundle")
 			elif returnValue is "Extensions":
 				self.session.open(store_Packages_Browse.OpenScreen,"2017",_("Skin Extensions"))
 			elif self.sort == "suite":
@@ -171,7 +171,7 @@ class OpenScreen(ConfigListScreen, Screen):
 			else:
 				self.session.open(store_SkinParts_Browse.OpenScreen,self["menu"].l.getCurrentSelection()[0][0],"%",self["menu"].l.getCurrentSelection()[0][1])
 		else:
-			print ""
+			pass
 		
 
 	
