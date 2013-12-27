@@ -125,7 +125,6 @@ class OpenScreen(ConfigListScreen, Screen):
 		self.action_downloadSkinPart = False
 		self.thread_updater = threading.Thread(target=self.threadworker,  args=())
 		self.thread_updater.daemon = True
-		#print "suite_id: "+self.suite_id+"   screenname:"+self.screenname
 		
 		self["menu"] =  SkinPartsList([])
 		self.menulist = []                    
@@ -174,7 +173,7 @@ class OpenScreen(ConfigListScreen, Screen):
 		
 	def getSkinParts(self,isactive=""):
 		menu = []
-		print "%image::"+config.plugins.MyMetrix.image.value+"%brand::"+metrixTools.getBrand()+"%"
+		
 		try:
 			if self.pagelength == 0:
 				params = {'screenname':self.screenname,
@@ -213,11 +212,11 @@ class OpenScreen(ConfigListScreen, Screen):
 				menu.append(self.SkinPartsListEntry(item_id,name,author,rating,date,version,total_votes,item_type,image_id,image_token,description,screenname,image_link,isactive,build))
 				metrixTools.callOnMainThread(self.setList,menu)
 			if len(menu) < 1:
-				self.menulist.append(self.SkinPartsListEntry("-",_("No SkinParts available!")))
+				self.picPath = metrixDefaults.PLUGIN_DIR + "images/sponsor.png"
 				metrixTools.callOnMainThread(self.setList,menu)
 		except Exception, e:
 			metrixTools.log("Error getting SkinParts", e)
-			self.menulist.append(self.SkinPartsListEntry("-",_("Error loading data!")))
+			self.picPath = metrixDefaults.PLUGIN_DIR + "images/sponsor.png"
 			metrixTools.callOnMainThread (self.setList,menu)
 		 
 	def setList(self,menu):
@@ -233,13 +232,15 @@ class OpenScreen(ConfigListScreen, Screen):
 		path = config.plugins.MyMetrix.SkinPartPath.value +item_type+"s/active/"+item_type+"_"+str(item_id)+"/"
 		if os.path.exists(path):
 			pngtype = metrixDefaults.PLUGIN_DIR + "images/"+item_type+"-on.png"
+			res.append(MultiContentEntryText(pos=(40, 4), size=(367, 45), font=0, text=name,color=metrixDefaults.COLOR_INSTALLED))
 		else:
 			pngtype = metrixDefaults.PLUGIN_DIR + "images/"+item_type+".png"
+			res.append(MultiContentEntryText(pos=(40, 4), size=(367, 45), font=0, text=name))
 		
 		png = metrixDefaults.PLUGIN_DIR + "images/vote"+rating+".png"
 		res.append(MultiContentEntryPixmapAlphaTest(pos=(412, 9), size=(170, 32), png=loadPNG(png)))
 		res.append(MultiContentEntryPixmapAlphaTest(pos=(3, 7), size=(32, 32), png=loadPNG(pngtype)))
-		res.append(MultiContentEntryText(pos=(40, 4), size=(367, 45), font=0, text=name))
+		
 		return res
 	
 
@@ -286,8 +287,9 @@ class OpenScreen(ConfigListScreen, Screen):
 			else:
 				self["isInstalled"].setText("")
 		except Exception, e:
-			metrixTools.log("Error updating meta", e)
-			traceback.print_exc()
+			self["itemname"].setText(_("No SkinParts available!"))
+			self["author"].setText("")
+			metrixTools.log("No SkinParts availbable in this view")
 	
 	def UpdatePicture(self):
 		self.PicLoad.PictureData.get().append(self.DecodePicture)
@@ -298,7 +300,6 @@ class OpenScreen(ConfigListScreen, Screen):
 		self.PicLoad.startDecode(self.picPath)
 		if self.currentauthor != "":
 			self["author"].setText(_("by") + " " + str(self.currentauthor))
-		#print "showing imageurl: "+self.picPath
 		
 	def DecodePicture(self, PicInfo = ""):
 		#print "decoding picture"
@@ -338,7 +339,7 @@ class OpenScreen(ConfigListScreen, Screen):
 		self.close()
 	
 	def openRating(self):
-		self.session.open(store_SubmitRating.OpenScreen,self.currentid,self.currentgroup)
+		self.session.open(store_SubmitRating.OpenScreen,self.currentid,self.currentgroup,str(self["menu"].l.getCurrentSelection()[0][1]))
 		self.getCatalog = True
 		self.getEntry = True
 		
