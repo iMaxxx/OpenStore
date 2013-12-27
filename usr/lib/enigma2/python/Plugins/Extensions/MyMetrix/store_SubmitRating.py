@@ -82,8 +82,8 @@ class OpenScreen(ConfigListScreen, Screen):
 	skin = """
 <screen name="OpenStore-Vote" position="264,207" size="689,270" flags="wfNoBorder" backgroundColor="#40000000">
   <eLabel font="Regular; 20" foregroundColor="#00ffffff" backgroundColor="#40000000" halign="left" position="49,229" size="250,33" text="Cancel" transparent="1" />
-  <eLabel position="20,15" size="348,50" text="OpenStore" font="Regular; 40" valign="center" transparent="1" backgroundColor="#40000000" />
-  <eLabel position="223,13" size="449,50" text="Vote" foregroundColor="#00ffffff" font="Regular; 30" valign="center" backgroundColor="#40000000" transparent="1" halign="right" />
+  <widget position="12,14" size="574,50" name="title" font="Regular; 35" valign="center" transparent="1" backgroundColor="#40000000" />
+  <eLabel position="588,13" size="84,50" text="Vote" foregroundColor="#00ffffff" font="Regular; 30" valign="center" backgroundColor="#40000000" transparent="1" halign="right" />
   <eLabel position="35,230" size="5,40" backgroundColor="#00ff0000" />
   <eLabel position="389,230" size="5,40" backgroundColor="#0000ff00" />
   <eLabel font="Regular; 20" foregroundColor="#00ffffff" backgroundColor="#40000000" halign="left" position="404,229" size="250,33" text="Submit" transparent="1" />
@@ -93,13 +93,14 @@ class OpenScreen(ConfigListScreen, Screen):
 </screen>
 """
 
-	def __init__(self, session, vote_id="1", group='none'):
+	def __init__(self, session, vote_id="1", group='none',title="OpenStore"):
 		self.ratingurl = metrixDefaults.URL_STORE_API + "set.rating"
 		Screen.__init__(self, session)
 		self.vote_id = str(vote_id)
 		self.group = group
 		self.session = session
 		self.picPath = ""
+		self["title"] = Label(title)
 		self.Scale = AVSwitch().getFramebufferScale()
 		self.PicLoad = ePicLoad()
 		self.rating = 5
