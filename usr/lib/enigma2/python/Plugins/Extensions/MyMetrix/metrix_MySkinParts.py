@@ -201,8 +201,12 @@ class OpenScreen(ConfigListScreen, Screen):
 	def StoreMenuEntry(self,name,value="",type="screen",author="",version="",description="",isactive="",id=""):
 		res = [[value,name,type,author,version,description,isactive,id]]
 		pngtype = metrixDefaults.PLUGIN_DIR + "images/"+type+isactive+".png"
+		if isactive == "":
+			res.append(MultiContentEntryText(pos=(40, 4), size=(455, 45), font=0, text=name))
+		else:
+			res.append(MultiContentEntryText(pos=(40, 4), size=(455, 45), font=0, text=name,color=metrixDefaults.COLOR_INSTALLED))
 		res.append(MultiContentEntryPixmapAlphaTest(pos=(3, 7), size=(32, 32), png=loadPNG(pngtype)))
-		res.append(MultiContentEntryText(pos=(40, 4), size=(455, 45), font=0, text=name))
+		
 		return res
 	
 	def updateMeta(self):
