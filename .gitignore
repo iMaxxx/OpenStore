@@ -6,7 +6,10 @@ metrixCore.py
 
 #Photoshop
 *.psd
+
+#OtherStuff
 *(In Konflikt stehende Kopie von*
+installedPackages.cfg
 
 # OS generated files #
 ######################
