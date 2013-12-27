@@ -84,6 +84,10 @@ CONFIG_SYSTEM_DESC = "/etc/systemdescription.cfg"
 CONFIG_PROFESSIONAL = PLUGIN_DIR + "metrixProfessional.cfg"
 CONFIG_INSTALLEDPACKAGES = PLUGIN_DIR + "installedPackages.cfg"
 
+NONEINT = 999999
+
+COLOR_INSTALLED = 0x0076CC1E
+COLOR_UPDATE_AVAILABLE = 0x00FA8004
 
 BASIC_COLORS = [
 				("#00F0A30A", _("Amber")),
@@ -327,6 +331,8 @@ def getImageNames():
 	else:
 		return [cfg(CONFIG_SYSTEM_DESC,"image","name")]
 
+
+
 def getDefaultImageName():
 	if cfg(CONFIG_SYSTEM_DESC,"image","name") == "":
 		boxinfo = e2info.getInfo()
@@ -342,26 +348,57 @@ def getDefaultImageName():
 	else:
 		return cfg(CONFIG_SYSTEM_DESC,"image","name")
 	
-def cfg(configfile,section,key):
+def cfg(configfile,sectionname,keyname,type="string"):
+	section = str(sectionname)
+	key = str(keyname)
 	try:
 		conf = ConfigParser.RawConfigParser()
 		conf.read(configfile)
-		return conf.get(section,key)
+		if type == "string":
+			value = conf.get(section,key)
+			return value
+		elif type == "int":
+			value = conf.getint(section,key)
+			return value
 	except:
-		return ""
-	
-def cfgset(configfile,section,key,value):
+		if type == "string":
+			return ""
+		elif type == "int":
+			return NONEINT
+
+				
+def cfgset(configfile,sectionname,keyname,keyvalue):
+	section = str(sectionname)
+	key = str(keyname)
+	value = str(keyvalue)
 	try:
 		conf = ConfigParser.RawConfigParser()
 		conf.read(configfile)
 		try:
-			configcontainer.set(section, key, value)
+			conf.set(section, key, value)
 		except ConfigParser.NoSectionError:
-		 	configcontainer.add_section(section)
-		 	configcontainer.set(section, key, value)
+		 	conf.add_section(section)
+		 	conf.set(section, key, value)
 		with open(configfile, 'wb') as file:
-  			file.write(conf)
+  			conf.write(file)
 		return True
-	except:
+	except Exception, e:
+		print str(e)
+		return False
+	
+def cfgremovesection(configfile,sectionname):
+	section = str(sectionname)
+	try:
+		conf = ConfigParser.RawConfigParser()
+		conf.read(configfile)
+		try:
+			conf.remove_section(section)
+		except:
+			pass
+		with open(configfile, 'wb') as file:
+  			conf.write(file)
+		return True
+	except Exception, e:
+		print str(e)
 		return False
 	

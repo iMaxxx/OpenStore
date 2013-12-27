@@ -54,6 +54,7 @@ from encode import multipart_encode
 import urllib, urllib2
 from xml.dom.minidom import parseString
 import metrixCore
+import ConfigParser
 
 
 
@@ -92,11 +93,11 @@ def skinPartIsCompatible(dom):
 								converter_class = my_import('.'.join(("Components", "Converter", ctype))).__dict__.get(ctype)
 							except Exception, e:
 								isvalid = False 
-								log("Missing converter '"+ctype+"'",e,"MetrixGSP")
+								log("Missing converter '"+ctype+"'",solution="MetrixGSP")
 								break
 					
 				except Exception, e:
-					log("Missing renderer '"+renderer+"'",e,"MetrixGSP")
+					log("Missing renderer '"+renderer+"'",solution="MetrixGSP")
 					isvalid = False
 			
 			if isvalid == False:
@@ -136,20 +137,26 @@ def webPixmap(url,image_id="openStoreImage",params={}):
 	
 
 def log(errormessage,e=None,solution="MyMetrix"):
+	HEADER = '\033[95m'
+	OKBLUE = '\033[94m'
+	OKGREEN = '\033[92m'
+	WARNING = '\033[93m'
+	FAIL = '\033[91m'
+	ENDC = '\033[0m'
 	# Log file output
 	from time import gmtime, strftime
 	time = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 	err_str = "["+solution+"] " + time + ' -- ' + errormessage
 	
-	print err_str
+	print OKBLUE+ err_str+ENDC
 	if config.plugins.MyMetrix.logLevel.value in ["on","debug"]:
 		if e:
-			print "["+solution+"] " + time + ' -- ' + "/*-Exception------------------------"
-			print "["+solution+"] " + time + ' -- ' + str(e)
+			print WARNING+"["+solution+"] " + time + ' -- ' + "/*-Exception------------------------"
+			print "["+solution+"] " + time + ' -- ' + str(e)+ENDC
 			if config.plugins.MyMetrix.logLevel.value == "debug":
-				print "["+solution+"] " + time + ' -- ' + "---------------TRACE----------------"
+				print FAIL+"["+solution+"] " + time + ' -- ' + "---------------TRACE----------------"
 				traceback.print_exc()	
-			print "["+solution+"] " + time + ' -- ' + "---Exception----------------------*/"
+			print "["+solution+"] " + time + ' -- ' + "---Exception----------------------*/"+ENDC
 			
 		f = None
 		try:
@@ -243,8 +250,21 @@ def getBrand():
 	return boxinfo['brand']
 
 def getRestrictions():
-	restriction = "%image::"+config.plugins.MyMetrix.image.value+"%brand::"+getBrand()+"%"
+	CONFIG_SYSTEM_DESC = "/etc/systemdescription.cfg"
+	restriction = "%image::"+config.plugins.MyMetrix.image.value +"%" 
+	oeversion = metrixDefaults.cfg(CONFIG_SYSTEM_DESC,"openembedded","version")
+	if not oeversion == "":
+		restriction = restriction + "%oe::"+oeversion+"%"
 	return restriction
+
+def getFileDiff(oldfile,newfile):
+	old_lines = set((line.strip() for line in open(oldfile, 'r+')))
+	file_new = open(newfile, 'r+')
+	 
+	for line in file_new:
+	    if line.strip() not in old_lines:
+	        return line
+	return ""
 
 
 		
