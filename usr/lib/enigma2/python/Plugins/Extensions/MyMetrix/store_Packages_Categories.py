@@ -43,7 +43,7 @@ from xml.dom.minidom import parseString
 import gettext
 from Components.GUIComponent import GUIComponent
 from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryText,MultiContentEntryPixmapAlphaTest
+from Components.MultiContent import MultiContentEntryText,MultiContentEntryPixmapAlphaTest,MultiContentEntryPixmapAlphaBlend
 from enigma import eListbox, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER
 from enigma import ePicLoad,eListboxPythonMultiContent,gFont,addFont, loadPic, loadPNG
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
@@ -139,7 +139,9 @@ class OpenScreen(ConfigListScreen, Screen):
 	def openCategory(self):
 		category_id = self["list"+str(self.selectedColumn)].l.getCurrentSelection()[0][0]
 		category_name = self["list"+str(self.selectedColumn)].l.getCurrentSelection()[0][1]
-		self.session.open(store_Packages_Browse.OpenScreen,category_id,category_name)
+		onlyupdates = self["list"+str(self.selectedColumn)].l.getCurrentSelection()[0][3]
+		onlyinstalled = self["list"+str(self.selectedColumn)].l.getCurrentSelection()[0][4]
+		self.session.open(store_Packages_Browse.OpenScreen,category_id,category_name,onlyupdates=onlyupdates,onlyinstalled=onlyinstalled)
 		
 	def openSettings(self):
 		self.session.open(store_Settings.OpenScreen)
@@ -150,10 +152,10 @@ class OpenScreen(ConfigListScreen, Screen):
 
 		
 
-	def CategoryEntry(self,item_id,name,image_link=""):
-		res = [[item_id,name,image_link]]
-		pngicon = metrixTools.webPixmap(metrixDefaults.URL_STORE + image_link,"openStoreImage-"+str(item_id))
-		res.append(MultiContentEntryPixmapAlphaTest(pos=(81, 1), size=(128, 128), png=loadPNG(pngicon)))
+	def CategoryEntry(self,column_id, item_id,name,image_link="",onlyupdates=False,onlyinstalled=False):
+		res = [[item_id,name,image_link,onlyupdates,onlyinstalled]]
+		pngicon = metrixTools.webPixmap(metrixDefaults.URL_STORE + image_link,"openStoreImage-"+str(column_id)+str(item_id))
+		res.append(MultiContentEntryPixmapAlphaBlend(pos=(81, 1), size=(128, 128), png=loadPNG(pngicon)))
 		res.append(MultiContentEntryText(pos=(0, 128), size=(290, 40), font=0, text=_(name),flags = RT_HALIGN_CENTER))
 		return res
 	
@@ -162,18 +164,25 @@ class OpenScreen(ConfigListScreen, Screen):
 		selectionEnabled = False
 		i = 1
 
-
-		list[i].append(self.CategoryEntry(9888, _("New"), "/img/categories/new.png"))
+		list[i].append(self.CategoryEntry(i,"%", _("Installed"), "/img/categories/installed.png",onlyinstalled=True))
+		metrixTools.callOnMainThread(self.setList,list[i],i)
 		i += 1
-		list[i].append(self.CategoryEntry(9777, _("Last Modified"), "/img/categories/recent.png"))
+		list[i].append(self.CategoryEntry(i,"%", _("Updates"), "/img/categories/updates.png",onlyupdates=True))
+		metrixTools.callOnMainThread(self.setList,list[i],i)
 		i += 1
-		list[i].append(self.CategoryEntry(9666, _("Top 50 Downloads"), "/img/categories/top50.png"))
+		list[i].append(self.CategoryEntry(i,9888, _("New"), "/img/categories/new.png"))
+		metrixTools.callOnMainThread(self.setList,list[i],i)
+		i += 1
+		list[i].append(self.CategoryEntry(i,9777, _("Last Modified"), "/img/categories/recent.png"))
+		metrixTools.callOnMainThread(self.setList,list[i],i)
+		i = 1
+		list[i].append(self.CategoryEntry(i,9666, _("Top 50 Downloads"), "/img/categories/top50.png"))
 		metrixTools.callOnMainThread(self.setList,list[i],i)
 		i += 1
 		if config.plugins.MyMetrix.Store.Plugin_Developer.value:
-			list[i].append(self.CategoryEntry(9999, _("My Packages"), "/img/categories/my.png"))
+			list[i].append(self.CategoryEntry(i,9999, _("My Packages"), "/img/categories/my.png"))
 			metrixTools.callOnMainThread(self.setList,list[i],i)
-			i = 1
+			i += 1
 		try:
 			data = metrixCore.getWeb(metrixDefaults.URL_GET_CATEGORIES,True)
 			dom = parseString(data)
@@ -182,7 +191,7 @@ class OpenScreen(ConfigListScreen, Screen):
 				item_id = str(entry.getAttributeNode('id').nodeValue)
 				name = str(entry.getAttributeNode('name').nodeValue)
 				image_link = str(entry.getAttributeNode('image').nodeValue)
-				list[i].append(self.CategoryEntry(item_id, name, image_link))
+				list[i].append(self.CategoryEntry(i,item_id, name, image_link))
 				metrixTools.callOnMainThread(self.setList,list[i],i)
 				i += 1
 				if i == self.columns+1:
@@ -190,7 +199,6 @@ class OpenScreen(ConfigListScreen, Screen):
 			metrixTools.callOnMainThread(self.setMaxRows,len(list[1])+1)
 		except Exception,e:
 			metrixTools.log("Error getting categories via web!",e)
-			traceback.print_exc()
 			
 	def setMaxRows(self,rows):
 		self.rows = rows
@@ -227,7 +235,7 @@ class OpenScreen(ConfigListScreen, Screen):
 	def updateSelection(self):
 		if self.selectedRow > 1:
 			if self.selectedRow > len(self["list"+str(self.selectedColumn)].list): 
-				self.selectedColumn = 1
+				self.selectedRow = 1
 		for i in range(1,self.columns+1):
 			if i == self.selectedColumn:
 				selectionEnabled = True
@@ -235,12 +243,10 @@ class OpenScreen(ConfigListScreen, Screen):
 				selectionEnabled = False
 			self["list"+str(i)].selectionEnabled(selectionEnabled)
 			self["list"+str(i)].instance.moveSelectionTo(self.selectedRow-1)
-			if self.selectedRow > len(self["list"+str(i)].list) and self.selectedRow >= 3 and self["list"+str(i)].list != []:
+			if self.selectedRow > len(self["list"+str(i)].list) and self.selectedRow == 4 and self["list"+str(i)].list != []:
 				self.clist[i-2] = self["list"+str(i)].list
 				self["list"+str(i)].setList([])
-			elif self["list"+str(i)].list == [] and self.selectedRow <= 3:
-				print self.selectedRow
-				print "-------------reset list------------"
+			elif self["list"+str(i)].list == [] and self.selectedRow == 3:
 				self["list"+str(i)].setList(self.clist[i-2])
 				self.clist[i-2] = []
 
