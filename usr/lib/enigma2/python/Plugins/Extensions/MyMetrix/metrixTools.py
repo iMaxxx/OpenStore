@@ -253,15 +253,8 @@ def getBrand():
 def getRestrictions():
 	CONFIG_SYSTEM_DESC = "/etc/systemdescription.cfg"
 	restriction = "%image::"+config.plugins.MyMetrix.image.value +"%"
-	restriction = restriction + "%oe::"+getOEVersion()+"%"
+	restriction = restriction + "%oe::"+metrixDefaults.getOEVersion()+"%"
 	return restriction
-
-def getOEVersion():
-	if sys.version_info < (2, 7):
-		oeversion = "1.6"
-	else:
-		oeversion = "2.0"
-	return oeversion
 
 def getFileDiff(oldfile,newfile):
 	old_lines = set((line.strip() for line in open(oldfile, 'r+')))

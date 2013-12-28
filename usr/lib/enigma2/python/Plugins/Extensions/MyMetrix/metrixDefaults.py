@@ -202,7 +202,7 @@ def loadDefaults():
 	
 	config.plugins.MyMetrix.Color.SkinPartImagesNegate = ConfigYesNo(default=False)
 	config.plugins.MyMetrix.Color.SkinPartImagesGreyscale = ConfigYesNo(default=False)
-	config.plugins.MyMetrix.Color.SkinPartImagesDepth = ConfigSelection(default="8bit", choices = [
+	config.plugins.MyMetrix.Color.SkinPartImagesDepth = ConfigSelection(default=getColorDepth(), choices = [
 					("8bit", "8 Bit"),
 					("Original","Original")
 					])
@@ -230,7 +230,7 @@ def loadDefaults():
 					("220:XPicon/picon/,100:picon/,50:picon5030/","XPicons, Picons, Small Picons"),
 					("220:XPicon/picon/,50:picon5030/","XPicons, Small Picons")
 					])
-	config.plugins.MyMetrix.PiconDepth = ConfigSelection(default="8bit", choices = [
+	config.plugins.MyMetrix.PiconDepth = ConfigSelection(default=getColorDepth(), choices = [
 					("8bit", "8 Bit"),
 					("Original","Original")
 					])
@@ -401,4 +401,17 @@ def cfgremovesection(configfile,sectionname):
 	except Exception, e:
 		print str(e)
 		return False
+
+def getOEVersion():
+	if sys.version_info < (2, 7):
+		oeversion = "1.6"
+	else:
+		oeversion = "2.0"
+	return oeversion
+
+def getColorDepth():
+	if getOEVersion == "1.6":
+		return "8bit"
+	else:
+		return "Original"
 	
