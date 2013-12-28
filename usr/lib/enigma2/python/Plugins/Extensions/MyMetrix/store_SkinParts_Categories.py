@@ -122,7 +122,7 @@ class OpenScreen(ConfigListScreen, Screen):
 			"downRepeated": self.keyDown,
 			"cancel": self.exit}, -1)
 		
-		self.setTitle(_("MyMetrix // OpenStore"))
+		self.setTitle("OpenStore")
 		self["title"] = Label(_("MyMetrix // OpenStore"))
 		
 		menu = []

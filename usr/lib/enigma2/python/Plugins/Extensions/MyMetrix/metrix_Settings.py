@@ -148,7 +148,7 @@ class OpenScreen(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("Developer"),config.plugins.MyMetrix.Store.SkinPart_Developer))
 		list.append(getConfigListEntry(_("Background mode (for better OSD screenshots)"),config.plugins.MyMetrix.Color.BackgroundMode))
 		
-		
+		self.setTitle(_("Settings"))
 		ConfigListScreen.__init__(self, list)
 		self["actions"] = ActionMap(["OkCancelActions","DirectionActions", "InputActions", "ColorActions"], {
 			"down": self.keyDown,

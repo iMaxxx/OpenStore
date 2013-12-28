@@ -115,7 +115,7 @@ class OpenScreen(ConfigListScreen, Screen):
 		self["author"] = Label()
 		self["date"] = Label()
 		self["description"] = Label()
-		
+		self.setTitle(_("My SkinParts"))
 		self.thread_updater = threading.Thread(target=self.threadworker,  args=())
 		
 		self.getCatalog = True

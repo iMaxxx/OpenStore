@@ -113,6 +113,7 @@ class OpenScreen(ConfigListScreen, Screen):
 		self.Scale = AVSwitch().getFramebufferScale()
 		self.PicLoad = ePicLoad()
 		self["avatar"] = Pixmap()
+		self.setTitle(_("Settings"))
 		self["connectbutton"] =  Label()
 		self["username"] = Label()
 		self["metrixVersion"] = Label(_(self.version + " - open-store.net"))
