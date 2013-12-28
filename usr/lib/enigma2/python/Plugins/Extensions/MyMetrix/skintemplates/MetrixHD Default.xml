@@ -2360,10 +2360,9 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
   </widget>
   <eLabel name="new eLabel" position="95,189" size="700,1" backgroundColor="metrixAccent1" foregroundColor="metrixAccent1" zPosition="1" />
 <eLabel name="new eLabel" position="0,160" size="890,60" zPosition="-1" /></screen>
-
-  <screen name="VideoFinetune" position="0,0" size="1280,720" backgroundColor="metrixBackground" flags="wfNoBorder">
-    <widget source="Canvas" render="Canvas" position="280,70" size="720,576" />
-  </screen>
+	<screen name="VideoFinetune" position="0,0" size="1280,720" backgroundColor="metrixBackground" flags="wfNoBorder">
+		<widget source="Canvas" render="Canvas" position="140,70" size="1000,576" />
+	</screen>
   <!-- AutoTimeshift -->
   <screen name="AutoTimeshift" position="0,0" size="1280,720" title="Auto Timeshift Configuration" flags="wfNoBorder" backgroundColor="transparent">
     <eLabel position="40,25" zPosition="-10" size="1205,650" backgroundColor="metrixBackground" />
