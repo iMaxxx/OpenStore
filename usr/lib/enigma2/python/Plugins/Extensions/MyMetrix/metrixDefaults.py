@@ -45,6 +45,7 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE
 import time
 import e2info
 import os
+import sys
 import ConfigParser
 
 

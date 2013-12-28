@@ -45,7 +45,6 @@ import gettext
 from enigma import ePicLoad
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import os
-import sys
 import traceback
 import md5
 import metrixDefaults
