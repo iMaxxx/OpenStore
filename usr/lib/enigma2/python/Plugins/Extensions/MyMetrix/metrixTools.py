@@ -45,6 +45,7 @@ import gettext
 from enigma import ePicLoad
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import os
+import sys
 import traceback
 import md5
 import metrixDefaults
@@ -251,11 +252,16 @@ def getBrand():
 
 def getRestrictions():
 	CONFIG_SYSTEM_DESC = "/etc/systemdescription.cfg"
-	restriction = "%image::"+config.plugins.MyMetrix.image.value +"%" 
-	oeversion = metrixDefaults.cfg(CONFIG_SYSTEM_DESC,"openembedded","version")
-	if not oeversion == "":
-		restriction = restriction + "%oe::"+oeversion+"%"
+	restriction = "%image::"+config.plugins.MyMetrix.image.value +"%"
+	restriction = restriction + "%oe::"+getOEVersion()+"%"
 	return restriction
+
+def getOEVersion():
+	if sys.version_info < (2, 7):
+		oeversion = "1.6"
+	else:
+		oeversion = "2.0"
+	return oeversion
 
 def getFileDiff(oldfile,newfile):
 	old_lines = set((line.strip() for line in open(oldfile, 'r+')))

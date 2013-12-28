@@ -105,7 +105,10 @@ class OpenScreen(Screen):
 		
 		config.plugins.MyMetrix.showFirstRun.value = False
 		config.plugins.MyMetrix.showFirstRun.save()
-		configfile.save()
+		try:
+			configfile.save()
+		except Exception, e:
+			metrixTools.log("Error writing config file",e,"MetrixInto")
 
 		self["actions"] = ActionMap(["OkCancelActions","DirectionActions", "InputActions", "ColorActions"], {
 																											
