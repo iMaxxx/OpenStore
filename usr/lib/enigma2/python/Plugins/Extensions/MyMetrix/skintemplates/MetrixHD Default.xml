@@ -2143,7 +2143,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
       <convert type="ClockToText">Format:%e. %b</convert>
     </widget>
     <eLabel text="Channel Selection" position="70,47" size="800,43" font="SetrixHD;35" backgroundColor="metrixBackground" transparent="1" />
-    <widget name="list" position="70,120" size="700,480" scrollbarMode="showOnDemand" colorServiceDescription="metrixAccent1" colorServiceDescriptionSelected="yellow" picServiceEventProgressbar="DMConcinnity-HD/progcl.png" colorEventProgressbarBorder="metrixAccent1" colorEventProgressbarBorderSelected="metrixAccent1" foregroundColorServiceNotAvail="#777777" serviceItemHeight="30" serviceNumberFont="SetrixHD;23" serviceNameFont="SetrixHD;23" serviceInfoFont="SetrixHD;21" transparent="1" />
+    <widget name="list" position="70,120" size="700,480" scrollbarMode="showOnDemand" colorServiceDescription="metrixAccent1" colorServiceDescriptionSelected="yellow" picServiceEventProgressbar="MetrixHD/progcl.png" colorEventProgressbarBorder="metrixAccent1" colorEventProgressbarBorderSelected="metrixAccent1" foregroundColorServiceNotAvail="#777777" serviceItemHeight="30" serviceNumberFont="SetrixHD;23" serviceNameFont="SetrixHD;23" serviceInfoFont="SetrixHD;21" transparent="1" />
     <ePixmap pixmap="MetrixHD/buttons/red.png" position=" 70,635" size="30,40" alphatest="blend" />
     <ePixmap pixmap="MetrixHD/buttons/green.png" position="360,635" size="30,40" alphatest="blend" />
     <ePixmap pixmap="MetrixHD/buttons/yellow.png" position="650,635" size="30,40" alphatest="blend" />
