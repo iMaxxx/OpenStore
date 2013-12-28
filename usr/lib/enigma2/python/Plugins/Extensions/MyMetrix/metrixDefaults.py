@@ -223,7 +223,8 @@ def loadDefaults():
 	config.plugins.MyMetrix.XPiconsPath = ConfigSelection(default="/usr/share/enigma2/", choices = [
 					("/usr/share/enigma2/", _("Internal")),
 					("/media/usb/", _("USB")),
-					("/media/hdd/", _("HDD"))
+					("/media/hdd/", _("HDD")),
+					("/media/cf/", _("CF"))
 					])
 	config.plugins.MyMetrix.PiconSizes = ConfigSelection(default="220:XPicon/picon/", choices = [
 					("220:XPicon/picon/", "XPicons"),
@@ -238,7 +239,8 @@ def loadDefaults():
 	config.plugins.MyMetrix.SkinPartPath = ConfigSelection(default=PLUGIN_DIR + "skinparts/", choices = [
 					(PLUGIN_DIR + "skinparts/", _("Internal")),
 					("/media/usb/skinparts/", _("USB")),
-					("/media/hdd/skinparts/", _("HDD"))
+					("/media/hdd/skinparts/", _("HDD")),
+					("/media/cf/skinparts/", _("CF"))
 					])
 	config.plugins.MyMetrix.SkinXMLPath = ConfigSelection(default='/usr/share/enigma2/MetrixHD/', choices = getTargetFolders())
 	
@@ -311,21 +313,21 @@ def getImageNames():
 			imagenames = [
 						"Dream Multimedia Original",
 						"Merlin", "iCVS","Newnigma2","Gemini","Oozoon","PBNigma","ZebraDem","HDF-Image",
-						"Neutrino HD", "Power-Board Enigma2","PeterPan-Neverland","Infinity-X","LT-Image","openMips",
+						"Neutrino HD", "Power-Board Enigma2","PeterPan-Neverland","Infinity-X","LT-Image","openMips","Persian Empire"
 						"EDG Nemesis","Open AAF","Other","VTI","OpenPLi","BlackHole","openATV","Vu+ Original","OpenVix","OpenRSi"
 						]
 		elif boxinfo['brand'] == "Vuplus":
 			imagenames = [
 				"VTI","OpenPLi","BlackHole","openATV","Vu+ Original","OpenVix",
 					"iCVS","Newnigma2","Gemini","Oozoon","PBNigma","ZebraDem","Merlin", "Neutrino HD","Dream Multimedia Original","HDF-Image",
-					"Power-Board Enigma2","PeterPan-Neverland","Infinity-X","LT-Image","openMips","OpenRSi",
+					"Power-Board Enigma2","PeterPan-Neverland","Infinity-X","LT-Image","openMips","OpenRSi","Persian Empire"
 					"EDG Nemesis","Open AAF","Other"
 				]
 		else:
 			imagenames = [
 			"OpenPLi","BlackHole","openATV","openMips","OpenRSi",
 				"iCVS","Newnigma2","Gemini","Oozoon","PBNigma","ZebraDem","Merlin", "Neutrino HD","HDF-Image",
-				"Power-Board Enigma2","PeterPan-Neverland","Infinity-X","LT-Image","OpenVix",
+				"Power-Board Enigma2","PeterPan-Neverland","Infinity-X","LT-Image","OpenVix","Persian Empire"
 				"EDG Nemesis","Open AAF","Other","VTI","Vu+ Original","Dream Multimedia Original"
 			]	
 		return imagenames
