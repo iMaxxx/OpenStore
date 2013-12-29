@@ -51,7 +51,7 @@ import ConfigParser
 
 #############################################################
 VERSION = "2.1alpha"
-BUILD = '131021'
+BUILD = '131229'
 PLUGIN_DIR = "/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/"
 SKIN_DIR = "/usr/share/enigma2/MetrixHD/"
 TEMPLATES_DIR = PLUGIN_DIR + "skintemplates/"
@@ -299,7 +299,7 @@ def getTargetFolders():
 	for dir in dirs:
 		try:
 			if os.path.isdir('/usr/share/enigma2/'+dir+'/'):
-				if not dir in ("XPicon","XPicons","po","picon","display","extensions","rc_models","spinner","picon5030","skin_default"):
+				if not dir in ("XPicon","XPicons","po","countries","vfd_icons","picon","display","extensions","rc_models","spinner","picon5030","skin_default"):
 					templates.append(('/usr/share/enigma2/'+dir+'/',dir))
 		except: 
 			pass
