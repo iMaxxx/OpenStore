@@ -76,10 +76,10 @@
     <font filename="ae_AlMateen.ttf" name="Replacement" scale="100" replacement="1" />
     <font filename="tuxtxt.ttf" name="Console" scale="100" />
     <font filename="nmsbd.ttf" name="Arial" scale="100" />
-    <font filename="/usr/share/enigma2/MetrixHD/fonts/OpenSans-Regular.ttf" name="Regular" scale="88" />
-    <font filename="/usr/share/enigma2/MetrixHD/fonts/OpenSans-Regular.ttf" name="RegularLight" scale="95" />
-    <font filename="/usr/share/enigma2/MetrixHD/fonts/setrixHD.ttf" name="SetrixHD" scale="100" />
-    <font filename="/usr/share/enigma2/MetrixHD/fonts/meteocons.ttf" name="Meteo" scale="100" />
+    <font filename="OpenSans-Regular.ttf" name="Regular" scale="88" />
+    <font filename="OpenSans-Regular.ttf" name="RegularLight" scale="95" />
+    <font filename="setrixHD.ttf" name="SetrixHD" scale="100" />
+    <font filename="meteocons.ttf" name="Meteo" scale="100" />
   </fonts>
   <subtitles>
     <sub name="Subtitle_TTX" font="Regular;30" shadowColor="#40101010" shadowOffset="3,3" />
@@ -748,10 +748,10 @@
     <widget source="Service" render="EMCPositionGauge" position="151,666" size="980,9" zPosition="6" transparent="1">
       <convert type="EMCServicePosition">Gauge</convert>
     </widget>
-    <widget source="Service" render="EMCPositionGauge" pointer="MetrixHD/CoolPointerRec.png:980,0" position="151,669" size="980,3" zPosition="4" transparent="1">
+    <widget source="Service" render="EMCPositionGauge" pointer="MetrixHD/extensions/CoolPointerRec.png:980,0" position="151,669" size="980,3" zPosition="4" transparent="1">
       <convert type="EMCRecordPosition">Position</convert>
     </widget>
-    <widget source="Service" render="EMCPositionGauge" pointer="MetrixHD/CoolPointer.png:980,0" position="151,669" size="980,3" zPosition="5" transparent="1">
+    <widget source="Service" render="EMCPositionGauge" pointer="MetrixHD/extensions/CoolPointer.png:980,0" position="151,669" size="980,3" zPosition="5" transparent="1">
       <convert type="EMCServicePosition">Position</convert>
     </widget>
     <widget source="Service" render="Label" position="1138,657" size="100,28" font="SetrixHD;24" halign="left" valign="center" backgroundColor="metrixBackground" transparent="1">
@@ -2597,7 +2597,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
       <convert type="ClockToText">Format:%e. %B</convert>
     </widget>
     <eLabel text="Channel Selection" position="70,47" size="800,53" font="SetrixHD;35" backgroundColor="metrixBackground2" transparent="1" />
-    <widget name="list" position="70,120" size="700,480" scrollbarMode="showOnDemand" colorServiceDescription="metrixAccent1" colorServiceDescriptionSelected="yellow" picServiceEventProgressbar="DMConcinnity-HD/progcl.png" colorEventProgressbarBorder="metrixAccent1" colorEventProgressbarBorderSelected="metrixAccent1" foregroundColorServiceNotAvail="#777777" serviceItemHeight="30" serviceNumberFont="SetrixHD;23" serviceNameFont="SetrixHD;23" serviceInfoFont="SetrixHD;21" transparent="1" />
+    <widget name="list" position="70,120" size="700,480" scrollbarMode="showOnDemand" colorServiceDescription="metrixAccent1" colorServiceDescriptionSelected="yellow" picServiceEventProgressbar="MetrixHD/progcl.png" colorEventProgressbarBorder="metrixAccent1" colorEventProgressbarBorderSelected="metrixAccent1" foregroundColorServiceNotAvail="#777777" serviceItemHeight="30" serviceNumberFont="SetrixHD;23" serviceNameFont="SetrixHD;23" serviceInfoFont="SetrixHD;21" transparent="1" />
     <ePixmap pixmap="MetrixHD/buttons/red.png" position=" 70,635" size="30,40" alphatest="blend" />
     <ePixmap pixmap="MetrixHD/buttons/green.png" position="360,635" size="30,40" alphatest="blend" />
     <ePixmap pixmap="MetrixHD/buttons/yellow.png" position="650,635" size="30,40" alphatest="blend" />
