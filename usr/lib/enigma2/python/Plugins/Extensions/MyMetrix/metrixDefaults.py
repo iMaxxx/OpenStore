@@ -311,21 +311,21 @@ def getImageNames():
 		boxinfo = e2info.getInfo()
 		if boxinfo['brand'] == "Dream Multimedia":
 			imagenames = [
-						"Dream Multimedia Original",
+						"Dream Multimedia Original","openATV",
 						"Merlin", "iCVS","Newnigma2","Gemini","Oozoon","PBNigma","ZebraDem","HDF-Image",
 						"Neutrino HD", "Power-Board Enigma2","PeterPan-Neverland","Infinity-X","LT-Image","openMips","Persian Empire",
-						"EDG Nemesis","Open AAF","Other","VTI","OpenPLi","BlackHole","openATV","Vu+ Original","OpenVix","OpenRSi"
+						"EDG Nemesis","Open AAF","Other","VTI","OpenPLi","BlackHole","Vu+ Original","OpenVix","OpenRSi"
 						]
 		elif boxinfo['brand'] == "Vuplus":
 			imagenames = [
-				"VTI","OpenPLi","BlackHole","openATV","Vu+ Original","OpenVix",
+				"VTI","openATV","OpenPLi","BlackHole","Vu+ Original","OpenVix",
 					"iCVS","Newnigma2","Gemini","Oozoon","PBNigma","ZebraDem","Merlin", "Neutrino HD","Dream Multimedia Original","HDF-Image",
 					"Power-Board Enigma2","PeterPan-Neverland","Infinity-X","LT-Image","openMips","OpenRSi","Persian Empire",
 					"EDG Nemesis","Open AAF","Other"
 				]
 		else:
 			imagenames = [
-			"OpenPLi","BlackHole","openATV","openMips","OpenRSi",
+			"openATV","OpenPLi","BlackHole","openMips","OpenRSi",
 				"iCVS","Newnigma2","Gemini","Oozoon","PBNigma","ZebraDem","Merlin", "Neutrino HD","HDF-Image",
 				"Power-Board Enigma2","PeterPan-Neverland","Infinity-X","LT-Image","OpenVix","Persian Empire",
 				"EDG Nemesis","Open AAF","Other","VTI","Vu+ Original","Dream Multimedia Original"
