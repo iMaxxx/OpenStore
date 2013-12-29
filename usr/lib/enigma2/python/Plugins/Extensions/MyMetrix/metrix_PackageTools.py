@@ -99,23 +99,21 @@ def uninstallPackage(packageName,id=0,silent=False):
 	syncPackages()
 	
 def installPackage(url,force=False,silent=False,id=0,build=0):
+	downloadDir = '/tmp/openstore/'
+	if not os.path.exists(downloadDir):
+		os.makedirs(downloadDir)
 	metrixTools.log("Installing package "+url,None,"OpenStore")
-
-	cmdStatus = runCommand("opkg list-installed > /tmp/listpreinstalled.tmp")
+	packagefile = metrixTools.downloadFile(url,downloadDir + 'package.ipk',forceOverwrite=True)
+	packagename = getPackageName(downloadDir,"package.ipk")
 	if force:
-		cmdStatus = runCommand("opkg install --force-overwrite '"+url+"'")
+		cmdStatus = runCommand("opkg install --force-overwrite '"+packagefile+"'")
 	else:
-		cmdStatus = runCommand("opkg install '"+url+"'")
+		cmdStatus = runCommand("opkg install '"+packagefile+"'")
 	if cmdStatus[0] == True:
 		if not id == 0:
-			cmdStatus = runCommand("opkg list-installed > /tmp/listinstalled.tmp")
-			
 			metrixDefaults.cfgset(metrixDefaults.CONFIG_INSTALLEDPACKAGES,id,"id",id)
 			try:
-				packagename, packageversion = metrixTools.getFileDiff("/tmp/listpreinstalled.tmp","/tmp/listinstalled.tmp").split(" - ")
-				
 				metrixDefaults.cfgset(metrixDefaults.CONFIG_INSTALLEDPACKAGES,id,"name",packagename)
-				metrixDefaults.cfgset(metrixDefaults.CONFIG_INSTALLEDPACKAGES,id,"version",packageversion)
 			except:
 				pass
 			metrixDefaults.cfgset(metrixDefaults.CONFIG_INSTALLEDPACKAGES,id,"build",build)
@@ -130,6 +128,8 @@ def installPackage(url,force=False,silent=False,id=0,build=0):
 		if not silent:
 			metrixConnector.showInfo(_("Error installing Package!"),MessageBox.TYPE_ERROR)
 		return False
+	if os.path.exists(downloadDir):
+		os.removedirs(downloadDir)
 	syncPackages()
 	
 	
@@ -146,6 +146,23 @@ def runCommand(command):
 		metrixTools.log("Error running command",e,"OpenStore")
 		return 0
 	
+def getPackageName(packagePath,packageFile):
+	try:
+		if os.path.exists('/tmp/control.tar.gz'):
+			os.remove('/tmp/control.tar.gz')
+		if os.path.exists('/tmp/control'):
+			os.remove('/tmp/control')
+		packageInfo = runCommand('cd '+packagePath+ ' && ar x ./'+packageFile+' control.tar.gz && tar xf ./control.tar.gz ./control && cat control | grep Package')
+		os.remove('/tmp/openstore/control.tar.gz')
+		os.remove('/tmp/openstore/control')
+		if packageInfo[0]:
+			packageName = packageInfo[1].split(": ")
+			return packageName[1]
+		else:
+			return ""
+	except Exception, e:
+		metrixTools.log("Error reading pacakge name",e)
+		return ""
 
 	
 	
