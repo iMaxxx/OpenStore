@@ -145,7 +145,7 @@ class OpenScreen(ConfigListScreen, Screen):
 		if metrixDefaults.cfg(metrixDefaults.CONFIG_SYSTEM_DESC,"image","name") == "":
 			list.append(getConfigListEntry(_("Firmware image"),config.plugins.MyMetrix.image))
 		#list.append(getConfigListEntry(_("Open NaviBar on blue key"),config.plugins.navibar.blue)) ##for later integration of navibar
-		list.append(getConfigListEntry(_("Developer"),config.plugins.MyMetrix.Store.Plugin_Developer))
+		list.append(getConfigListEntry(_("SkinParts Developer"),config.plugins.MyMetrix.Store.Plugin_Developer))
 		list.append(getConfigListEntry(_("Log level"),config.plugins.MyMetrix.logLevel))
 		self.UpdatePicture()
 		self.onLayoutFinish.append(self.UpdateComponents)
