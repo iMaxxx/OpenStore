@@ -59,8 +59,8 @@ import store_Packages_Categories
 import metrix_MainMenu
 from enigma import addFont
 #from xml.etree.ElementTree import parse
-addFont('/usr/share/fonts/setrixHD.ttf', 'SetrixHD', 100, False)
-addFont('/usr/share/fonts/meteocons.ttf', 'Meteo', 100, False)
+addFont(metrixDefaults.PLUGIN_DIR + "setrixHD.ttf", "SetrixHD", 100, False)
+addFont(metrixDefaults.PLUGIN_DIR + "meteocons.ttf", "Meteo", 100, False)
 
 		
 def startMetrixDeamon(reason, **kwargs):
