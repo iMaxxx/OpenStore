@@ -22,7 +22,7 @@ URL_ACTIVEXPICON_API = "http://api.open-store.net/?q=v2.get.file&type=9&id="
 
 
 class XPicon(Renderer):
-	searchPaths = ('/media/hdd/XPicons/%s/','/media/usb/XPicons/%s/','/usr/share/enigma2/XPicons/%s/','/media/hdd/XPicon/%s/','/media/usb/XPicon/%s/','/usr/share/enigma2/XPicon/%s/','/usr/share/enigma2/%s/', '/media/usb/%s/')
+	searchPaths = ('/media/hdd/XPicons/%s/','/media/usb/XPicons/%s/','/media/cf/XPicons/%s/','/usr/share/enigma2/XPicons/%s/','/media/hdd/XPicon/%s/','/media/usb/XPicon/%s/','/media/cf/XPicon/%s/','/usr/share/enigma2/XPicon/%s/','/usr/share/enigma2/%s/','/media/hdd/%s/','/media/usb/%s/','/media/cf/%s/')
 
 	def __init__(self):
 		Renderer.__init__(self)
