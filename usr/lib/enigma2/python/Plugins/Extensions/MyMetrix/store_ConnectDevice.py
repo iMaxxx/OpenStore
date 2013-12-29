@@ -74,11 +74,11 @@ def _(txt):
 
 class OpenScreen(ConfigListScreen, Screen):
 	skin = """
-<screen name="MyMetrix-Setup" position="264,207" size="689,270" flags="wfNoBorder" backgroundColor="#40000000">
+<screen name="OpenStore-Setup" position="264,207" size="689,270" flags="wfNoBorder" backgroundColor="#40000000">
   <eLabel font="Regular; 20" foregroundColor="#00ffffff" backgroundColor="#40000000" halign="left" position="49,229" size="250,33" text="Cancel" transparent="1" />
  <widget name="config" position="19,83" itemHeight="30" scrollbarMode="showOnDemand" size="653,36" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
-  <eLabel position="20,15" size="348,50" text="MyMetrix" font="Regular; 40" valign="center" transparent="1" backgroundColor="#40000000" />
-  <eLabel position="223,13" size="449,50" text="Connect to MyMetrix.de" foregroundColor="#00ffffff" font="Regular; 30" valign="center" backgroundColor="#40000000" transparent="1" halign="right" />
+  <eLabel position="20,15" size="348,50" text="OpenStore" font="Regular; 40" valign="center" transparent="1" backgroundColor="#40000000" />
+  <eLabel position="223,13" size="449,50" text="Connect to open-store.net" foregroundColor="#00ffffff" font="Regular; 30" valign="center" backgroundColor="#40000000" transparent="1" halign="right" />
   <eLabel position="35,230" size="5,40" backgroundColor="#00ff0000" />
   <eLabel position="389,230" size="5,40" backgroundColor="#0000ff00" />
 <eLabel font="Regular; 20" foregroundColor="#00ffffff" backgroundColor="#40000000" halign="left" position="404,229" size="250,33" text="Connect" transparent="1" />
@@ -127,7 +127,7 @@ class OpenScreen(ConfigListScreen, Screen):
 					pass
 			if status == 'success':
 				if username == '':
-					self["help"].setText(_("Accept device and press connect."))
+					self["help"].setText(_("Accept device and press connect again."))
 				else:
 					#config.plugins.MetrixConnect.PIN.value = 0
 					config.plugins.MetrixConnect.username.value = username
