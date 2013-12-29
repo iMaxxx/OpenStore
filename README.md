@@ -52,6 +52,8 @@ OpenStore - www.open-store.net
 - (NEW) Uninstall plugins via plugin
 - (NEW) New sections 'Installed' and 'Updates' on OpenStore wall
 - (NEW) Only vote for plugin if installed
+- (NEW) Automatic detection of installed OE version
+- (NEW) Better support for a wide variety of enimga2 devices
 - (FIXED) Multitasking operations now ready for all OE2.0 boxes
 - (FIXED) Refreshing page jumping pages with left/right key
 - many more....
