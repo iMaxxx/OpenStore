@@ -312,7 +312,11 @@ class OpenScreen(ConfigListScreen, Screen ):
 					self["greenbutton"].setText(_("Reinstall"))
 					
 			else:
-				self["yellowbutton"].setText("")
+				type = self["menu"].l.getCurrentSelection()[0][7]
+				if type == "piconrepo" and config.plugins.MyMetrix.XPiconsRepository.value == self.currentid:
+					self["yellowbutton"].setText("Vote")
+				else:
+					self["yellowbutton"].setText("")
 				self["redbutton"].setText("")
 				if self.currenttype == "piconrepo":
 					self["greenbutton"].setText(_("Apply"))
@@ -392,7 +396,8 @@ class OpenScreen(ConfigListScreen, Screen ):
 	
 	def openRating(self):
 		isinstalled = self["menu"].l.getCurrentSelection()[0][15]
-		if isinstalled:
+		type = self["menu"].l.getCurrentSelection()[0][7]
+		if isinstalled or type == "piconrepo" and config.plugins.MyMetrix.XPiconsRepository.value == self.currentid:
 			self.session.open(store_SubmitRating.OpenScreen,self.currentid,self.currentgroup,str(self["menu"].l.getCurrentSelection()[0][1]))
 			self.getCatalog = True
 			self.getEntry = True
