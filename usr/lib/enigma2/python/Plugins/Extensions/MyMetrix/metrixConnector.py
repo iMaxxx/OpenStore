@@ -304,7 +304,7 @@ def prepareInfoGeneral(session):
 		sync_data = []
 		if config.plugins.MetrixCloudSync.SyncBoxInfo.value:
 			sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","mymetrix_version","MyMetrix version",metrixDefaults.VERSION,0))
-			sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","image_version","Image version",config.plugins.MyMetrix.image.value,2))
+			sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","image_version","Image version",metrixDefaults.getImageName(),2))
 			sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","mymetrix_build","MyMetrix build",metrixDefaults.BUILD,1))
 			try:
 				sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","enigmaver","GUI version",boxinfo['enigmaver'],3))

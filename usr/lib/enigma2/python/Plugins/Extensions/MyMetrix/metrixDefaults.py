@@ -154,7 +154,6 @@ def loadDefaults():
 	config.plugins.MetrixConnect = ConfigSubsection()
 	config.plugins.MetrixCloudSync = ConfigSubsection()
 	
-	config.plugins.MyMetrix.image = ConfigSelection(default=getDefaultImageName(), choices = getImageNames())
 	config.plugins.MyMetrix.templateFile = ConfigSelection(default="MetrixHD Default.xml", choices = getTemplateFiles())
 	config.plugins.MyMetrix.showFirstRun = ConfigYesNo(default=True)
 	config.plugins.MyMetrix.logLevel = ConfigSelection(default="off", choices = [
@@ -306,50 +305,25 @@ def getTargetFolders():
 	return templates
 
 
-def getImageNames():
-	if cfg(CONFIG_SYSTEM_DESC,"image","name") == "":
-		boxinfo = e2info.getInfo()
-		if boxinfo['brand'] == "Dream Multimedia":
-			imagenames = [
-						"Dream Multimedia Original","openATV",
-						"Merlin", "iCVS","Newnigma2","Gemini","Oozoon","PBNigma","ZebraDem","HDF-Image",
-						"Neutrino HD", "Power-Board Enigma2","PeterPan-Neverland","Infinity-X","LT-Image","openMips","Persian Empire",
-						"EDG Nemesis","Open AAF","Other","VTI","OpenPLi","BlackHole","Vu+ Original","OpenVix","OpenRSi"
-						]
-		elif boxinfo['brand'] == "Vuplus":
-			imagenames = [
-				"VTI","openATV","OpenPLi","BlackHole","Vu+ Original","OpenVix",
-					"iCVS","Newnigma2","Gemini","Oozoon","PBNigma","ZebraDem","Merlin", "Neutrino HD","Dream Multimedia Original","HDF-Image",
-					"Power-Board Enigma2","PeterPan-Neverland","Infinity-X","LT-Image","openMips","OpenRSi","Persian Empire",
-					"EDG Nemesis","Open AAF","Other"
-				]
-		else:
-			imagenames = [
-			"openATV","OpenPLi","BlackHole","openMips","OpenRSi",
-				"iCVS","Newnigma2","Gemini","Oozoon","PBNigma","ZebraDem","Merlin", "Neutrino HD","HDF-Image",
-				"Power-Board Enigma2","PeterPan-Neverland","Infinity-X","LT-Image","OpenVix","Persian Empire",
-				"EDG Nemesis","Open AAF","Other","VTI","Vu+ Original","Dream Multimedia Original"
-			]	
-		return imagenames
-	else:
-		return [cfg(CONFIG_SYSTEM_DESC,"image","name")]
 
-
-
-def getDefaultImageName():
-	if cfg(CONFIG_SYSTEM_DESC,"image","name") == "":
-		boxinfo = e2info.getInfo()
-		if boxinfo['brand'] == "Dream Multimedia":
-			imagename = "Dream Multimedia Original"
-		elif boxinfo['brand'] == "Vuplus":
-			imagename = "VTI"
-		elif boxinfo['brand'] == "AZBOX":
-			imagename = "openATV"
-		else:
-			imagename = "OpenPLi"
-		return imagename
-	else:
+def getImageName():
+	imagefile = '/etc/image-version'
+	imagename= "Other"
+	if not cfg(CONFIG_SYSTEM_DESC,"image","name") == "":
 		return cfg(CONFIG_SYSTEM_DESC,"image","name")
+	elif os.path.exists(imagefile):
+		f = open(imagefile)
+		lines = f.readlines()
+		f.close()
+		for line in lines:
+			if "creator=" in line:
+				imagename = imagename.split("=")[1]
+				if " <" in imagename:
+					imagename = imagename.split(" <")[0]
+				elif "<" in imagename:
+					imagename = imagename.split("<")[0]
+		
+	return imagename
 	
 def cfg(configfile,sectionname,keyname,type="string"):
 	section = str(sectionname)

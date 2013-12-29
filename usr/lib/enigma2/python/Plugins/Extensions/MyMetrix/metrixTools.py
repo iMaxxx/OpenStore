@@ -251,7 +251,7 @@ def getBrand():
 
 def getRestrictions():
 	CONFIG_SYSTEM_DESC = "/etc/systemdescription.cfg"
-	restriction = "%image::"+config.plugins.MyMetrix.image.value +"%"
+	restriction = "%image::"+ metrixDefaults.getImageName() +"%"
 	restriction = restriction + "%oe::"+metrixDefaults.getOEVersion()+"%"
 	return restriction
 

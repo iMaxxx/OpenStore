@@ -371,7 +371,7 @@ def widgetActive(path,xmlfile="data.xml",configfile="config.cfg",screenname="Inf
 def replaceGlobalVariables(string):
 	boxinfo = e2info.getInfo()
 	string = string.replace("%GLOBAL:BRAND%",boxinfo['brand'])
-	string = string.replace("%GLOBAL:IMAGE%",config.plugins.MyMetrix.image.value)
+	string = string.replace("%GLOBAL:IMAGE%",metrixDefaults.getImageName())
 	string = string.replace("%GLOBAL:MODEL%",boxinfo['model'])
 	string = string.replace("%GLOBAL:NUMTUNERS%",str(len(boxinfo['tuners'])))
 	return string
