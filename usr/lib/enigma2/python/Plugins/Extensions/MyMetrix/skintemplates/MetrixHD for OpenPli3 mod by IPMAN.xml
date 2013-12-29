@@ -76,10 +76,10 @@
     <font filename="ae_AlMateen.ttf" name="Replacement" scale="100" replacement="1" />
     <font filename="tuxtxt.ttf" name="Console" scale="100" />
     <font filename="nmsbd.ttf" name="Arial" scale="100" />
-    <font filename="/usr/share/enigma2/MetrixHD/fonts/OpenSans-Regular.ttf" name="Regular" scale="88" />
-    <font filename="/usr/share/enigma2/MetrixHD/fonts/OpenSans-Regular.ttf" name="RegularLight" scale="95" />
-    <font filename="/usr/share/enigma2/MetrixHD/fonts/setrixHD.ttf" name="SetrixHD" scale="100" />
-    <font filename="/usr/share/enigma2/MetrixHD/fonts/meteocons.ttf" name="Meteo" scale="100" />
+    <font filename="OpenSans-Regular.ttf" name="Regular" scale="88" />
+    <font filename="OpenSans-Regular.ttf" name="RegularLight" scale="95" />
+    <font filename="setrixHD.ttf" name="SetrixHD" scale="100" />
+    <font filename="meteocons.ttf" name="Meteo" scale="100" />
   </fonts>
   <subtitles>
     <sub name="Subtitle_TTX" font="Regular;30" shadowColor="#40101010" shadowOffset="3,3" />
@@ -748,10 +748,10 @@
     <widget source="Service" render="EMCPositionGauge" position="151,666" size="980,9" zPosition="6" transparent="1">
       <convert type="EMCServicePosition">Gauge</convert>
     </widget>
-    <widget source="Service" render="EMCPositionGauge" pointer="MetrixHD/CoolPointerRec.png:980,0" position="151,669" size="980,3" zPosition="4" transparent="1">
+    <widget source="Service" render="EMCPositionGauge" pointer="MetrixHD/extensions/CoolPointerRec.png:980,0" position="151,669" size="980,3" zPosition="4" transparent="1">
       <convert type="EMCRecordPosition">Position</convert>
     </widget>
-    <widget source="Service" render="EMCPositionGauge" pointer="MetrixHD/CoolPointer.png:980,0" position="151,669" size="980,3" zPosition="5" transparent="1">
+    <widget source="Service" render="EMCPositionGauge" pointer="MetrixHD/extensions/CoolPointer.png:980,0" position="151,669" size="980,3" zPosition="5" transparent="1">
       <convert type="EMCServicePosition">Position</convert>
     </widget>
     <widget source="Service" render="Label" position="1138,657" size="100,28" font="SetrixHD;24" halign="left" valign="center" backgroundColor="metrixBackground" transparent="1">
@@ -2597,7 +2597,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
       <convert type="ClockToText">Format:%e. %B</convert>
     </widget>
     <eLabel text="Channel Selection" position="70,47" size="800,53" font="SetrixHD;35" backgroundColor="metrixBackground2" transparent="1" />
-    <widget name="list" position="70,120" size="700,480" scrollbarMode="showOnDemand" colorServiceDescription="metrixAccent1" colorServiceDescriptionSelected="yellow" picServiceEventProgressbar="DMConcinnity-HD/progcl.png" colorEventProgressbarBorder="metrixAccent1" colorEventProgressbarBorderSelected="metrixAccent1" foregroundColorServiceNotAvail="#777777" serviceItemHeight="30" serviceNumberFont="SetrixHD;23" serviceNameFont="SetrixHD;23" serviceInfoFont="SetrixHD;21" transparent="1" />
+    <widget name="list" position="70,120" size="700,480" scrollbarMode="showOnDemand" colorServiceDescription="metrixAccent1" colorServiceDescriptionSelected="yellow" picServiceEventProgressbar="MetrixHD/progcl.png" colorEventProgressbarBorder="metrixAccent1" colorEventProgressbarBorderSelected="metrixAccent1" foregroundColorServiceNotAvail="#777777" serviceItemHeight="30" serviceNumberFont="SetrixHD;23" serviceNameFont="SetrixHD;23" serviceInfoFont="SetrixHD;21" transparent="1" />
     <ePixmap pixmap="MetrixHD/buttons/red.png" position=" 70,635" size="30,40" alphatest="blend" />
     <ePixmap pixmap="MetrixHD/buttons/green.png" position="360,635" size="30,40" alphatest="blend" />
     <ePixmap pixmap="MetrixHD/buttons/yellow.png" position="650,635" size="30,40" alphatest="blend" />
@@ -3736,7 +3736,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
     <widget name="key_green" position="295,637" size="160,25" zPosition="1" font="SetrixHD;22" halign="left" backgroundColor="metrixBackground" transparent="1" />
     <widget name="key_yellow" position="495,637" size="160,25" zPosition="1" font="SetrixHD;22" halign="left" backgroundColor="metrixBackground" transparent="1" />
     <widget name="key_blue" position="675,637" size="160,25" zPosition="1" font="SetrixHD;22" halign="left" backgroundColor="metrixBackground" transparent="1" />
-    <ePixmap position="830,560" zPosition="2" size="400,66" pixmap="MetrixHD/icons/db.png" transparent="1" alphatest="blend" />
+    <ePixmap position="830,560" zPosition="2" size="400,66" pixmap="MetrixHD/menu/db.png" transparent="1" alphatest="blend" />
     <ePixmap position="840,635" size="30,30" zPosition="10" pixmap="MetrixHD/buttons/key_ok.png" transparent="1" alphatest="blend" />
     <ePixmap position="920,230" size="256,256" zPosition="2" pixmap="MetrixHD/icons/fritz.png" transparent="1" alphatest="blend" />
   </screen>
@@ -3771,7 +3771,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
     <widget name="key_green" position="295,637" size="160,25" zPosition="1" font="SetrixHD;22" halign="left" backgroundColor="metrixBackground" transparent="1" />
     <widget name="key_yellow" position="495,637" size="160,25" zPosition="1" font="SetrixHD;22" halign="left" backgroundColor="metrixBackground" transparent="1" />
     <widget name="key_blue" position="675,637" size="160,25" zPosition="1" font="SetrixHD;22" halign="left" backgroundColor="metrixBackground" transparent="1" />
-    <ePixmap position="830,560" zPosition="2" size="400,66" pixmap="MetrixHD/icons/db.png" transparent="1" alphatest="blend" />
+    <ePixmap position="830,560" zPosition="2" size="400,66" pixmap="MetrixHD/menu/db.png" transparent="1" alphatest="blend" />
     <ePixmap position="840,635" size="30,30" zPosition="10" pixmap="MetrixHD/buttons/key_ok.png" transparent="1" alphatest="blend" />
     <ePixmap position="920,230" size="256,256" zPosition="2" pixmap="MetrixHD/icons/fritz.png" transparent="1" alphatest="blend" />
   </screen>
@@ -3792,7 +3792,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
     <ePixmap pixmap="MetrixHD/buttons/key_green.png" position="610,635" size="30,40" alphatest="blend" />
     <widget name="key_red" position="105,637" size="160,25" zPosition="1" font="SetrixHD;22" halign="left" backgroundColor="metrixBackground" transparent="1" />
     <widget name="key_green" position="645,637" size="160,25" zPosition="1" font="SetrixHD;22" halign="left" backgroundColor="metrixBackground" transparent="1" />
-    <ePixmap position="830,560" zPosition="2" size="400,66" pixmap="MetrixHD/icons/db.png" transparent="1" alphatest="blend" />
+    <ePixmap position="830,560" zPosition="2" size="400,66" pixmap="MetrixHD/menu/db.png" transparent="1" alphatest="blend" />
     <ePixmap position="920,230" size="256,256" zPosition="2" pixmap="MetrixHD/icons/fritz.png" transparent="1" alphatest="blend" />
   </screen>
   <screen name="FritzMenu" position="0,0" size="1280,720" title="Fritz Menu" flags="wfNoBorder" backgroundColor="transparent">
@@ -3830,7 +3830,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
     <widget name="key_red" position="105,637" size="160,25" zPosition="1" font="Regular; 22" halign="left" backgroundColor="metrixBackground" transparent="1" />
     <widget name="key_green" position="375,637" size="160,25" zPosition="1" font="Regular; 22" halign="left" backgroundColor="metrixBackground" transparent="1" />
     <widget name="key_yellow" position="645,637" size="220,25" zPosition="1" font="Regular; 22" halign="left" backgroundColor="metrixBackground" transparent="1" />
-    <ePixmap position="830,560" zPosition="2" size="400,66" pixmap="MetrixHD/icons/db.png" transparent="1" alphatest="blend" />
+    <ePixmap position="830,560" zPosition="2" size="400,66" pixmap="MetrixHD/menu/db.png" transparent="1" alphatest="blend" />
     <ePixmap position="920,230" size="256,256" zPosition="2" pixmap="MetrixHD/icons/fritz.png" transparent="1" alphatest="blend" />
   </screen>
   <screen name="FritzAbout" position="0,0" size="1280,720" title="About Fritz Call" flags="wfNoBorder" backgroundColor="transparent">
@@ -4837,7 +4837,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
     <widget name="key_green" position="300,635" size="160,24" zPosition="1" font="SetrixHD; 20" halign="left" backgroundColor="metrixBackground" transparent="1" />
     <widget name="key_yellow" position="505,635" size="160,24" zPosition="1" font="SetrixHD; 20" halign="left" backgroundColor="metrixBackground" transparent="1" />
     <widget name="key_blue" position="710,635" size="160,24" zPosition="1" font="SetrixHD; 20" halign="left" backgroundColor="metrixBackground" transparent="1" />
-    <ePixmap position="830,560" zPosition="2" size="400,66" pixmap="MetrixHD/icons/db.png" transparent="1" alphatest="blend" />
+    <ePixmap position="830,560" zPosition="2" size="400,66" pixmap="MetrixHD/menu/db.png" transparent="1" alphatest="blend" />
     <ePixmap position="890,635" size="30,30" zPosition="10" pixmap="MetrixHD/buttons/key_ok.png" transparent="1" alphatest="blend" />
     <ePixmap position="920,230" size="256,256" zPosition="2" pixmap="MetrixHD/icons/vlc.png" transparent="1" alphatest="blend" />
   </screen>
@@ -4859,7 +4859,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
     <ePixmap name="green" pixmap="MetrixHD/buttons/key_green.png" position="610,635" size="30,40" alphatest="blend" />
     <widget name="key_red" position="104,635" size="160,24" zPosition="1" font="SetrixHD; 20" halign="left" backgroundColor="metrixBackground" transparent="1" />
     <widget name="key_green" position="644,635" size="160,24" zPosition="1" font="SetrixHD; 20" halign="left" backgroundColor="metrixBackground" transparent="1" />
-    <ePixmap position="830,560" zPosition="2" size="400,66" pixmap="MetrixHD/icons/db.png" transparent="1" alphatest="blend" />
+    <ePixmap position="830,560" zPosition="2" size="400,66" pixmap="MetrixHD/menu/db.png" transparent="1" alphatest="blend" />
     <ePixmap position="920,230" size="256,256" zPosition="2" pixmap="MetrixHD/icons/vlc.png" transparent="1" alphatest="blend" />
   </screen>
   <!-- SHOUTcast -->
@@ -5853,7 +5853,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
     <widget source="key_red" render="Label" position="105,637" size="240,24" zPosition="1" font="SetrixHD;20" halign="left" backgroundColor="metrixBackground" transparent="1" />
     <widget source="key_green" render="Label" position="395,637" size="240,24" zPosition="1" font="SetrixHD;20" halign="left" backgroundColor="metrixBackground" transparent="1" />
     <ePixmap position="870,390" size="128,128" zPosition="2" pixmap="MetrixHD/icons/sweeper.png" transparent="1" alphatest="blend" />
-    <ePixmap position="870,560" zPosition="2" size="350,44" pixmap="MetrixHD/icons/db.png" transparent="1" alphatest="blend" />
+    <ePixmap position="870,560" zPosition="2" size="350,44" pixmap="MetrixHD/menu/db.png" transparent="1" alphatest="blend" />
   </screen>
   <screen name="FancontrolConfiguration" position="0,0" size="1280,720" title="Standbymode Fancontrol settings" flags="wfNoBorder" backgroundColor="transparent">
     <eLabel backgroundColor="metrixBackground" position="40,25" zPosition="-10" size="1205,650" borderWidth="1" borderColor="metrixDeepGrey" transparent="0" />
@@ -5873,7 +5873,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
     <widget source="key_green" render="Label" position="285,637" zPosition="1" size="140,25" font="SetrixHD;20" halign="center" valign="center" backgroundColor="metrixBackground" transparent="1" />
     <widget name="config" zPosition="2" position="70,120" size="710,500" scrollbarMode="showOnDemand" transparent="1" />
     <ePixmap position="870,390" size="128,128" zPosition="2" pixmap="MetrixHD/icons/fan.png" transparent="1" alphatest="blend" />
-    <ePixmap position="870,560" zPosition="2" size="350,44" pixmap="MetrixHD/icons/db.png" transparent="1" alphatest="blend" />
+    <ePixmap position="870,560" zPosition="2" size="350,44" pixmap="MetrixHD/menu/db.png" transparent="1" alphatest="blend" />
   </screen>
   <screen name="LEDBrightnessSetup" position="0,0" size="1280,720" title="LED Brightness Setup" flags="wfNoBorder" backgroundColor="transparent">
     <eLabel backgroundColor="metrixBackground" position="40,25" zPosition="-10" size="1205,650" borderWidth="1" borderColor="metrixDeepGrey" transparent="0" />
@@ -5896,6 +5896,6 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
     <widget name="config" zPosition="2" position="70,120" size="710,455" scrollbarMode="showOnDemand" transparent="1" />
     <widget name="current_entry" position="70,585" size="710,40" font="SetrixHD;18" halign="center" valign="center" />
     <ePixmap position="870,390" size="128,128" zPosition="2" pixmap="MetrixHD/icons/led.png" transparent="1" alphatest="blend" />
-    <ePixmap position="870,560" zPosition="2" size="350,44" pixmap="MetrixHD/icons/db.png" transparent="1" alphatest="blend" />
+    <ePixmap position="870,560" zPosition="2" size="350,44" pixmap="MetrixHD/menu/db.png" transparent="1" alphatest="blend" />
   </screen>
 </skin>

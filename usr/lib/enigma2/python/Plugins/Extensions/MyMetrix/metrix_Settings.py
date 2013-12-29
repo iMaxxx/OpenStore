@@ -145,7 +145,7 @@ class OpenScreen(ConfigListScreen, Screen):
 		
 		list.append(getConfigListEntry(_("SkinParts location (regenerate skin!)"), config.plugins.MyMetrix.SkinPartPath))
 		list.append(getConfigListEntry(" "))
-		list.append(getConfigListEntry(_("Developer"),config.plugins.MyMetrix.Store.SkinPart_Developer))
+		list.append(getConfigListEntry(_("Developer (Skin)"),config.plugins.MyMetrix.Store.SkinPart_Developer))
 		list.append(getConfigListEntry(_("Background mode (for better OSD screenshots)"),config.plugins.MyMetrix.Color.BackgroundMode))
 		
 		self.setTitle(_("Settings"))
