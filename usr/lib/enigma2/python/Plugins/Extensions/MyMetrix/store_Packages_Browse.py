@@ -314,7 +314,10 @@ class OpenScreen(ConfigListScreen, Screen ):
 			else:
 				self["yellowbutton"].setText("")
 				self["redbutton"].setText("")
-				self["greenbutton"].setText(_("Install"))
+				if self.currenttype == "piconrepo":
+					self["greenbutton"].setText(_("Apply"))
+				else:
+					self["greenbutton"].setText(_("Install"))
 				self["isInstalled"].setText("")
 			path = metrixDefaults.pathRoot()+"packages/"+str(self.currentid)+"/"
 			
