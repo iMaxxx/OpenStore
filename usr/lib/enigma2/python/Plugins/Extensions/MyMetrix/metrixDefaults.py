@@ -304,20 +304,22 @@ def getTargetFolders():
 def getImageName():
 	imagefile = '/etc/image-version'
 	imagename= "Other"
-	if not cfg(CONFIG_SYSTEM_DESC,"image","name") == "":
-		return cfg(CONFIG_SYSTEM_DESC,"image","name")
-	elif os.path.exists(imagefile):
-		f = open(imagefile)
-		lines = f.readlines()
-		f.close()
-		for line in lines:
-			if "creator=" in line:
-				imagename = imagename.split("=")[1]
-				if " <" in imagename:
-					imagename = imagename.split(" <")[0]
-				elif "<" in imagename:
-					imagename = imagename.split("<")[0]
-		
+	try:
+		if not cfg(CONFIG_SYSTEM_DESC,"image","name") == "":
+			return cfg(CONFIG_SYSTEM_DESC,"image","name")
+		elif os.path.exists(imagefile):
+			f = open(imagefile)
+			lines = f.readlines()
+			f.close()
+			for line in lines:
+				if "creator=" in line:
+					imagename = line.split("=")[1]
+					if " <" in imagename:
+						imagename = imagename.split(" <")[0]
+					elif "<" in imagename:
+						imagename = imagename.split("<")[0]
+	except:
+		pass
 	return imagename
 	
 def cfg(configfile,sectionname,keyname,type="string"):
