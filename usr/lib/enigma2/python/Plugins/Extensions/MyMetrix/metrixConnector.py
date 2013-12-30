@@ -90,7 +90,8 @@ def syncStart(session):
 	config.plugins.MetrixUpdater.UpdateAvailable.value = 0
 	config.plugins.MetrixUpdater.Open.value = 0
 	config.plugins.MetrixUpdater.save() 
-	
+	config.plugins.MyMetrix.XPiconsOverwrite.value = False
+	config.plugins.MyMetrix.save() 
 	threadUpdater = threading.Thread(target=syncHourly,  args=())
 	threadUpdater.daemon = True
 	threadUpdater.start()	
