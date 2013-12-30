@@ -320,6 +320,9 @@ class OpenScreen(ConfigListScreen, Screen ):
 				self["redbutton"].setText("")
 				if self.currenttype == "piconrepo":
 					self["greenbutton"].setText(_("Apply"))
+					if config.plugins.MyMetrix.XPiconsRepository.value == self.currentid:
+						self["greenbutton"].setText("")
+						
 				else:
 					self["greenbutton"].setText(_("Install"))
 				self["isInstalled"].setText("")
