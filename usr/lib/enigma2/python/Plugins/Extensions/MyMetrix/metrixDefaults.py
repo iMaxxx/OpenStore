@@ -141,11 +141,6 @@ def pathRoot():
 	return PLUGIN_DIR
 
 def loadDefaults():	
-	
-	
-	
-	
-	
 	config.plugins.MyMetrix = ConfigSubsection()
 	config.plugins.MyMetrix.Color = ConfigSubsection()
 	config.plugins.MetrixWeather = ConfigSubsection()
@@ -387,7 +382,7 @@ def getOEVersion():
 	return oeversion
 
 def getColorDepth():
-	if getOEVersion == "1.6":
+	if getOEVersion() == "1.6":
 		return "8bit"
 	else:
 		return "Original"
