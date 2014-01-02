@@ -104,11 +104,11 @@ class OpenScreen(ConfigListScreen, Screen ):
 </screen>
 """
 
-	def __init__(self, session,category_id = "%",category_name=_("Plugins"),onlyupdates=False, limit = "",onlyinstalled=False):
+	def __init__(self, session,category_id = "%",category_name=_("Plugins"),onlyupdates=False, limit = "",orderby="date_created desc",onlyinstalled=False):
 		Screen.__init__(self, session)
 		self.limit = limit
 		self["title"] = Label("OpenStore // "+_(category_name))
-		self.orderby="date_created desc"
+		self.orderby=orderby
 		self.url = metrixDefaults.URL_GET_PACKAGES
 		self["itemname"] = Label()
 		self["author"] = Label()
@@ -190,6 +190,7 @@ class OpenScreen(ConfigListScreen, Screen ):
 					  'orderby':self.orderby+" "+self.limit,
 					  'category_id':str(self.category_id)}
 			data = metrixCore.getWeb(self.url,True,params)
+			print str(params)
 			if "<exception status=""error""" in data:
 				raise Exception("Error loading data")
 			dom = parseString(data)

@@ -141,7 +141,9 @@ class OpenScreen(ConfigListScreen, Screen):
 		category_name = self["list"+str(self.selectedColumn)].l.getCurrentSelection()[0][1]
 		onlyupdates = self["list"+str(self.selectedColumn)].l.getCurrentSelection()[0][3]
 		onlyinstalled = self["list"+str(self.selectedColumn)].l.getCurrentSelection()[0][4]
-		self.session.open(store_Packages_Browse.OpenScreen,category_id,category_name,onlyupdates=onlyupdates,onlyinstalled=onlyinstalled)
+		orderby = self["list"+str(self.selectedColumn)].l.getCurrentSelection()[0][5]
+		limit = self["list"+str(self.selectedColumn)].l.getCurrentSelection()[0][6]
+		self.session.open(store_Packages_Browse.OpenScreen,category_id,category_name,onlyupdates=onlyupdates,onlyinstalled=onlyinstalled,orderby=orderby,limit=limit)
 		
 	def openSettings(self):
 		self.session.open(store_Settings.OpenScreen)
@@ -152,8 +154,8 @@ class OpenScreen(ConfigListScreen, Screen):
 
 		
 
-	def CategoryEntry(self,column_id, item_id,name,image_link="",onlyupdates=False,onlyinstalled=False):
-		res = [[item_id,name,image_link,onlyupdates,onlyinstalled]]
+	def CategoryEntry(self,column_id, item_id,name,image_link="",onlyupdates=False,onlyinstalled=False,orderby="",limit=""):
+		res = [[item_id,name,image_link,onlyupdates,onlyinstalled,orderby,limit]]
 		pngicon = metrixTools.webPixmap(metrixDefaults.URL_STORE + image_link,"openStoreImage-"+str(column_id)+str(item_id))
 		res.append(MultiContentEntryPixmapAlphaBlend(pos=(81, 1), size=(128, 128), png=loadPNG(pngicon)))
 		res.append(MultiContentEntryText(pos=(0, 128), size=(290, 40), font=0, text=_(name),flags = RT_HALIGN_CENTER))
@@ -164,23 +166,23 @@ class OpenScreen(ConfigListScreen, Screen):
 		selectionEnabled = False
 		i = 1
 
-		list[i].append(self.CategoryEntry(i,"%", _("Installed"), "/img/categories/installed.png",onlyinstalled=True))
+		list[i].append(self.CategoryEntry(i,"%", _("Installed"), "/img/categories/installed.png",onlyinstalled=True,orderby="date_modified desc",))
 		metrixTools.callOnMainThread(self.setList,list[i],i)
 		i += 1
-		list[i].append(self.CategoryEntry(i,"%", _("Updates"), "/img/categories/updates.png",onlyupdates=True))
+		list[i].append(self.CategoryEntry(i,"%", _("Updates"), "/img/categories/updates.png",onlyupdates=True,orderby="date_modified desc",))
 		metrixTools.callOnMainThread(self.setList,list[i],i)
 		i += 1
-		list[i].append(self.CategoryEntry(i,9888, _("New"), "/img/categories/new.png"))
+		list[i].append(self.CategoryEntry(i,"%", _("New"), "/img/categories/new.png",orderby="date_created desc", limit="LIMIT 20"))
 		metrixTools.callOnMainThread(self.setList,list[i],i)
 		i += 1
-		list[i].append(self.CategoryEntry(i,9777, _("Last Modified"), "/img/categories/recent.png"))
+		list[i].append(self.CategoryEntry(i,"%", _("Last Modified"), "/img/categories/recent.png",orderby="date_modified desc", limit="LIMIT 20"))
 		metrixTools.callOnMainThread(self.setList,list[i],i)
 		i = 1
-		list[i].append(self.CategoryEntry(i,9666, _("Top 50 Downloads"), "/img/categories/top50.png"))
+		list[i].append(self.CategoryEntry(i,"%%", _("Top 50 Downloads"), "/img/categories/top50.png",orderby="rating desc", limit="LIMIT 50"))
 		metrixTools.callOnMainThread(self.setList,list[i],i)
 		i += 1
 		if config.plugins.MyMetrix.Store.Plugin_Developer.value:
-			list[i].append(self.CategoryEntry(i,9999, _("My Packages"), "/img/categories/my.png"))
+			list[i].append(self.CategoryEntry(i,9999, _("My Packages"), "/img/categories/my.png",orderby="date_modified desc",))
 			metrixTools.callOnMainThread(self.setList,list[i],i)
 			i += 1
 		try:
@@ -191,7 +193,7 @@ class OpenScreen(ConfigListScreen, Screen):
 				item_id = str(entry.getAttributeNode('id').nodeValue)
 				name = str(entry.getAttributeNode('name').nodeValue)
 				image_link = str(entry.getAttributeNode('image').nodeValue)
-				list[i].append(self.CategoryEntry(i,item_id, name, image_link))
+				list[i].append(self.CategoryEntry(i,item_id, name, image_link,orderby="date_created desc"))
 				metrixTools.callOnMainThread(self.setList,list[i],i)
 				i += 1
 				if i == self.columns+1:
