@@ -190,7 +190,6 @@ class OpenScreen(ConfigListScreen, Screen ):
 					  'orderby':self.orderby+" "+self.limit,
 					  'category_id':str(self.category_id)}
 			data = metrixCore.getWeb(self.url,True,params)
-			print str(params)
 			if "<exception status=""error""" in data:
 				raise Exception("Error loading data")
 			dom = parseString(data)

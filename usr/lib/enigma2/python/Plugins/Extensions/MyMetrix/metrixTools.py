@@ -129,16 +129,13 @@ def downloadFile(webURL,localPath = '/tmp/metrixPreview.png',searchpattern="",re
 		
 def webPixmap(url,image_id="openStoreImage",params={}):
 	uri = ""
-	print "requesting webpixmap-url: "+str(url)
 	try:
 		urlparams = urllib.urlencode(params)
 		if urlparams != "":
 			requesturl = url+'&'+urlparams
 		else:
 			requesturl = url
-		
-		
-			uri = downloadFile(requesturl,'/tmp/'+image_id+".png")
+		uri = downloadFile(requesturl,'/tmp/'+image_id+".png")
 	except Exception, e:
 		log("Error downloading pixmap",e)
 	if uri is None:
