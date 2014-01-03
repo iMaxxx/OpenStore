@@ -156,7 +156,7 @@ class OpenScreen(ConfigListScreen, Screen):
 
 	def CategoryEntry(self,column_id, item_id,name,image_link="",onlyupdates=False,onlyinstalled=False,orderby="",limit=""):
 		res = [[item_id,name,image_link,onlyupdates,onlyinstalled,orderby,limit]]
-		pngicon = metrixTools.webPixmap(metrixDefaults.URL_STORE + image_link,"openStoreImage-"+str(column_id)+str(item_id))
+		pngicon = metrixTools.webPixmap(metrixDefaults.URL_STORE + str(image_link),"openStoreImage-"+str(column_id)+str(item_id))
 		res.append(MultiContentEntryPixmapAlphaBlend(pos=(81, 1), size=(128, 128), png=loadPNG(pngicon)))
 		res.append(MultiContentEntryText(pos=(0, 128), size=(290, 40), font=0, text=_(name),flags = RT_HALIGN_CENTER))
 		return res
@@ -200,6 +200,7 @@ class OpenScreen(ConfigListScreen, Screen):
 					i = 1
 			metrixTools.callOnMainThread(self.setMaxRows,len(list[1])+1)
 		except Exception,e:
+			showInfo("Check your internet connection")
 			metrixTools.log("Error getting categories via web!",e)
 			
 	def setMaxRows(self,rows):
