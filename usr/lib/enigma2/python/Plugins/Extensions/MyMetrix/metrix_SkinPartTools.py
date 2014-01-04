@@ -80,6 +80,7 @@ def downloadSkinPartImages(id,path):
 	return downloadAdditionalFiles(url,path + "images/")
 
 def downloadAdditionalFiles(url,target_path,searchpattern="",replacepattern="",forceOverwrite = True):
+	print url
 	negate = config.plugins.MyMetrix.Color.SkinPartImagesNegate.value
 	greyscale = config.plugins.MyMetrix.Color.SkinPartImagesGreyscale.value
 	depth = config.plugins.MyMetrix.Color.SkinPartImagesDepth.value
@@ -102,7 +103,7 @@ def downloadAdditionalFiles(url,target_path,searchpattern="",replacepattern="",f
 				metrixTools.log("Error downloading file!")
 		return True
 	except Exception, e:
-		metrixTools.log("Error downloading file!",e)
+		metrixTools.log("No additional files available!",e)
 		return False
 	
 
@@ -120,8 +121,7 @@ def installSkinPart(id,sp_type,author="",image_link="",date_modified="",isActive
 		os.makedirs(path)
 	datapath = metrixTools.downloadFile(downloadurl + str(id)+"&author="+author, path+"data.xml")
 	metapath = metrixTools.downloadFile(downloadmetaurl + str(id)+"&author="+author, path +"meta.xml")
-	imagepath = metrixTools.downloadFile(image_link, path +"preview.png")
-	
+	imagepath = metrixTools.downloadFile(image_link+"&width=550", path +"preview.png")
 	downloadSkinPartRenderer(id)
 	downloadSkinPartConverter(id)
 	downloadSkinPartImages(id,path)
