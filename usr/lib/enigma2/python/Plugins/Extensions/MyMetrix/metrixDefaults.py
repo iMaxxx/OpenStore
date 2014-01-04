@@ -149,7 +149,7 @@ def loadDefaults():
 	config.plugins.MetrixConnect = ConfigSubsection()
 	config.plugins.MetrixCloudSync = ConfigSubsection()
 	
-	config.plugins.MyMetrix.templateFile = ConfigSelection(default="MetrixHD Default.xml", choices = getTemplateFiles())
+	config.plugins.MyMetrix.templateFile = ConfigSelection(default="MetrixHD for VTi.xml", choices = getTemplateFiles())
 	config.plugins.MyMetrix.showFirstRun = ConfigYesNo(default=True)
 	config.plugins.MyMetrix.logLevel = ConfigSelection(default="off", choices = [
 					("off", _("Off")),
@@ -230,7 +230,7 @@ def loadDefaults():
 					("8bit", "8 Bit"),
 					("Original","Original")
 					])
-	config.plugins.MyMetrix.SkinPartPath = ConfigSelection(default=PLUGIN_DIR + "skinparts/", choices = [
+	config.plugins.MyMetrix.SkinPartPath = ConfigSelection(default=getDefaultSkinPartPath(), choices = [
 					(PLUGIN_DIR + "skinparts/", _("Internal")),
 					("/media/usb/skinparts/", _("USB")),
 					("/media/hdd/skinparts/", _("HDD")),
@@ -299,7 +299,15 @@ def getTargetFolders():
 			pass
 	return templates
 
-
+def getDefaultSkinPartPath():
+	if os.path.exists("/media/usb/skinparts/"):
+		return "/media/usb/skinparts/"
+	elif os.path.exists("/media/cf/skinparts/"):
+		return "/media/cf/skinparts/"
+	elif os.path.exists("/media/hdd/skinparts/"):
+		return "/media/cf/skinparts/"
+	else:
+		return PLUGIN_DIR + "skinparts/"
 
 def getImageName():
 	imagefile = '/etc/image-version'
