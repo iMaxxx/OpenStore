@@ -95,7 +95,7 @@ class OpenScreen(Screen):
 """
 
 	def __init__(self, session):
-		self["title"] = Label(_("Welcome to MyMetrix and OpenStore!"))
+		self["title"] = Label(_("Welcome to MyMetrix!"))
 		self["description"] = Label(_("MyMetrix brings your set-top box experience onto a whole new level!\nPress left button to start the easy setup which generates the default MetrixHD feeling. Alternatively press right button to explore great SkinParts in OpenStore and customize your user interface how ever you want!"))
 		Screen.__init__(self, session)
 		self.session = session
