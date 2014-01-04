@@ -80,7 +80,7 @@ class OpenScreen(ConfigListScreen, Screen):
 <eLabel position="1111,43" size="5,60" backgroundColor="#000000ff" />
 <widget position="942,60" size="163,40" name="sort" foregroundColor="#00bbbbbb" font="Regular; 25" valign="center" backgroundColor="#40000000" transparent="1" halign="right" />
   <widget position="528,54" size="413,50" name="title" foregroundColor="#00ffffff" font="SetrixHD; 40" valign="center" transparent="1" backgroundColor="#40000000" />
-  <widget name="menu" position="506,119" scrollbarMode="showAlways" size="613,554" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
+  <widget name="menu" backgroundColorSelected="#00282828" foregroundColorSelected="#00ffffff" position="506,119" scrollbarMode="showAlways" size="613,554" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
     <eLabel position="132,43" zPosition="-1" size="340,320" backgroundColor="#40000000" transparent="0" />
     <!-- /*ClockWidget-->
     <widget source="global.CurrentTime" foregroundColor="#00ffffff" render="Label" position="307,396" size="169,80" font="SetrixHD; 60" halign="left" backgroundColor="#40000000" transparent="1" valign="top">

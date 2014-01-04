@@ -167,9 +167,7 @@ class OpenScreen(ConfigListScreen, Screen):
 			try:
 				default = self.skinpartconfig.get(section,key)
 			except:
-				default = value
-				if key == "InfoBar" or key == "SecondInfoBar":
-					default = key
+				default = key
 		elif section == "rel_position":
 			try:
 				default = self.skinpartconfig.getint(section,key)

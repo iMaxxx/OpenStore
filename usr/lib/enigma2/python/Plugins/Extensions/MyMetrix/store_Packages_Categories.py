@@ -75,10 +75,10 @@ class OpenScreen(ConfigListScreen, Screen):
 <eLabel position="0,0" size="1280,720" backgroundColor="#b0ffffff" zPosition="-50" />
 <eLabel position="30,25" size="1222,668" backgroundColor="#40111111" zPosition="-1" />
 <ePixmap position="60,40" size="200,70" transparent="1" alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/openstore-logo-small.png" />
-<widget name="list1" position="60,125" scrollbarMode="showNever" size="290,568" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
-<widget name="list2" position="350,125" scrollbarMode="showNever" size="290,568" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
-<widget name="list3" position="639,125" scrollbarMode="showNever" size="290,568" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
-<widget name="list4" position="930,125" scrollbarMode="showNever" size="290,568" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
+<widget name="list1" backgroundColorSelected="#00009cff" foregroundColorSelected="#00ffffff" position="60,125" scrollbarMode="showNever" size="290,568" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
+<widget name="list2" backgroundColorSelected="#00009cff" foregroundColorSelected="#00ffffff" position="350,125" scrollbarMode="showNever" size="290,568" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
+<widget name="list3" backgroundColorSelected="#00009cff" foregroundColorSelected="#00ffffff" position="639,125" scrollbarMode="showNever" size="290,568" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
+<widget name="list4" backgroundColorSelected="#00009cff" foregroundColorSelected="#00ffffff" position="930,125" scrollbarMode="showNever" size="290,568" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
 <eLabel name="" position="1214,25" size="5,60" backgroundColor="blue" />
 <widget position="766,36" size="438,51" name="title" foregroundColor="#00ffffff" font="SetrixHD; 28" valign="center" transparent="1" backgroundColor="#40000000" halign="right" text="Settings" /></screen>
 """

@@ -86,7 +86,7 @@ class OpenScreen(ConfigListScreen, Screen ):
 <eLabel position="644,40" size="5,60" backgroundColor="#000000ff" />
 <widget position="500,61" size="136,40" name="sort" foregroundColor="#00bbbbbb" font="Regular; 25" valign="center" backgroundColor="#40000000" transparent="1" halign="right" />
   <widget font="Regular; 20" foregroundColor="#00ffffff" backgroundColor="#40000000" halign="left" position="680,620" size="160,33" name="greenbutton" transparent="1" />
- <widget name="menu" position="40,117" scrollbarMode="showNever" size="620,560" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
+ <widget name="menu" backgroundColorSelected="#00282828" foregroundColorSelected="#00ffffff" position="40,117" scrollbarMode="showNever" size="620,560" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
   <widget position="55,55" size="470,50" name="title" noWrap="1" foregroundColor="#00ffffff" font="SetrixHD; 33" valign="center" transparent="1" backgroundColor="#40000000" />
   <widget position="672,585" size="540,32" name="isInstalled" foregroundColor="#00ffffff" font="Regular; 20" valign="center" halign="left" transparent="1" backgroundColor="#40000000" />
   <eLabel position="669,620" size="5,40" backgroundColor="#0000ff00" />
@@ -308,7 +308,7 @@ class OpenScreen(ConfigListScreen, Screen ):
 					self["isInstalled"].setText(_("Update available!"))
 					self["greenbutton"].setText(_("Update"))
 				else:
-					self["isInstalled"].setText(_("Already installed!"))
+					self["isInstalled"].setText(_("This app is installed!"))
 					self["greenbutton"].setText(_("Reinstall"))
 					
 			else:
