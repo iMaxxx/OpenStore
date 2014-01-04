@@ -217,8 +217,8 @@ class OpenScreen(ConfigListScreen, Screen):
 	
 		
 		if not self.skinPartPath == config.plugins.MyMetrix.SkinPartPath.value:
-			 if os.path.exists(config.plugins.MyMetrix.SkinPartPath.value):
-			 	rmtree(config.plugins.MyMetrix.SkinPartPath.value)
+			 #if os.path.exists(config.plugins.MyMetrix.SkinPartPath.value):
+			 #rmtree(config.plugins.MyMetrix.SkinPartPath.value)
 			 try:
 			 	copytree(self.skinPartPath,config.plugins.MyMetrix.SkinPartPath.value)
 			 	rmtree(self.skinPartPath)
