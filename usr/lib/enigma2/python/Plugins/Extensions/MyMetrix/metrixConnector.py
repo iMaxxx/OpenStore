@@ -86,6 +86,8 @@ config = metrixDefaults.loadDefaults()
 def syncStart(session):
 	global global_session
 	global_session = session
+
+	#resetting config values
 	config.plugins.MetrixUpdater.Reboot.value = 0
 	config.plugins.MetrixUpdater.UpdateAvailable.value = 0
 	config.plugins.MetrixUpdater.Open.value = 0
@@ -113,9 +115,6 @@ def syncStart(session):
 			metrixTools.callOnMainThread(Notifications.AddNotification,metrix_Intro.OpenScreen)
 	except:
 		pass
-		#global_session.open(metrix_Intro.OpenScreen)
-		
-	
 		
 def syncGeneral():
 	while(1):
@@ -465,44 +464,6 @@ def checkAction(actionId):
 	if not metrixCore.getWeb(metrixDefaults.URL_STORE_API + "connect.actioncheck",True,{'id':actionId}):
 		metrixTools.log("Error checking action")
 
-
-#---------PACKAGES
-def getPackageUpdates():
-	try:
-		updates_available = False
-		data = metrixCore.getWeb(metrixDefaults.URL_STORE_API + "get.xml.packages&category_id=%",True)
-		if not data:
-			metrixTools.log("Error getting package updates")
-			
-			
-		dom = parseString(data)
-		for design in dom.getElementsByTagName('entry'):
-			item_id = str(design.getAttributeNode('id').nodeValue)
-			name = str(design.getAttributeNode('name').nodeValue)
-			author = str(design.getAttributeNode('author').nodeValue)
-			version = str(design.getAttributeNode('version').nodeValue)
-			rating = str(design.getAttributeNode('rating').nodeValue)
-			date = str(design.getAttributeNode('date_created').nodeValue)
-			item_type = str(design.getAttributeNode('type').nodeValue)
-			file_id = str(design.getAttributeNode('file_id').nodeValue)
-			file_token = str(design.getAttributeNode('file_token').nodeValue)
-			image_id = str(design.getAttributeNode('image_id').nodeValue)
-			image_token = str(design.getAttributeNode('image_token').nodeValue)
-			total_votes = str(design.getAttributeNode('total_votes').nodeValue)
-			description = str(design.getAttributeNode('description').nodeValue)
-			previouspackage = str(design.getAttributeNode('previouspackage').nodeValue)
-			path = metrixDefaults.pathRoot()+"packages/"+item_id
-			if not os.path.exists(path):
-				if previouspackage != "0":
-					path = metrixDefaults.pathRoot()+"packages/"+previouspackage
-					if os.path.exists(path):
-						metrixTools.log("Update found: "+name+" Version: "+version)
-						installPackage(item_id+";"+file_id+";"+file_token,0)	
-						updates_available = True
-		if updates_available == True:
-			getPackageUpdates()
-	except:
-		metrixTools.log("Error getting updates.")
 
 
 def installPackage(param,actionId,isUpdate=False):

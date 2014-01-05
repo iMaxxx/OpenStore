@@ -45,6 +45,7 @@ import gettext
 from enigma import ePicLoad
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import os
+import shutil
 import traceback
 import md5
 import metrixDefaults
@@ -106,16 +107,19 @@ def skinPartIsCompatible(dom):
 		pass
 	return dom
 
+
+
 def downloadFile(webURL,localPath = '/tmp/metrixPreview.png',searchpattern="",replacepattern="",forceOverwrite = True):
 	#print localPath
 	try:
 		if "http" in webURL:
 			webFile = urllib2.urlopen(webURL)
-			localFile = open(localPath, 'w')
 			if searchpattern == "":
-				if not os.path.exists(localPath) or forceOverwrite:
+				if not os.path.isfile(localPath) or forceOverwrite:
+					localFile = open(localPath, 'w')
 					localFile.write(webFile.read())
 			else:
+				localFile = open(localPath, 'w')
 				for line in webFile:
 						localFile.write(line.replace(searchpattern,replacepattern))
 			webFile.close()
@@ -270,5 +274,16 @@ def getFileDiff(oldfile,newfile):
 	        return line
 	return ""
 
+def checkComponents(sourceRoot,targetRoot, transferPath, filename=None, force=False):
+	for file in os.listdir(sourceRoot+transferPath):
+	    full_file_name = os.path.join(sourceRoot+transferPath, file)
+	    if (os.path.isfile(full_file_name)):
+	    	if filename is None:
+	    		if not os.path.isfile(targetRoot+transferPath+file) or force:
+	        		shutil.copy(full_file_name, targetRoot+transferPath)
+	        else:
+	        	if file == filename:
+	        		if not os.path.isfile(targetRoot+transferPath+file) or force:
+	        			shutil.copy(full_file_name, targetRoot+transferPath)
 
 		

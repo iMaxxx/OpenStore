@@ -49,6 +49,7 @@ class XPicon(Renderer):
 	
 	def ShowXPicon(self,picPath):
 		self.PicLoad.setPara([self.instance.size().width(),self.instance.size().height(),self.Scale[0],self.Scale[1],True, 1, "#ff000000"])
+		#self.PicLoad.getThumbnail(picPath,self.instance.size().width(),self.instance.size().height(),True)
 		self.PicLoad.startDecode(picPath)
 		#print "showing image"
 		

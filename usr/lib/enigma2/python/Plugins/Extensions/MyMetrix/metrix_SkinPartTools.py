@@ -69,22 +69,20 @@ import e2info
 	
 def downloadSkinPartRenderer(id):
 	url = metrixDefaults.URL_GET_SKINPART_RENDERER + "&id="+id
-	downloadAdditionalFiles(url,"/usr/lib/enigma2/python/Components/Renderer/","","",False)
+	downloadAdditionalFiles(url,metrixDefaults.PLUGIN_DIR+"Components/Renderer/",forceOverwrite=False)
 	
 def downloadSkinPartConverter(id):
 	url = metrixDefaults.URL_GET_SKINPART_RENDERER + "&id="+id
-	downloadAdditionalFiles(url,"/usr/lib/enigma2/python/Components/Converter/","","",False)
+	downloadAdditionalFiles(url,metrixDefaults.PLUGIN_DIR+"Components/Converter/",forceOverwrite=False)
 	
 def downloadSkinPartImages(id,path):
-	url = metrixDefaults.URL_GET_SKINPART_IMAGE + "&width=550&id="+id
-	return downloadAdditionalFiles(url,path + "images/")
-
-def downloadAdditionalFiles(url,target_path,searchpattern="",replacepattern="",forceOverwrite = True):
-	print url
+	url = metrixDefaults.URL_GET_SKINPART_IMAGE + "&id="+id
 	negate = config.plugins.MyMetrix.Color.SkinPartImagesNegate.value
 	greyscale = config.plugins.MyMetrix.Color.SkinPartImagesGreyscale.value
 	depth = config.plugins.MyMetrix.Color.SkinPartImagesDepth.value
-	
+	return downloadAdditionalFiles(url,path + "images/",urlparameters="&negate="+metrixTools.bool210(negate)+"&greyscale="+metrixTools.bool210(greyscale)+"&depth="+depth)
+
+def downloadAdditionalFiles(url,target_path,searchpattern="",replacepattern="",forceOverwrite = True,urlparameters=""):
 	try:
 		data = metrixCore.getWeb(url,True)
 		#print(data)
@@ -92,13 +90,11 @@ def downloadAdditionalFiles(url,target_path,searchpattern="",replacepattern="",f
 		dom = parseString(data)
 		
 		for design in dom.getElementsByTagName('entry'):
-			url = str(design.getAttributeNode('url').nodeValue)+"&negate="+metrixTools.bool210(negate)+"&greyscale="+metrixTools.bool210(greyscale)+"&depth="+depth
-			file_name = target_path+url.split('file=')[-1]
-			file_name = file_name.split('&negate=')[0]
+			url = str(design.getAttributeNode('url').nodeValue)+urlparameters
+			file_name = str(design.getAttributeNode('url').nodeValue).split('file=')[-1]
 			if not os.path.exists(target_path):
 				os.makedirs(target_path)
-			print url+" targ: "+target_path
-			if metrixTools.downloadFile(url,file_name,searchpattern,replacepattern,forceOverwrite) == None:
+			if metrixTools.downloadFile(url,target_path+file_name,searchpattern,replacepattern,forceOverwrite) == None:
 				return False
 				metrixTools.log("Error downloading file!")
 		return True

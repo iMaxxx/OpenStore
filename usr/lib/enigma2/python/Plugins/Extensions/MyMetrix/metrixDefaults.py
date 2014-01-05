@@ -51,7 +51,7 @@ import ConfigParser
 
 #############################################################
 VERSION = "2.1alpha"
-BUILD = '131229'
+BUILD = '140104'
 PLUGIN_DIR = "/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/"
 SKIN_DIR = "/usr/share/enigma2/MetrixHD/"
 TEMPLATES_DIR = PLUGIN_DIR + "skintemplates/"
@@ -315,7 +315,7 @@ def getImageName():
 	try:
 		if not cfg(CONFIG_SYSTEM_DESC,"image","name") == "":
 			return cfg(CONFIG_SYSTEM_DESC,"image","name")
-		elif os.path.exists(imagefile):
+		elif os.path.isfile(imagefile):
 			f = open(imagefile)
 			lines = f.readlines()
 			f.close()

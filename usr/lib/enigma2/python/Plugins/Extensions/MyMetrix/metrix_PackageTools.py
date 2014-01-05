@@ -148,9 +148,9 @@ def runCommand(command):
 	
 def getPackageName(packagePath,packageFile):
 	try:
-		if os.path.exists('/tmp/control.tar.gz'):
+		if os.path.isfile('/tmp/control.tar.gz'):
 			os.remove('/tmp/control.tar.gz')
-		if os.path.exists('/tmp/control'):
+		if os.path.isfile('/tmp/control'):
 			os.remove('/tmp/control')
 		packageInfo = runCommand('cd '+packagePath+ ' && ar x ./'+packageFile+' control.tar.gz && tar xf ./control.tar.gz ./control && cat control | grep Package')
 		os.remove('/tmp/openstore/control.tar.gz')
