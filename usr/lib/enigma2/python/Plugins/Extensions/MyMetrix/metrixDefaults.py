@@ -50,8 +50,8 @@ import ConfigParser
 
 
 #############################################################
-VERSION = "2.1alpha"
-BUILD = '140104'
+VERSION = "2.1a"
+BUILD = '140106'
 PLUGIN_DIR = "/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/"
 SKIN_DIR = "/usr/share/enigma2/MetrixHD/"
 TEMPLATES_DIR = PLUGIN_DIR + "skintemplates/"
