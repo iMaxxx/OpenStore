@@ -5,8 +5,8 @@ OpenStore - www.open-store.net
 
 ### OpenStore Plugin - Explore The Variety Of Your Set-Top-Box
 ![alt tag](http://open-store.net/info/Screenshots/Plugin/OpenStore/Categories2.jpg)
+![alt tag](http://open-store.net/info/Screenshots/Plugin/OpenStore/Browse1.jpg)
 ![alt tag](http://open-store.net/info/Screenshots/Plugin/OpenStore/Browse2.jpg)
-![alt tag](http://open-store.net/info/Screenshots/Plugin/OpenStore/Browse3.jpg)
 
 
 =========
