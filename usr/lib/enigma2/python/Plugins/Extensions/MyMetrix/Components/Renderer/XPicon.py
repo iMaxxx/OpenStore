@@ -98,10 +98,9 @@ class XPicon(Renderer):
 			overwrite = False
 		for path in self.searchPaths:
 			pngname = (path % self.path) + serviceName + ".png"
-			if fileExists(pngname) and overwrite == False:
+			if fileExists(pngname) or overwrite == False:
 				return pngname
 		if active:
-			print "active"
 			self.thread_downloader = threading.Thread(target=self.downloadXPicon, args=(serviceName,pngname))
 			self.thread_downloader.daemon = True
 			self.thread_downloader.start()
@@ -143,7 +142,7 @@ class XPicon(Renderer):
 					localFile.write(webFile.read())
 					webFile.close()
 					localFile.close()
-
+					self.ShowXPicon(localFilePath)
 			except Exception, e:
 				pass
 
