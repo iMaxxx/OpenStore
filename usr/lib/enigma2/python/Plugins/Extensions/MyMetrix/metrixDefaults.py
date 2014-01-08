@@ -240,7 +240,10 @@ def loadDefaults():
 	
 	
 	
-	config.plugins.MetrixCloudSync.SyncBoxInfo = ConfigYesNo(default=False)
+	config.plugins.MetrixCloudSync.SyncBoxInfo = ConfigYesNo(default=True)
+	config.plugins.MetrixCloudSync.SyncProgramInfo = ConfigYesNo(default=False)
+	config.plugins.MetrixCloudSync.SyncNetworkInfo = ConfigYesNo(default=False)
+	config.plugins.MetrixCloudSync.SyncHardwareInfo = ConfigYesNo(default=False)
 	config.plugins.MetrixCloudSync.SyncSkinParts = ConfigYesNo(default=False)
 	config.plugins.MetrixCloudSync.SyncPackages = ConfigYesNo(default=False)
 	config.plugins.MetrixCloudSync.SyncEPG = ConfigYesNo(default=False)

@@ -259,11 +259,7 @@ def prepareInfo(session):
 	try:
 		statusinfo = e2info.getStatusInfo2(session)
 		sync_data = []
-		if config.plugins.MetrixCloudSync.SyncBoxInfo.value:
-			try:
-				sync_data.append(metrixCloudSync.getSyncRow("Box Info","General","inStandby","Standby status",statusinfo['inStandby'],8))	
-			except:
-				pass
+		if config.plugins.MetrixCloudSync.SyncProgramInfo.value:
 			try:
 				sync_data.append(metrixCloudSync.getSyncRow("Box Info","Current Service","currservice_name","Program",statusinfo['currservice_name'],1))
 			except:
@@ -288,6 +284,10 @@ def prepareInfo(session):
 				sync_data.append(metrixCloudSync.getSyncRow("Box Info","Current Service","currservice_end","End",statusinfo['currservice_end'],6))
 			except:
 				pass
+			try:
+				sync_data.append(metrixCloudSync.getSyncRow("Box Info","General","inStandby","Standby status",statusinfo['inStandby'],8))	
+			except:
+				pass
 			metrixCloudSync.syncNow(sync_data)
 	except:
 		pass
@@ -302,22 +302,8 @@ def prepareInfoGeneral(session):
 	try:
 		boxinfo = e2info.getInfo()
 		sync_data = []
-		if config.plugins.MetrixCloudSync.SyncBoxInfo.value:
-			sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","mymetrix_version","MyMetrix version",metrixDefaults.VERSION,0))
-			sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","image_version","Image version",metrixDefaults.getImageName(),2))
-			sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","mymetrix_build","MyMetrix build",metrixDefaults.BUILD,1))
-			try:
-				sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","enigmaver","GUI version",boxinfo['enigmaver'],3))
-			except:
-				pass
-			try:
-				sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","imagever","Firmware version",boxinfo['imagever'],4))
-			except:
-				pass
-			try:
-				sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","kernelver","Kernel version",boxinfo['kernelver'],5))
-			except:
-				pass
+		
+		if config.plugins.MetrixCloudSync.SyncNetworkInfo.value:
 			try:
 				for item in boxinfo["ifaces"]:
 					sync_data.append(metrixCloudSync.getSyncRow("Box Info","Network Interface "+item["name"],item["name"]+"dhcp","DHCP status",item["dhcp"],1))
@@ -327,6 +313,7 @@ def prepareInfoGeneral(session):
 					sync_data.append(metrixCloudSync.getSyncRow("Box Info","Network Interface "+item["name"],item["name"]+"gw","Gateway",item["gw"],5))
 			except:
 				pass
+		if config.plugins.MetrixCloudSync.SyncHardwareInfo.value:	
 			try:
 				for item in boxinfo["tuners"]:
 					sync_data.append(metrixCloudSync.getSyncRow("Box Info","Tuners",item["name"],item["name"],item["type"])	)
@@ -356,6 +343,23 @@ def prepareInfoGeneral(session):
 				pass
 			try:
 				sync_data.append(metrixCloudSync.getSyncRow("Box Info","General","mem2","Free memory",boxinfo['mem2'],6))
+			except:
+				pass
+			
+		if config.plugins.MetrixCloudSync.SyncBoxInfo.value:	
+			sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","mymetrix_version","MyMetrix version",metrixDefaults.VERSION,0))
+			sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","image_version","Image version",metrixDefaults.getImageName(),2))
+			sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","mymetrix_build","MyMetrix build",metrixDefaults.BUILD,1))
+			try:
+				sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","enigmaver","GUI version",boxinfo['enigmaver'],3))
+			except:
+				pass
+			try:
+				sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","imagever","Firmware version",boxinfo['imagever'],4))
+			except:
+				pass
+			try:
+				sync_data.append(metrixCloudSync.getSyncRow("Box Info","Software","kernelver","Kernel version",boxinfo['kernelver'],5))
 			except:
 				pass
 			try:
