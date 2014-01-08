@@ -60,9 +60,13 @@ class XPicon(Renderer):
 
 	def changed(self, what):
 		if self.instance:
+			try:
+				overwrite = config.plugins.MyMetrix.XPiconsOverwrite.value
+			except:
+				overwrite = False
+			print "overwrite: "+str(overwrite)
 			pngname = ""
 			if what[0] != self.CHANGED_CLEAR:
-				
 				sname = self.source.text
 				pos = sname.rfind(':')
 				if pos != -1:
@@ -72,6 +76,11 @@ class XPicon(Renderer):
 					pngname = self.findPicon(sname)
 					if pngname != "":
 						self.nameCache[sname] = pngname
+						if overwrite:
+							self.downloadXPicon(sname)
+				else:
+					if overwrite:
+						self.downloadXPicon(sname)
 			if pngname == "": # no picon for service found
 				pngname = self.nameCache.get("default", "")
 				if pngname == "": # no default yet in cache..
@@ -83,34 +92,31 @@ class XPicon(Renderer):
 						else:
 							pngname = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/picon_default.png")
 					self.nameCache["default"] = pngname
+				
 			if self.pngname != pngname:
-				self.ShowXPicon(pngname)
 				self.pngname = pngname
+				self.ShowXPicon(pngname)
+				
 
 	def findPicon(self, serviceName):
 		try:
 			active = config.plugins.MyMetrix.ActiveXPicon.value
 		except:
 			active = False
-		try:
-			overwrite = config.plugins.MyMetrix.Overwrite.value
-		except:
-			overwrite = False
 		for path in self.searchPaths:
 			pngname = (path % self.path) + serviceName + ".png"
-			if fileExists(pngname) or overwrite == False:
-				return pngname
-		if active:
-			self.thread_downloader = threading.Thread(target=self.downloadXPicon, args=(serviceName,pngname))
-			self.thread_downloader.daemon = True
-			self.thread_downloader.start()
 			if fileExists(pngname):
 				return pngname
+		if active:
+			downloadXPicon(serviceName)
 		return ""
 	
-			
+	def downloadXPicon(self,serviceName):	
+		self.thread_downloader = threading.Thread(target=self.downloadXPiconThread, args=(serviceName,))
+		self.thread_downloader.daemon = True
+		self.thread_downloader.start()
 	
-	def downloadXPicon(self,serviceName,pngname):
+	def downloadXPiconThread(self,serviceName):
 		try:
 			repoId = config.plugins.MyMetrix.XPiconsRepository.value
 		except:
@@ -142,7 +148,7 @@ class XPicon(Renderer):
 					localFile.write(webFile.read())
 					webFile.close()
 					localFile.close()
-					self.ShowXPicon(localFilePath)
+					#self.ShowXPicon(localFilePath)
 			except Exception, e:
 				pass
 

@@ -56,6 +56,7 @@ import urllib, urllib2
 from xml.dom.minidom import parseString
 import metrixCore
 import ConfigParser
+from Tools.Directories import fileExists
 
 
 
@@ -277,13 +278,15 @@ def getFileDiff(oldfile,newfile):
 def checkComponents(sourceRoot,targetRoot, transferPath, filename=None, force=False):
 	for file in os.listdir(sourceRoot+transferPath):
 	    full_file_name = os.path.join(sourceRoot+transferPath, file)
-	    if (os.path.isfile(full_file_name)):
+	    if fileExists(full_file_name):
 	    	if filename is None:
-	    		if not os.path.isfile(targetRoot+transferPath+file) or force:
+	    		if not fileExists(targetRoot+transferPath+file) or force:
 	        		shutil.copy(full_file_name, targetRoot+transferPath)
 	        else:
 	        	if file == filename:
-	        		if not os.path.isfile(targetRoot+transferPath+file) or force:
+	        		if not fileExists(targetRoot+transferPath+file) or force:
 	        			shutil.copy(full_file_name, targetRoot+transferPath)
+
+
 
 		

@@ -55,6 +55,7 @@ import metrixConnector
 import metrix_MetrixColors
 import metrixDefaults
 import metrixTools
+import shutil
 import metrixInfobar
 import store_Packages_Categories
 import metrix_MainMenu
@@ -72,8 +73,8 @@ def startSession(reason, session):
 	global_session = session
 	
 	#Copy components
-	metrixTools.checkComponents(metrixDefaults.PLUGIN_DIR,"/usr/lib/enigma2/python/","Components/Converter/",filename="XPicon.py",force=True)
-	metrixTools.checkComponents(metrixDefaults.PLUGIN_DIR,"/usr/lib/enigma2/python/","Components/Converter/",filename="MetrixWeather.py",force=True)
+	shutil.copy(metrixDefaults.PLUGIN_DIR+"Components/Renderer/XPicon.py","/usr/lib/enigma2/python/Components/Renderer/")
+	shutil.copy(metrixDefaults.PLUGIN_DIR+"Components/Converter/MetrixWeather.py","/usr/lib/enigma2/python/Components/Converter/")
 	metrixTools.checkComponents(metrixDefaults.PLUGIN_DIR,"/usr/lib/enigma2/python/","Components/Converter/")
 	metrixTools.checkComponents(metrixDefaults.PLUGIN_DIR,"/usr/lib/enigma2/python/","Components/Renderer/")
 
