@@ -305,7 +305,7 @@ def getDefaultSkinPartPath():
 	elif os.path.exists("/media/cf/skinparts/"):
 		return "/media/cf/skinparts/"
 	elif os.path.exists("/media/hdd/skinparts/"):
-		return "/media/cf/skinparts/"
+		return "/media/hdd/skinparts/"
 	else:
 		return PLUGIN_DIR + "skinparts/"
 
