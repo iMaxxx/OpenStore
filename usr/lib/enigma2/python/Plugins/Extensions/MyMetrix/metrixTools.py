@@ -171,7 +171,7 @@ def log(errormessage,e=None,solution="MyMetrix"):
 			
 		f = None
 		try:
-			f = open('/tmp/metrixerror.log', 'a')
+			f = open('/tmp/openstore.log', 'a')
 			f.write(err_str + '\n')
 		except Exception, e:
 			print "[skinError] Can not write skin file: " + str(e)

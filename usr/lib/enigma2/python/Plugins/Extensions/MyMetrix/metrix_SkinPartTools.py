@@ -387,8 +387,8 @@ def getTargetScreens(skinpartconfig,targetscreens):
 	#return "InfoBar,"
 	return screens
 		
-def writeSkinFile(skindom):
-	file = open(metrixDefaults.SKIN_DIR+"skin.xml","wb")
+def writeSkinFile(skindom,file):
+	file = open(file,"wb")
 	skindom.writexml(file)
 	file.close()
 	

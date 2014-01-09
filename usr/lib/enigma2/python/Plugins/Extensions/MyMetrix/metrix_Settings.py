@@ -124,26 +124,29 @@ class OpenScreen(ConfigListScreen, Screen):
 		
 		#list.append(getConfigListEntry(_("Update interval (min)"), config.plugins.MetrixUpdater.refreshInterval))
 		
-		list.append(getConfigListEntry(_("Weather --------------------------------------------------------------------------------")))
+		list.append(getConfigListEntry(_("Weather --------------------------------------------------------------------------------------")))
 		
 		list.append(getConfigListEntry(_("MetrixWeather ID"), config.plugins.MetrixWeather.woeid))
 		list.append(getConfigListEntry(_("Unit"), config.plugins.MetrixWeather.tempUnit))
 		#list.append(getConfigListEntry(_("Refresh Interval (min)"), config.plugins.MetrixWeather.refreshInterval))
 		list.append(getConfigListEntry(_(" ")))
-		list.append(getConfigListEntry(_("SkinPart tools -----------------------------------------------------------------------------------")))
+		list.append(getConfigListEntry(_("SkinPart tools -------------------------------------------------------------------------------------")))
 		list.append(getConfigListEntry(_("Negate image downloads"), config.plugins.MyMetrix.Color.SkinPartImagesNegate))
 		list.append(getConfigListEntry(_("Greyscale image downloads"), config.plugins.MyMetrix.Color.SkinPartImagesGreyscale))
 		list.append(getConfigListEntry(_("image downloads depth"), config.plugins.MyMetrix.Color.SkinPartImagesDepth))
 		
 		list.append(getConfigListEntry(_(" ")))
-		list.append(getConfigListEntry(_("Skin -----------------------------------------------------------------------------------")))
+		list.append(getConfigListEntry(_("Skin -------------------------------------------------------------------------------------------------")))
+		list.append(getConfigListEntry(_("SkinParts location (regenerate skin!)"), config.plugins.MyMetrix.SkinPartPath))
 		#list.append(getConfigListEntry(_("SkinPart updates"), config.plugins.MyMetrix.AutoUpdateSkinParts))
 		#list.append(getConfigListEntry(_("Show update notification bar"), config.plugins.MetrixUpdater.UpdatePopup_Packages))
-		list.append(getConfigListEntry(_("Show intro page"), config.plugins.MyMetrix.showFirstRun))
-		list.append(getConfigListEntry(_("Skin template"), config.plugins.MyMetrix.templateFile))
-		list.append(getConfigListEntry(_("Skin target folder"), config.plugins.MyMetrix.SkinXMLPath))
+		#list.append(getConfigListEntry(_("Show intro page"), config.plugins.MyMetrix.showFirstRun))
+		list.append(getConfigListEntry(_("Skin template"), config.plugins.MyMetrix.Templates))
+		list.append(getConfigListEntry(_("My skin name"), config.plugins.MyMetrix.SkinName))
+		list.append(getConfigListEntry(_("Only use SkinParts in InfoBar"), config.plugins.MyMetrix.CleanInfoBar))
 		
-		list.append(getConfigListEntry(_("SkinParts location (regenerate skin!)"), config.plugins.MyMetrix.SkinPartPath))
+		#list.append(getConfigListEntry(_("Skin target folder"), config.plugins.MyMetrix.SkinXMLPath))
+		
 		list.append(getConfigListEntry(" "))
 		list.append(getConfigListEntry(_("Developer"),config.plugins.MyMetrix.Store.SkinPart_Developer))
 		list.append(getConfigListEntry(_("Background mode (for better OSD screenshots)"),config.plugins.MyMetrix.Color.BackgroundMode))

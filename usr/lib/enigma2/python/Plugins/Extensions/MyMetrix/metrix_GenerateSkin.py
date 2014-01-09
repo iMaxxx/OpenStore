@@ -128,6 +128,9 @@ class OpenScreen(ConfigListScreen, Screen):
 				screennames.append(name)
 			except:
 				pass
+		if config.plugins.MyMetrix.CleanInfoBar.value:
+			screennames.append("InfoBar")
+			screennames.append("SecondInfoBar")
 		return screennames
 	
 	
@@ -137,7 +140,7 @@ class OpenScreen(ConfigListScreen, Screen):
 		screennames = [] 
 		screennames = self.getSkinPartsScreennames(config.plugins.MyMetrix.SkinPartPath.value + "screens/active/")
 		metrixTools.callOnMainThread(self["output"].setText,_("Reading template file"))
-		skindom = parse(metrixDefaults.pathRoot()+"skintemplates/"+config.plugins.MyMetrix.templateFile.value)
+		skindom = parse(config.plugins.MyMetrix.Templates.value)
 		skinNode = skindom.getElementsByTagName('skin')[0]
 		
 		metrixTools.callOnMainThread(self["output"].setText,_("Setting colors"))
@@ -210,24 +213,25 @@ class OpenScreen(ConfigListScreen, Screen):
 			screen = skinPartIsCompatible(screen)
 		
 		metrixTools.callOnMainThread(self.writeFile,skindom)
+		
+		
+
+	def writeFile(self,skindom):
+		self["output"].setText(_("Writing skin file, please wait..."))
+		file =  config.plugins.MyMetrix.Templates.value.replace("/skin.xml","/") + config.plugins.MyMetrix.SkinName.value + "/skin.xml"
+		path = os.path.dirname(file)	
+		if not os.path.exists(path):
+			os.makedirs(path)	
+		metrix_SkinPartTools.writeSkinFile(skindom,file)
 		try:
 			metrixTools.callOnMainThread(self["output"].setText,_("Activating Skin"))
-			config.skin.primary_skin.value = config.plugins.MyMetrix.SkinXMLPath.value.split("/")[-1] + "skin.xml"
+			config.skin.primary_skin.value = file
 			config.skin.primary_skin.save()
 			configfile.save()
 		except Exception, e:
 			
 			metrixTools.log("Error activating skin",e)
-		metrixTools.callOnMainThread(self.finished)
-		
-
-	def writeFile(self,skindom):
-		self["output"].setText(_("Writing skin file, please wait..."))
-		file = config.plugins.MyMetrix.SkinXMLPath.value + "skin.xml"
-		path = os.path.dirname(file)	
-		if not os.path.exists(path):
-			os.makedirs(path)	
-		metrix_SkinPartTools.writeSkinFile(skindom)
+		self.finished()
 		
 	
 	def finished(self):

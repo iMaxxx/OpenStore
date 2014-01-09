@@ -64,7 +64,6 @@ class XPicon(Renderer):
 				overwrite = config.plugins.MyMetrix.XPiconsOverwrite.value
 			except:
 				overwrite = False
-			print "overwrite: "+str(overwrite)
 			pngname = ""
 			if what[0] != self.CHANGED_CLEAR:
 				sname = self.source.text
@@ -108,7 +107,7 @@ class XPicon(Renderer):
 			if fileExists(pngname):
 				return pngname
 		if active:
-			downloadXPicon(serviceName)
+			self.downloadXPicon(serviceName)
 		return ""
 	
 	def downloadXPicon(self,serviceName):	

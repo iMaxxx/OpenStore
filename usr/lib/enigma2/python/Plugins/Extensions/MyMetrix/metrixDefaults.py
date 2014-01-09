@@ -39,6 +39,7 @@ from skin import parseColor
 from Components.Pixmap import Pixmap
 from Components.Label import Label
 import urllib
+import fnmatch
 import gettext
 from enigma import ePicLoad
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
@@ -53,7 +54,7 @@ import ConfigParser
 VERSION = "2.1a"
 BUILD = '140109'
 PLUGIN_DIR = "/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/"
-SKIN_DIR = "/usr/share/enigma2/MetrixHD/"
+SKINS_ROOT = "/usr/share/enigma2/"
 TEMPLATES_DIR = PLUGIN_DIR + "skintemplates/"
 
 
@@ -236,7 +237,9 @@ def loadDefaults():
 					("/media/hdd/skinparts/", _("HDD")),
 					("/media/cf/skinparts/", _("CF"))
 					])
-	config.plugins.MyMetrix.SkinXMLPath = ConfigSelection(default='/usr/share/enigma2/MetrixHD/', choices = getTargetFolders())
+	config.plugins.MyMetrix.Templates = ConfigSelection(choices = getTemplateFiles())
+	config.plugins.MyMetrix.SkinName = ConfigText(default="MySkin",fixed_size = False)
+	config.plugins.MyMetrix.CleanInfoBar = ConfigYesNo(default=True)
 	
 	
 	
@@ -280,27 +283,16 @@ def loadDefaults():
 	return config
 
 
-def getTemplateFiles():
-	templates = []
-	dirs = listdir(TEMPLATES_DIR)
-	for dir in dirs:
-		try:
-			templates.append((dir,dir.split("/")[-1].replace(".xml","")))
-		except: 
-			pass
-	return templates
 
-def getTargetFolders():
-	templates = []
-	dirs = listdir('/usr/share/enigma2/')
-	for dir in dirs:
-		try:
-			if os.path.isdir('/usr/share/enigma2/'+dir+'/'):
-				if not dir in ("XPicon","XPicons","po","countries","vfd_icons","picon","display","extensions","rc_models","spinner","picon5030","skin_default"):
-					templates.append(('/usr/share/enigma2/'+dir+'/',dir))
-		except: 
-			pass
-	return templates
+
+def getTemplateFiles():
+	files = []
+	for root, dirnames, filenames in os.walk(SKINS_ROOT):
+		for filename in fnmatch.filter(filenames, 'skin.xml'):
+			skinfile = os.path.join(root, filename)
+			if skinfile.replace(SKINS_ROOT,"").replace("/skin.xml","") != "skin.xml":
+				files.append((skinfile, skinfile.replace(SKINS_ROOT,"").replace("/skin.xml","")))
+	return files
 
 def getDefaultSkinPartPath():
 	if os.path.exists("/media/usb/skinparts/"):
