@@ -150,7 +150,7 @@ def loadDefaults():
 	config.plugins.MetrixCloudSync = ConfigSubsection()
 	
 	config.plugins.MyMetrix.templateFile = ConfigSelection(default="MetrixHD for VTi.xml", choices = getTemplateFiles())
-	config.plugins.MyMetrix.showFirstRun = ConfigYesNo(default=True)
+	config.plugins.MyMetrix.showFirstRun = ConfigYesNo(default=showFirstRun())
 	config.plugins.MyMetrix.logLevel = ConfigSelection(default="off", choices = [
 					("off", _("Off")),
 					("on", _("On")),
@@ -399,4 +399,10 @@ def getColorDepth():
 		return "8bit"
 	else:
 		return "Original"
+	
+def showFirstRun():
+	if getImageName().lower() == "vti":
+		return True
+	else:
+		return False
 	
