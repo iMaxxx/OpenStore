@@ -11,13 +11,6 @@ OpenStore - www.open-store.net
 
 =========
 
-### MetrixHD - Skin for Enigma2 
-![alt tag](http://open-store.net/info/Screenshots/Skin/Menu.jpg?raw=true)
-![alt tag](http://open-store.net/info/Screenshots/Skin/ChannelList.jpg?raw=true)
-![alt tag](http://open-store.net/info/Screenshots/Skin/InfoBar.jpg?raw=true)
-
-=========
-
 ### MyMetrix Plugin to customize your skin
 ![alt tag](http://open-store.net/info/Screenshots/Plugin/MyMetrix/MyMetrix.jpg)
 ![alt tag](http://open-store.net/info/Screenshots/Plugin/MyMetrix/MyMetrixCategories.jpg)
@@ -56,10 +49,10 @@ OpenStore - www.open-store.net
 - (NEW) Better support for a wide variety of enimga2 devices
 - (FIXED) Multitasking operations now ready for all OE2.0 boxes
 - (FIXED) Refreshing page jumping pages with left/right key
+- (NEW) [MetrixHD](https://github.com/iMaxxx/MetrixHD-VTi) skin is no longer required during to image incompatibility issues
 - many more....
 
 ### To-Do:
 - Build new Updater - depends on new build-number for entries
-- Save information of installed plugins
 - downloadable plugin icons
 -...
