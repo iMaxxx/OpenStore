@@ -166,6 +166,8 @@ class OpenScreen(ConfigListScreen, Screen):
 				self.session.open(store_SkinParts_Browse.OpenScreen,"%","%",_("Bundles"),"date desc",False,pagelength=50,type="bundle")
 			elif returnValue is "Extensions":
 				self.session.open(store_Packages_Browse.OpenScreen,"2017",_("Skin Extensions"))
+			elif returnValue is "Skins":
+				self.session.open(store_Packages_Browse.OpenScreen,"2009",_("Skins"))
 			elif self.sort == "suite":
 				self.session.open(store_SkinParts_Browse.OpenScreen,"%",self["menu"].l.getCurrentSelection()[0][0],self["menu"].l.getCurrentSelection()[0][1])
 			else:
@@ -194,6 +196,7 @@ class OpenScreen(ConfigListScreen, Screen):
 			dom = parseString(data)
 			menu = []
 			## ADD STATIC PSEUDO CATEGORIES
+			menu.append(self.CategoryListEntry(_("Skins"), "Skins","skins"))
 			menu.append(self.CategoryListEntry(_("MetrixColors"), "MetrixColors","brush"))
 			menu.append(self.CategoryListEntry(_("Newest SkinParts"), "newest","new"))
 			menu.append(self.CategoryListEntry(_("Last Modified"), "modified","recent"))
