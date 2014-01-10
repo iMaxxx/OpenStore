@@ -52,7 +52,7 @@ import ConfigParser
 
 #############################################################
 VERSION = "2.1a"
-BUILD = '140110'
+BUILD = '140111'
 PLUGIN_DIR = "/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/"
 SKINS_ROOT = "/usr/share/enigma2/"
 TEMPLATES_DIR = PLUGIN_DIR + "skintemplates/"
@@ -322,6 +322,7 @@ def getImageName():
 						imagename = imagename.split(" <")[0]
 					elif "<" in imagename:
 						imagename = imagename.split("<")[0]
+					imagename = imagename.replace('\r\n', '').replace('\n', '')
 	except:
 		pass
 	return imagename

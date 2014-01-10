@@ -264,6 +264,8 @@ def getRestrictions():
 	CONFIG_SYSTEM_DESC = "/etc/systemdescription.cfg"
 	restriction = "%image::"+ metrixDefaults.getImageName() +"%"
 	restriction = restriction + "%oe::"+metrixDefaults.getOEVersion()+"%"
+	if config.plugins.MyMetrix.logLevel.value in ["debug"]:
+		log("RESTRICTIONS: "+restriction)
 	return restriction
 
 def getFileDiff(oldfile,newfile):
