@@ -128,9 +128,6 @@ class OpenScreen(ConfigListScreen, Screen):
 				screennames.append(name)
 			except:
 				pass
-		if config.plugins.MyMetrix.CleanInfoBar.value:
-			screennames.append("InfoBar")
-			screennames.append("SecondInfoBar")
 		return screennames
 	
 	
@@ -153,7 +150,10 @@ class OpenScreen(ConfigListScreen, Screen):
 				metrixTools.callOnMainThread(self["output"].setText,_(str("Removing default screen "+screenname)))
 				parentNode = screen.parentNode
 				parentNode.removeChild(screen)
-			
+			if config.plugins.MyMetrix.CleanInfoBar.value:
+				if screenname == "InfoBar" or screenname == "SecondInfoBar":
+					for child in screen.childNodes:
+						screen.removeChild(child)
 				
 		# APPEND STORE SCREENS
 		path = config.plugins.MyMetrix.SkinPartPath.value + "screens/active/"
@@ -217,15 +217,17 @@ class OpenScreen(ConfigListScreen, Screen):
 		
 
 	def writeFile(self,skindom):
-		self["output"].setText(_("Writing skin file, please wait..."))
-		file =  config.plugins.MyMetrix.Templates.value.replace("/skin.xml","/") + config.plugins.MyMetrix.SkinName.value + "/skin.xml"
-		path = os.path.dirname(file)	
-		if not os.path.exists(path):
-			os.makedirs(path)	
-		metrix_SkinPartTools.writeSkinFile(skindom,file)
 		try:
-			metrixTools.callOnMainThread(self["output"].setText,_("Activating Skin"))
-			config.skin.primary_skin.value = file
+			self["output"].setText(_("Writing skin file, please wait..."))
+			oldfilename = config.plugins.MyMetrix.Templates.value.split("/")[-1]
+			file =  config.plugins.MyMetrix.Templates.value.replace(oldfilename,"skin."+config.plugins.MyMetrix.SkinName.value + ".xml")
+			path = os.path.dirname(file)	
+			if not os.path.exists(path):
+				os.makedirs(path)	
+			metrix_SkinPartTools.writeSkinFile(skindom,file)
+		
+			self["output"].setText(_("Activating Skin"))
+			config.skin.primary_skin.value = file.replace(metrixDefaults.SKINS_ROOT,"")
 			config.skin.primary_skin.save()
 			configfile.save()
 		except Exception, e:
@@ -314,9 +316,6 @@ class OpenScreen(ConfigListScreen, Screen):
 		if answer is True:
 			config.plugins.MetrixUpdater.Reboot.value = 0
 			config.plugins.MetrixUpdater.save()    
-			configfile.save()
-			config.skin.primary_skin.value = "MetrixHD/skin.xml"
-			config.skin.primary_skin.save()
 			configfile.save()
 			self.session.open(TryQuitMainloop, 3)
 		else:

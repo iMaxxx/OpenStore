@@ -343,7 +343,6 @@ def parseSkinPart(path,xmlfile="data.xml",configfile="config.cfg",screenname="In
 
 def widgetActive(path,xmlfile="data.xml",configfile="config.cfg",screenname="InfoBar"):
 	xml = ""
-	print "parsing: "+path
 	try:
 		raw_xml = metrixTools.getFile(path+"/"+xmlfile)
 		#Read config file

@@ -288,10 +288,11 @@ def loadDefaults():
 def getTemplateFiles():
 	files = []
 	for root, dirnames, filenames in os.walk(SKINS_ROOT):
-		for filename in fnmatch.filter(filenames, 'skin.xml'):
+		for filename in fnmatch.filter(filenames, 'skin.*xml'):
 			skinfile = os.path.join(root, filename)
-			if skinfile.replace(SKINS_ROOT,"").replace("/skin.xml","") != "skin.xml":
-				files.append((skinfile, skinfile.replace(SKINS_ROOT,"").replace("/skin.xml","")))
+			skinname = skinfile.replace(SKINS_ROOT,"").replace("/skin.xml","").replace("/skin.","/").replace(".xml","")
+			if not "enigma2/skin" in skinfile:
+				files.append((skinfile, skinname))
 	return files
 
 def getDefaultSkinPartPath():
