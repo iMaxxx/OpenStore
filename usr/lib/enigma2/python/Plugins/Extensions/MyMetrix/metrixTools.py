@@ -261,6 +261,8 @@ def getBrand():
 	return boxinfo['brand']
 
 def getRestrictions():
+	if config.plugins.MyMetrix.Store.IgnoreRestrictions.value:
+		return "%"
 	CONFIG_SYSTEM_DESC = "/etc/systemdescription.cfg"
 	restriction = "%image::"+ metrixDefaults.getImageName() +"%"
 	restriction = restriction + "%oe::"+metrixDefaults.getOEVersion()+"%"

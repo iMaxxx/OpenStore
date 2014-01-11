@@ -177,6 +177,7 @@ def loadDefaults():
 	config.plugins.MyMetrix.Store.Author = ConfigText(default="Unknown",fixed_size = False)
 	config.plugins.MyMetrix.Store.SkinPart_Developer = ConfigYesNo(default=False)
 	config.plugins.MyMetrix.Store.Plugin_Developer = ConfigYesNo(default=False)
+	config.plugins.MyMetrix.Store.IgnoreRestrictions = ConfigYesNo(default=False)
 	config.plugins.MyMetrix.Store.Designname = ConfigText(default="MyDesign",fixed_size = False)
 	
 	config.plugins.MyMetrix.Color.ProgressBar = ConfigMetrixBarColors("#00ffffff")
