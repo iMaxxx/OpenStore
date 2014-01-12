@@ -128,6 +128,9 @@ class OpenScreen(ConfigListScreen, Screen):
 				screennames.append(name)
 			except:
 				pass
+		if config.plugins.MyMetrix.CleanInfoBar.value:
+			screennames.append("InfoBar")
+			screennames.append("SecondInfoBar")
 		return screennames
 	
 	
@@ -142,7 +145,7 @@ class OpenScreen(ConfigListScreen, Screen):
 		
 		metrixTools.callOnMainThread(self["output"].setText,_("Setting colors"))
 		self.setColor(skinNode)
-		for screen in skindom.getElementsByTagName('screen'):
+		for screen in skinNode.getElementsByTagName('screen'):
 			screenname = str(screen.getAttributeNode('name').nodeValue)
 			
 			metrixTools.callOnMainThread(self["output"].setText,(str(_("Checking screen ")+screenname)))
@@ -151,9 +154,17 @@ class OpenScreen(ConfigListScreen, Screen):
 				parentNode = screen.parentNode
 				parentNode.removeChild(screen)
 			if config.plugins.MyMetrix.CleanInfoBar.value:
-				if screenname == "InfoBar" or screenname == "SecondInfoBar":
-					for child in screen.childNodes:
-						screen.removeChild(child)
+				if screenname in ["InfoBar","SecondInfoBar"]:
+					ib = skindom.createElement("screen")
+					ib.setAttribute('backgroundColor', 'transparent')
+					ib.setAttribute('flags', 'wfNoBorder')
+					ib.setAttribute('name', screenname)
+					ib.setAttribute('position', '0,0')
+					ib.setAttribute('size', '1280,720')
+					ib.setAttribute('title', "InfoBar")
+					skinNode.appendChild(ib)
+					print "############################ append "+screenname
+				
 				
 		# APPEND STORE SCREENS
 		path = config.plugins.MyMetrix.SkinPartPath.value + "screens/active/"
