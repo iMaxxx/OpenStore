@@ -131,6 +131,7 @@ class OpenScreen(ConfigListScreen, Screen):
 		if config.plugins.MyMetrix.CleanInfoBar.value:
 			screennames.append("InfoBar")
 			screennames.append("SecondInfoBar")
+			screennames.append("Nab_ExtraInfobar")
 		return screennames
 	
 	
@@ -154,7 +155,7 @@ class OpenScreen(ConfigListScreen, Screen):
 				parentNode = screen.parentNode
 				parentNode.removeChild(screen)
 			if config.plugins.MyMetrix.CleanInfoBar.value:
-				if screenname in ["InfoBar","SecondInfoBar"]:
+				if screenname in ["InfoBar","SecondInfoBar","Nab_ExtraInfobar"]:
 					ib = skindom.createElement("screen")
 					ib.setAttribute('backgroundColor', 'transparent')
 					ib.setAttribute('flags', 'wfNoBorder')

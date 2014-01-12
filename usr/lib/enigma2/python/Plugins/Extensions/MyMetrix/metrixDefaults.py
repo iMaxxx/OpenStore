@@ -323,7 +323,7 @@ def getImageName():
 						imagename = imagename.split(" <")[0]
 					elif "<" in imagename:
 						imagename = imagename.split("<")[0]
-					imagename = imagename.replace('\r\n', '').replace('\n', '')
+					imagename = imagename.replace('\n', '').replace('\r', '')
 	except:
 		pass
 	return imagename
