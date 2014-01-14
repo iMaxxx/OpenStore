@@ -143,7 +143,7 @@ class OpenScreen(ConfigListScreen, Screen):
 		#list.append(getConfigListEntry(_("Show intro page"), config.plugins.MyMetrix.showFirstRun))
 		list.append(getConfigListEntry(_("Skin template"), config.plugins.MyMetrix.Templates))
 		list.append(getConfigListEntry(_("My skin name"), config.plugins.MyMetrix.SkinName))
-		list.append(getConfigListEntry(_("Clean InfoBar screen of template"), config.plugins.MyMetrix.CleanInfoBar))
+		list.append(getConfigListEntry(_("Clean Infobars of template"), config.plugins.MyMetrix.CleanInfoBar))
 		
 		#list.append(getConfigListEntry(_("Skin target folder"), config.plugins.MyMetrix.SkinXMLPath))
 		
