@@ -94,11 +94,12 @@ def _(txt):
 	if t == txt:
 		t = gettext.gettext(txt)
 	return t
-
-def menu_openstore (menuid, **kwargs):
-    if menuid == "mainmenu":
-            return [(_("OpenStore"), openStore, "openstore", 15)]
-    return []
+   
+#noinspection PyUnusedLocal
+def menu_openstore(menuid, **kwargs):
+        if menuid == "mainmenu":
+                return [(_("OpenStore"), openStore, "openstore", 15)]
+        return []
 
 def main(session, **kwargs):
 	session.open(metrix_MainMenu.OpenScreen)
@@ -112,8 +113,8 @@ def Plugins(**kwargs):
 		PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=startMetrixDeamon),
 		PluginDescriptor(name="MyMetrix", description=_("Metrify Your Set-Top Box"), where = [ PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU ], icon="plugin.png", fnc=main),
 		PluginDescriptor(name="OpenStore", description=_("Explore The Variety Of Your Set-Top Box"), where = [ PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU ], icon="plugin-store.png", fnc=openStore)]
-	#if config.plugins.MyMetrix.showInMainMenu.value:
-	#	descriptor.append(PluginDescriptor(name="OpenStore", description=_("Explore The Variety Of Your Set-Top Box"), where = [PluginDescriptor.WHERE_MENU], fnc=menu_openstore))
+	if config.plugins.MyMetrix.showInMainMenu.value:
+		descriptor.append(PluginDescriptor(name="OpenStore", description=_("Explore The Variety Of Your Set-Top Box"), where = [PluginDescriptor.WHERE_MENU], fnc=menu_openstore))
 	return descriptor
 
 
