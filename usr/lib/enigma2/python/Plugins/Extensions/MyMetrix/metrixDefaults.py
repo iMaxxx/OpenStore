@@ -80,6 +80,7 @@ URL_GET_PACKAGES = URL_STORE_API + "v2.get.xml.packages" # returns a list of pac
 URL_GET_CATEGORIES = URL_STORE_API + "get.xml.categories" # returns a list of categories
 URL_GET_ACTIONS = URL_STORE_API + "connect.actions" # returns a list of actions push from web service triggered by user
 
+URL_GET_UPDATE_FILES = URL_STORE_API + 'v2.get.xml.update'
 URI_IMAGE_LOADING = PLUGIN_DIR + "images/loading.png"
 
 CONFIG_SYSTEM_DESC = "/etc/systemdescription.cfg"
@@ -170,10 +171,12 @@ def loadDefaults():
 	config.plugins.MetrixUpdater.refreshInterval = ConfigSelectionNumber(10,1440,10,default=30)
 	config.plugins.MetrixUpdater.UpdateAvailable = ConfigNumber(default=0)
 	config.plugins.MetrixUpdater.Reboot = ConfigNumber(default=0)
-	config.plugins.MetrixUpdater.Revision = ConfigNumber(default=1000)
+	config.plugins.MetrixUpdater.RebootRequired = ConfigYesNo(default=False)
 	config.plugins.MetrixUpdater.Open = ConfigNumber(default=0)
-	config.plugins.MetrixUpdater.UpdatePopup_SkinParts = ConfigYesNo(default=True)
-	config.plugins.MetrixUpdater.UpdatePopup_Packages = ConfigYesNo(default=True)
+	config.plugins.MetrixUpdater.UpdatePopup_SkinParts = ConfigYesNo(default=False)
+	config.plugins.MetrixUpdater.UpdatePopup_Packages = ConfigYesNo(default=False)
+	config.plugins.MetrixUpdater.UpdatePopup_Self = ConfigYesNo(default=False)
+	config.plugins.MetrixUpdater.UpdatePopup_Reboot = ConfigYesNo(default=False)
 	config.plugins.MyMetrix.Store.Author = ConfigText(default="Unknown",fixed_size = False)
 	config.plugins.MyMetrix.Store.SkinPart_Developer = ConfigYesNo(default=False)
 	config.plugins.MyMetrix.Store.Plugin_Developer = ConfigYesNo(default=False)
@@ -211,6 +214,7 @@ def loadDefaults():
 
 	config.plugins.MyMetrix.AutoUpdate = ConfigYesNo(default=True)
 	config.plugins.MyMetrix.AutoUpdateSkinParts = ConfigYesNo(default=True)
+	config.plugins.MyMetrix.AutoUpdatePlugins = ConfigYesNo(default=True)
 	
 	config.plugins.MyMetrix.ActiveXPicon = ConfigYesNo(default=True)
 	config.plugins.MyMetrix.XPiconsOverwrite = ConfigYesNo(default=False)

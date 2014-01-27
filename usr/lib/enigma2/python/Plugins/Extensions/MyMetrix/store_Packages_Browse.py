@@ -183,7 +183,7 @@ class OpenScreen(ConfigListScreen, Screen ):
 				
 		
 		
-	def getPackages(self,isactive=""):
+	def getPackages(self):
 		menu = []
 		try:
 			params = {'restrictions':metrixTools.getRestrictions(),
@@ -212,10 +212,9 @@ class OpenScreen(ConfigListScreen, Screen ):
 				build = int(design.getAttributeNode('build').nodeValue)
 				description = str(design.getAttributeNode('description').nodeValue)
 				previouspackage = str(design.getAttributeNode('previouspackage').nodeValue)
-				path = metrixDefaults.pathRoot()+"packages/"+item_id
 				localbuild = int(metrixDefaults.cfg(metrixDefaults.CONFIG_INSTALLEDPACKAGES,item_id,"build","int"))
 				# add when not only updates or (only updates and online build is higher)
-				if not localbuild == metrixDefaults.NONEINT:
+				if (not localbuild == metrixDefaults.NONEINT) or item_id == config.plugins.MyMetrix.XPiconsRepository.value:
 					isinstalled = True
 				if build > localbuild:
 					updateavailable = True

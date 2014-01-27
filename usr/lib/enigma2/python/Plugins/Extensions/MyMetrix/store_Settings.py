@@ -123,7 +123,6 @@ class OpenScreen(ConfigListScreen, Screen):
 		self["metrixUpdate"] = Label(_(" "))
 		list = []
 		#list.append(getConfigListEntry(_("Automatic Updates ------------------------------------------------------------------------")))
-		#list.append(getConfigListEntry(_("MyMetrix, OpenStore and plugins"), config.plugins.MyMetrix.AutoUpdate))
 		#list.append(getConfigListEntry(_("Show notification bar"), config.plugins.MetrixUpdater.UpdatePopup_Packages))
 		#list.append(getConfigListEntry(_(" ")))
 		list.append(getConfigListEntry(_("Sync --------------------------------------------------------------------------------------------")))
@@ -144,8 +143,16 @@ class OpenScreen(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("Picon color depth:"),config.plugins.MyMetrix.PiconDepth))
 		
 		list.append(getConfigListEntry(" "))
+		list.append(getConfigListEntry(_("Automatic Updates ------------------------------------------------------------------------")))
+		list.append(getConfigListEntry(_("Update OpenStore and MyMetrix"), config.plugins.MyMetrix.AutoUpdate))
+		list.append(getConfigListEntry(_("Update Plugins"), config.plugins.MyMetrix.AutoUpdatePlugins))
+		
+		list.append(getConfigListEntry(" "))
+		list.append(getConfigListEntry(_("Enhanced Options ------------------------------------------------------------------------")))
 		
 		#list.append(getConfigListEntry(_("Open NaviBar on blue key"),config.plugins.navibar.blue)) ##for later integration of navibar
+		list.append(getConfigListEntry(_("Show in main menu"),config.plugins.MyMetrix.showInMainMenu))
+		
 		list.append(getConfigListEntry(_("SkinParts Developer"),config.plugins.MyMetrix.Store.Plugin_Developer))
 		list.append(getConfigListEntry(_("Log level"),config.plugins.MyMetrix.logLevel))
 		list.append(getConfigListEntry(_("Ignore restrictions (danger!)"),config.plugins.MyMetrix.Store.IgnoreRestrictions))

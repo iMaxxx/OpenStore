@@ -200,7 +200,7 @@ class OpenScreen(ConfigListScreen, Screen):
 					i = 1
 			metrixTools.callOnMainThread(self.setMaxRows,len(list[1])+1)
 		except Exception,e:
-			showInfo("Check your internet connection")
+			self.showInfo("Check your internet connection")
 			metrixTools.log("Error getting categories via web!",e)
 			
 	def setMaxRows(self,rows):

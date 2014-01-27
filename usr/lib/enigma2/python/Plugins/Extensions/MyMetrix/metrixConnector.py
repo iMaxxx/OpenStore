@@ -78,6 +78,7 @@ from Tools import Notifications
 import metrix_UpdateAvailable
 import metrix_MetrixColorsTools
 import metrix_GenerateSkin
+import store_Updater
 #from xml.etree.ElementTree import parse
 
 
@@ -86,7 +87,7 @@ config = metrixDefaults.loadDefaults()
 def syncStart(session):
 	global global_session
 	global_session = session
-
+	
 	#resetting config values
 	config.plugins.MetrixUpdater.Reboot.value = 0
 	config.plugins.MetrixUpdater.UpdateAvailable.value = 0
@@ -161,14 +162,13 @@ def daily():
 				#	metrixTools.callOnMainThread(Notifications.AddNotification,metrix_UpdateAvailable.OpenScreen)
 		except:
 			traceback.print_exc()
-		try:
-			if config.plugins.MyMetrix.AutoUpdate.value:
-				# Auto-Update vorrübergehend außer Funktion
-				pass
-				#getPackageUpdates()
-		except:
-			traceback.print_exc()
 		"""
+		if config.plugins.MyMetrix.AutoUpdate.value:
+			store_Updater.getUpdatedFiles()
+			
+		if config.plugins.MyMetrix.AutoUpdatePlugins.value:
+			store_Updater.getUpdatedPackages()
+			
 		time.sleep(24*60*60)
 		
 def syncActions():

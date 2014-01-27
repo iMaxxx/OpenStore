@@ -111,7 +111,7 @@ def skinPartIsCompatible(dom):
 
 
 def downloadFile(webURL,localPath = '/tmp/metrixPreview.png',searchpattern="",replacepattern="",forceOverwrite = True):
-	#print localPath
+	print "downloading: "+localPath
 	try:
 		if "http" in webURL:
 			webFile = urllib2.urlopen(webURL)
@@ -290,6 +290,10 @@ def checkComponents(sourceRoot,targetRoot, transferPath, filename=None, force=Fa
 	        	if file == filename:
 	        		if not fileExists(targetRoot+transferPath+file) or force:
 	        			shutil.copy(full_file_name, targetRoot+transferPath)
+
+def getUnixTime():
+	return int(time.time())
+
 
 
 
