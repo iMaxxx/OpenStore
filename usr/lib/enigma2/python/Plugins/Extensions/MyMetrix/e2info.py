@@ -19,10 +19,8 @@ from Screens.Standby import inStandby
 from Tools.Directories import fileExists, pathExists
 from time import time, localtime, strftime
 from enigma import eDVBVolumecontrol, eServiceCenter, eServiceReference
-try:
-	from enigma import getDistro, getBoxType, getMachineName
-except:
-	pass
+from boxbranding import getBoxType, getMachineName, getImageDistro, getImageVersion, getImageBuild
+from enigma import getEnigmaVersionString
 
 import NavigationInstance
 
@@ -106,6 +104,9 @@ def getInfo():
 		elif model == "optimussos2":
 			model = "Optimuss-OS2"
 			brand = "Edision"
+		elif model == "sogno-8800hd":
+			brand = "Sogno"
+			model = "Sogno 8800HD"
 	elif fileExists("/proc/stb/info/boxtype"):
 		file = open("/proc/stb/info/boxtype")
 		model = file.read().strip().lower()
@@ -116,10 +117,6 @@ def getInfo():
 				file = open("/proc/stb/info/gbmodel")
 				model = file.read().strip().lower()
 				file.close()
-				if model == "quad":
-					model = "gbquad"
-			else:
-				model = 'gb800solo'
 		elif model.startswith("et"):
 			brand = "Clarke-Xtrend"
 			if model == "et9500":
@@ -153,6 +150,9 @@ def getInfo():
 					model
 			else:
 				brand = "Venton"
+		elif model == "enfinity":
+			brand = "EVO"
+			model = "ENfinity"
 		elif model == "xp1000":
 			brand = "XP-Series"
 		elif model == "xp1000s":
@@ -161,7 +161,7 @@ def getInfo():
 		elif model == "odinm9":
 			brand = "Odin-Series"
 		elif model == "odinm7":
-			if getDistro() == 'axassupport':
+			if getImageDistro() == 'axassupport':
 				brand = "AXAS"
 				model = "Class M"
 			elif getBoxType() == 'odinm6':
@@ -173,7 +173,7 @@ def getInfo():
 			else:
 				brand = "Odin-Series"
 		elif model == "e3hd":
-			if getDistro() == 'axassupport':
+			if getImageDistro() == 'axassupport':
 				brand = "AXAS"
 				model = "Class E"
 			else:
@@ -250,13 +250,9 @@ def getInfo():
 	info['uptime'] = uptimetext
 
 	info["webifver"] = getOpenWebifVer()
-	try:
-		from enigma import getImageVersionString, getEnigmaVersionString
-		info['imagever'] = getImageVersionString()
-		info['enigmaver'] = getEnigmaVersionString()
-	except:
-		info['imagever'] = ""
-		info['enigmaver'] = about.getEnigmaVersionString()
+	info['imagedistro'] = getImageDistro()
+	info['imagever'] = getImageVersion() + '.' + getImageBuild()
+	info['enigmaver'] = getEnigmaVersionString()
 	info['kernelver'] = about.getKernelVersionString()
 
 	try:
