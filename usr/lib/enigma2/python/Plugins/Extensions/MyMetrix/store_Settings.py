@@ -153,7 +153,7 @@ class OpenScreen(ConfigListScreen, Screen):
 		#list.append(getConfigListEntry(_("Open NaviBar on blue key"),config.plugins.navibar.blue)) ##for later integration of navibar
 		list.append(getConfigListEntry(_("Show in main menu"),config.plugins.MyMetrix.showInMainMenu))
 		
-		list.append(getConfigListEntry(_("SkinParts Developer"),config.plugins.MyMetrix.Store.Plugin_Developer))
+		list.append(getConfigListEntry(_("Plugin Developer"),config.plugins.MyMetrix.Store.Plugin_Developer))
 		list.append(getConfigListEntry(_("Log level"),config.plugins.MyMetrix.logLevel))
 		list.append(getConfigListEntry(_("Ignore restrictions (danger!)"),config.plugins.MyMetrix.Store.IgnoreRestrictions))
 		
