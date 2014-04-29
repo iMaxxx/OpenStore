@@ -49,7 +49,7 @@ OpenStore - www.open-store.net
 - (NEW) Better support for a wide variety of enimga2 devices
 - (FIXED) Multitasking operations now ready for all OE2.0 boxes
 - (FIXED) Refreshing page jumping pages with left/right key
-- (NEW) [MetrixHD](https://github.com/iMaxxx/MetrixHD-VTi) skin is no longer required during to image incompatibility issues
+- (NEW) [MetrixHD](https://github.com/iMaxxx/MetrixHD-VTi) skin is no longer included during to image incompatibility issues
 - many more....
 
 ### To-Do:
