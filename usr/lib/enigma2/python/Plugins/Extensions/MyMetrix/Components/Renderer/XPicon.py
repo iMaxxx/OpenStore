@@ -18,7 +18,7 @@ import shutil
 from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr
 from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 
-URL_ACTIVEXPICON_API = "http://api.open-store.net/?q=v2.get.file&type=9&id="
+URL_ACTIVEXPICON_API = "http://api-nuevo.open-store.net/?q=get.file&type=9&id="
 
 
 class XPicon(Renderer):

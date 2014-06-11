@@ -60,7 +60,6 @@ import datetime
 import metrix_UpdateAvailable
 from Tools import Notifications
 import ConfigParser
-import e2info
 
 
 
@@ -89,9 +88,9 @@ def downloadAdditionalFiles(url,target_path,searchpattern="",replacepattern="",f
 		
 		dom = parseString(data)
 		
-		for design in dom.getElementsByTagName('entry'):
-			url = str(design.getAttributeNode('url').nodeValue)+urlparameters
-			file_name = str(design.getAttributeNode('url').nodeValue).split('file=')[-1]
+		for file in dom.getElementsByTagName('entry'):
+			url = str(file.getAttributeNode('url').nodeValue)+urlparameters
+			file_name = str(file.getAttributeNode('url').nodeValue).split('file=')[-1]
 			if not os.path.exists(target_path):
 				os.makedirs(target_path)
 			if metrixTools.downloadFile(url,target_path+file_name,searchpattern,replacepattern,forceOverwrite) == None:
@@ -208,20 +207,24 @@ def checkSkinPartUpdates(path,isActive=True):
 			data = file.read()
 			file.close()	
 			dom = parseString(data)
-			for design in dom.getElementsByTagName('entry'):
-				id = str(design.getAttributeNode('id').nodeValue)
-				name = str(design.getAttributeNode('name').nodeValue)
-				type = str(design.getAttributeNode('type').nodeValue)
-				author = str(design.getAttributeNode('author').nodeValue)
-				description = str(design.getAttributeNode('description').nodeValue)
-				date = str(design.getAttributeNode('date').nodeValue)
-				version = str(design.getAttributeNode('version').nodeValue)
-				image_link = str(design.getAttributeNode('image_link').nodeValue)
+			for skinpart in dom.getElementsByTagName('entry'):
+				id = str(skinpart.getAttributeNode('id').nodeValue)
+				name = str(skinpart.getAttributeNode('name').nodeValue)
+				type = str(skinpart.getAttributeNode('type').nodeValue)
+				author = str(skinpart.getAttributeNode('author').nodeValue)
+				description = str(skinpart.getAttributeNode('description').nodeValue)
+				date = str(skinpart.getAttributeNode('date').nodeValue)
+				version = str(skinpart.getAttributeNode('version').nodeValue)
 				try:
-					date_modified = str(design.getAttributeNode('date_modified').nodeValue)
+					build = int(skinpart.getAttributeNode('build').nodeValue)
+				except:
+					build = 99999 # FOR LEGACY SKINPARTS
+				image_link = str(skinpart.getAttributeNode('image_link').nodeValue)
+				try:
+					date_modified = str(skinpart.getAttributeNode('date_modified').nodeValue)
 				except:
 					date_modified = date
-				if isUpdateAvailable(id,date_modified,version):
+				if isUpdateAvailable(id,build):
 					installSkinPart(id,type,author,image_link,date_modified,isActive,True)
 					metrixConnector.showInfo(name+_(" successfully updated!"))
 					config.plugins.MetrixUpdater.UpdateAvailable.value = 1
@@ -234,20 +237,20 @@ def checkSkinPartUpdates(path,isActive=True):
 		
 
 
-def isUpdateAvailable(id,local_data_modified,local_version):
+def isUpdateAvailable(id,local_build):
 	try:
 		downloadmetaurl = metrixDefaults.URL_GET_SKINPART_META_UPDATE + "&id="+id
 		metafile = metrixCore.getWeb(downloadmetaurl,True)
 		dom = parseString(metafile)
 		store_date_modified = ""
-		for design in dom.getElementsByTagName('entry'):
+		for skinpart in dom.getElementsByTagName('entry'):
 			try:
-				store_date_modified = str(design.getAttributeNode('date_modified').nodeValue)
+				store_build = str(skinpart.getAttributeNode('build').nodeValue)
 			except:
-				store_date_modified = local_data_modified
-			version = str(design.getAttributeNode('version').nodeValue)
-		if time.strptime(local_data_modified,"%Y-%m-%d") < time.strptime(store_date_modified,"%Y-%m-%d") and not local_version == version:
-			print "--------------------------======================UA"
+				store_build = local_build
+			version = str(skinpart.getAttributeNode('version').nodeValue)
+		metrixTools.log("Local build: "+local_build + " store build: " + store_build)
+		if store_build > local_build:
 			return True
 		else:
 			return False
@@ -364,7 +367,7 @@ def widgetActive(path,xmlfile="data.xml",configfile="config.cfg",screenname="Inf
 	return skinPartNode
 
 def replaceGlobalVariables(string):
-	boxinfo = e2info.getInfo()
+	boxinfo = metrixTools.getBoxInfo()
 	string = string.replace("%GLOBAL:BRAND%",boxinfo['brand'])
 	string = string.replace("%GLOBAL:IMAGE%",metrixDefaults.getImageName())
 	string = string.replace("%GLOBAL:MODEL%",boxinfo['model'])

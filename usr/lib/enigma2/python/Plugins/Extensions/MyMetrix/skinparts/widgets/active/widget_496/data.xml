@@ -1,4 +1,4 @@
-<skinpartwidget screenname="InfoBar,SecondInfoBar">
+<skinpartwidget screenname="InfoBar,SecondInfoBar,MoviePlayer,EMCMediaCenter">
 <!-- /* ClockWidget -->
 <variable name="style" title="Style" type="list"  value="layer">
 <option title="2Layer Style" value="layer"/>

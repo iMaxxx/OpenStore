@@ -59,7 +59,6 @@ from xml.dom.minidom import parseString, parse
 import os
 import urllib2
 import socket
-import e2info
 import metrixDefaults
 import metrixTools
 import time
@@ -128,7 +127,7 @@ def syncGeneral():
 				postBackup()
 			except:
 				traceback.print_exc()
-		time.sleep(30*60)
+		time.sleep(60*60)
 
 def syncHourly():
 	while(1):
@@ -147,22 +146,21 @@ def syncHourly():
 					metrix_PackageTools.syncPackages()
 			except:
 				traceback.print_exc()
-		time.sleep(60*60)
+		time.sleep(90*60)
 		
 def daily():
 	while(1):
 		metrixCore.setInfo()  # Send general info to MetrixCloud
-		"""
+		
 		try:
 			if config.plugins.MyMetrix.AutoUpdateSkinParts.value:
-				# Auto-Update vorrübergehend außer Funktion
 				pass
-				#metrix_SkinPartTools.updateSkinParts()
-				#if config.plugins.MetrixUpdater.UpdateAvailable.value == 1:
-				#	metrixTools.callOnMainThread(Notifications.AddNotification,metrix_UpdateAvailable.OpenScreen)
+				metrix_SkinPartTools.updateSkinParts()
+				if config.plugins.MetrixUpdater.UpdateAvailable.value == 1:
+					metrixTools.callOnMainThread(Notifications.AddNotification,metrix_UpdateAvailable.OpenScreen)
 		except:
 			traceback.print_exc()
-		"""
+		
 		if config.plugins.MyMetrix.AutoUpdate.value:
 			store_Updater.getUpdatedFiles()
 			
@@ -172,7 +170,7 @@ def daily():
 		time.sleep(24*60*60)
 		
 def syncActions():
-	syncinterval =1200
+	syncinterval = 20 * 60
 	while(1):
 		if metrixCore.isLoggedIn():
 			try:
@@ -257,7 +255,7 @@ def runAction(item_id,action,actiontype,param):
 	
 def prepareInfo(session):
 	try:
-		statusinfo = e2info.getStatusInfo2(session)
+		statusinfo = metrixTools.getBoxStatusBarInfo(session)
 		sync_data = []
 		if config.plugins.MetrixCloudSync.SyncProgramInfo.value:
 			try:
@@ -300,7 +298,7 @@ def prepareInfoGeneral(session):
 	except:
 		pass
 	try:
-		boxinfo = e2info.getInfo()
+		boxinfo = metrixTools.getBoxInfo()
 		sync_data = []
 		
 		if config.plugins.MetrixCloudSync.SyncNetworkInfo.value:
@@ -396,17 +394,6 @@ def postSkinParts(path,isActive="Active"):
 			pass
 	metrixCloudSync.syncNow(sync_data)
 
-		
-	
-	
-def postAnonymous(keyname="status",value=""):
-	try:
-		url = metrixDefaults.URL_STORE_API + 'connect.statistic'
-		params = {'keyname':keyname,
-				'value':value}
-		metrixCore.getWeb(url,True,params)
-	except:
-		pass
 
 def getActions(url=metrixDefaults.URL_GET_ACTIONS):
 	try:
@@ -490,7 +477,6 @@ def installPackage(param,actionId,isUpdate=False):
 	else:
 		showInfo(_("Error installing package!"),MessageBox.TYPE_ERROR)
 		metrixTools.log("Error installing package "+params[0])
-
 
 
 def generateSkin(actionId):

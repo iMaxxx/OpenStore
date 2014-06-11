@@ -81,13 +81,13 @@ def main(session, **kwargs):
 class MetrixPreviewSIBWindow(ConfigListScreen, Screen):
 	skin = """
 <screen name="MyMetrix-Preview" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
-  <ePixmap pixmap="MetrixHD/icons/ico_dolby_on.png" position="1020,670" size="64,23" zPosition="1" alphatest="blend" />
-  <ePixmap pixmap="MetrixHD/icons/ico_format_on.png" position="1156,668" size="41,26" zPosition="1" alphatest="blend" />
-  <ePixmap pixmap="MetrixHD/icons/ico_txt_off.png" position="981,669" size="28,24" zPosition="1" alphatest="blend" />
-  <ePixmap pixmap="MetrixHD/icons/ico_hd_off.png" position="1095,670" size="49,24" zPosition="1" alphatest="blend" />
-  <ePixmap pixmap="MetrixHD/icons/ico_crypt_on.png" position="1209,668" size="27,25" zPosition="1" alphatest="blend" />
-  <ePixmap pixmap="MetrixHD/icons/ico_hbbtv_on.png" position="907,669" size="64,24" zPosition="1" alphatest="blend" />
-  <ePixmap pixmap="MetrixHD/icons/subtitle_off.png" position="867,671" size="30,22" alphatest="blend" />
+  <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/preview/ico_dolby_on.png" position="1020,670" size="64,23" zPosition="1" alphatest="blend" />
+  <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/preview/ico_format_on.png" position="1156,668" size="41,26" zPosition="1" alphatest="blend" />
+  <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/preview/ico_txt_off.png" position="981,669" size="28,24" zPosition="1" alphatest="blend" />
+  <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/preview/ico_hd_off.png" position="1095,670" size="49,24" zPosition="1" alphatest="blend" />
+  <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/preview/ico_crypt_on.png" position="1209,668" size="27,25" zPosition="1" alphatest="blend" />
+  <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/preview/ico_hbbtv_on.png" position="907,669" size="64,24" zPosition="1" alphatest="blend" />
+  <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/preview/subtitle_off.png" position="867,671" size="30,22" alphatest="blend" />
  <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/picon.png" position="39,570" zPosition="4" size="220,132" transparent="1" alphatest="blend" />
 
 <widget position="-1,560" size="1283,160" zPosition="-10" name="InfoBar_BG" />

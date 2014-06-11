@@ -85,9 +85,9 @@ class OpenScreen(Screen):
   <eLabel position="40,40" size="1195,113" backgroundColor="#40000000" zPosition="-1" />
   <eLabel position="62,153" size="1151,521" backgroundColor="#40149baf" zPosition="-1" />
 <widget name="left" position="84,317" size="262,59" foregroundColor="foreground" font="Regular; 23" valign="center" transparent="1" backgroundColor="#40149baf" halign="center" />
-<ePixmap position="194,281" size="36,36" zPosition="10" pixmap="MetrixHD/left.png" transparent="1" alphatest="blend" />
+<ePixmap position="194,281" size="36,36" zPosition="10" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/left.png" transparent="1" alphatest="blend" />
 <ePixmap position="361,161" size="550,310" zPosition="1" alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/metrixhddefault.png" />
-<ePixmap position="1039,281" size="36,36" zPosition="10" pixmap="MetrixHD/right.png" transparent="1" alphatest="blend" />
+<ePixmap position="1039,281" size="36,36" zPosition="10" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/right.png" transparent="1" alphatest="blend" />
 <widget name="right" position="929,318" size="262,59" foregroundColor="foreground" font="Regular; 23" valign="center" transparent="1" backgroundColor="#40149baf" halign="center" />
   <widget name="description" position="75,479" size="1127,189" transparent="1" halign="left" foregroundColor="foreground" backgroundColor="#40149baf" font="Regular; 30" valign="center" />
   <widget position="57,58" size="1162,85" foregroundColor="foreground" name="title" font="SetrixHD; 60" valign="center" transparent="1" backgroundColor="background" />

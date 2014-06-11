@@ -44,21 +44,20 @@ import gettext
 from enigma import ePicLoad
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import time
-import e2info
 import os
 import sys
 import ConfigParser
 
 
 #############################################################
-VERSION = "2.1a"
-BUILD = '140112'
+VERSION = "2.2a"
+BUILD = '140612'
 PLUGIN_DIR = "/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/"
 SKINS_ROOT = "/usr/share/enigma2/"
 TEMPLATES_DIR = PLUGIN_DIR + "skintemplates/"
 
 
-URL_STORE_API = "http://api.open-store.net/?q="
+URL_STORE_API = "http://api-nuevo.open-store.net/?q="
 #URL_STORE_API = "http://connect.mymetrix.de/store/api/?q="
 URL_STORE = "http://open-store.net"
 URL_GET_SUITES = URL_STORE_API + 'get.xml.suites' #returns a list of suites containing skinparts
@@ -67,21 +66,24 @@ URL_GET_SKINPARTS = URL_STORE_API + 'get.xml.skinparts' #returns skinparts list
 URL_GET_SKINPART_BUNDLE = URL_STORE_API + 'get.xml.skinpartbundle' #returns list of skinpart ids
 URL_GET_SKINPART_XML = URL_STORE_API + 'get.xml.skinpartxml' #returns skinparts xml data
 URL_GET_SKINPART_META_UPDATE = URL_STORE_API + "get.xml.skinpartmeta-update" # returns skinparts meta info
-URL_GET_SKINPART_IMAGE = URL_STORE_API + "v2.get.xml.files&type=5" # returns skinpart image &width=xxx in pixels required and id=xxx
-URL_GET_SKINPART_RENDERER = URL_STORE_API + "v2.get.xml.files&type=7" # returns skinpart renderer; required and id=xxx
-URL_GET_SKINPART_CONVERTER = URL_STORE_API + "v2.get.xml.files&type=8" # returns skinpart converter; required and id=xxx
+URL_GET_SKINPART_IMAGE = URL_STORE_API + "get.xml.files&type=5" # returns skinpart image &width=xxx in pixels required and id=xxx
+URL_GET_SKINPART_RENDERER = URL_STORE_API + "get.xml.files&type=7" # returns skinpart renderer; required and id=xxx
+URL_GET_SKINPART_CONVERTER = URL_STORE_API + "get.xml.files&type=8" # returns skinpart converter; required and id=xxx
 
 URL_GET_SKINPART_META = URL_STORE_API + 'get.xml.skinpartmeta' #returns skinparts meta info and increases count for dl statistic
 URL_GET_SKINPARTS_COUNT = URL_STORE_API + 'get.xml.skinparts_count' #returns amount of skinparts
 URL_GET_METRIXCOLORS = URL_STORE_API + "get.xml.designs" #returns a list of metrixcolors
 URL_GET_METRIXCOLORS_PREVIEW = URL_STORE_API + "get.pngresizedColors" #returns the metrixcolors preview image
-URL_GET_FILES = URL_STORE_API + "v2.get.xml.files" #returns list of file urls
-URL_GET_PACKAGES = URL_STORE_API + "v2.get.xml.packages" # returns a list of packages
+URL_GET_FILES = URL_STORE_API + "get.xml.files" #returns list of file urls
+URL_GET_PACKAGES = URL_STORE_API + "get.xml.packages" # returns a list of packages
 URL_GET_CATEGORIES = URL_STORE_API + "get.xml.categories" # returns a list of categories
 URL_GET_ACTIONS = URL_STORE_API + "connect.actions" # returns a list of actions push from web service triggered by user
 
-URL_GET_UPDATE_FILES = URL_STORE_API + 'v2.get.xml.update'
+URL_GET_UPDATE_FILES = URL_STORE_API + 'get.xml.update'
 URI_IMAGE_LOADING = PLUGIN_DIR + "images/loading.png"
+URL_IMAGE_LOADING = URL_STORE + "/sponsor/loading.png"
+URI_IMAGE_SPONSOR = PLUGIN_DIR + "images/sponsor.png"
+URL_IMAGE_SPONSOR = URL_STORE + "/sponsor/full.png"
 
 CONFIG_SYSTEM_DESC = "/etc/systemdescription.cfg"
 CONFIG_PROFESSIONAL = PLUGIN_DIR + "metrixProfessional.cfg"
@@ -151,7 +153,7 @@ def loadDefaults():
 	config.plugins.MetrixConnect = ConfigSubsection()
 	config.plugins.MetrixCloudSync = ConfigSubsection()
 	
-	config.plugins.MyMetrix.templateFile = ConfigSelection(default="MetrixHD for VTi.xml", choices = getTemplateFiles())
+	config.plugins.MyMetrix.templateFile = ConfigSelection(choices = getTemplateFiles())
 	config.plugins.MyMetrix.showFirstRun = ConfigYesNo(default=showFirstRun())
 	config.plugins.MyMetrix.logLevel = ConfigSelection(default="off", choices = [
 					("off", _("Off")),
@@ -219,7 +221,7 @@ def loadDefaults():
 	config.plugins.MyMetrix.ActiveXPicon = ConfigYesNo(default=True)
 	config.plugins.MyMetrix.XPiconsOverwrite = ConfigYesNo(default=False)
 	config.plugins.MyMetrix.XPiconsRepository = ConfigNumber(default=611)
-	config.plugins.MyMetrix.XPiconsRepositoryName = ConfigText(default="MetrixHD Default")
+	config.plugins.MyMetrix.XPiconsRepositoryName = ConfigText(default="XPicons Default")
 	config.plugins.MyMetrix.XPiconsPath = ConfigSelection(default="/usr/share/enigma2/", choices = [
 					("/usr/share/enigma2/", _("Internal")),
 					("/media/usb/", _("USB")),
@@ -236,7 +238,7 @@ def loadDefaults():
 					("8bit", "8 Bit"),
 					("Original","Original")
 					])
-	config.plugins.MyMetrix.SkinPartPath = ConfigSelection(default=getDefaultSkinPartPath(), choices = [
+	config.plugins.MyMetrix.SkinPartPath = ConfigSelection(default=PLUGIN_DIR + "skinparts/", choices = [
 					(PLUGIN_DIR + "skinparts/", _("Internal")),
 					("/media/usb/skinparts/", _("USB")),
 					("/media/hdd/skinparts/", _("HDD")),

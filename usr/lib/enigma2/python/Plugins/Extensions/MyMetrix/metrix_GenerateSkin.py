@@ -208,12 +208,12 @@ class OpenScreen(ConfigListScreen, Screen):
 				for widget in screen.getElementsByTagName('widget'):
 					try:
 						pixmap = widget.getAttributeNode('pixmap').nodeValue
-						if pixmap == "MetrixHD/colors/00ffffff.png":
+						if pixmap == metrixDefaults.getTemplateFiles() + "/colors/00ffffff.png":
 							widget.setAttribute("pixmap",pixmap.replace("/00ffffff", "/" + config.plugins.MyMetrix.Color.ProgressBar.value.replace("#","")))
 						elif pixmap == "%METRIX:PROGRESSBAR:COLOR:MULTI%":
-							widget.setAttribute("pixmap","MetrixHD/colors/" + config.plugins.MyMetrix.Color.ProgressBar.value.replace("#","")+".png")
+							widget.setAttribute("pixmap",metrixDefaults.getTemplateFiles() + "/colors/" + config.plugins.MyMetrix.Color.ProgressBar.value.replace("#","")+".png")
 						elif pixmap == "%METRIX:PROGRESSBAR:COLOR:WHITE%":
-							widget.setAttribute("pixmap","MetrixHD/colors/00ffffff.png")
+							widget.setAttribute("pixmap",metrixDefaults.getTemplateFiles() + "/colors/00ffffff.png")
 					except:
 						pass
 			except: 

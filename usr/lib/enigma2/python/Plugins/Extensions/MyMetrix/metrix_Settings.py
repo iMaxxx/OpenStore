@@ -138,9 +138,8 @@ class OpenScreen(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_(" ")))
 		list.append(getConfigListEntry(_("Skin -------------------------------------------------------------------------------------------------")))
 		list.append(getConfigListEntry(_("SkinParts location (regenerate skin!)"), config.plugins.MyMetrix.SkinPartPath))
-		#list.append(getConfigListEntry(_("SkinPart updates"), config.plugins.MyMetrix.AutoUpdateSkinParts))
-		#list.append(getConfigListEntry(_("Show update notification bar"), config.plugins.MetrixUpdater.UpdatePopup_Packages))
-		#list.append(getConfigListEntry(_("Show intro page"), config.plugins.MyMetrix.showFirstRun))
+		
+	
 		list.append(getConfigListEntry(_("Skin template"), config.plugins.MyMetrix.Templates))
 		list.append(getConfigListEntry(_("My skin name"), config.plugins.MyMetrix.SkinName))
 		list.append(getConfigListEntry(_("Clean Infobars of template"), config.plugins.MyMetrix.CleanInfoBar))
@@ -148,6 +147,8 @@ class OpenScreen(ConfigListScreen, Screen):
 		#list.append(getConfigListEntry(_("Skin target folder"), config.plugins.MyMetrix.SkinXMLPath))
 		
 		list.append(getConfigListEntry(" "))
+		#Deactivate because by default no skin is installed:
+		#list.append(getConfigListEntry(_("Show intro page"), config.plugins.MyMetrix.showFirstRun))
 		list.append(getConfigListEntry(_("Developer"),config.plugins.MyMetrix.Store.SkinPart_Developer))
 		list.append(getConfigListEntry(_("Background mode (for better OSD screenshots)"),config.plugins.MyMetrix.Color.BackgroundMode))
 		

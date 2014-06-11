@@ -38,7 +38,6 @@ from Components.Label import Label
 from Components.Language import language
 from os import environ, listdir, remove, rename, system
 from skin import parseColor
-import e2info
 from Components.Pixmap import Pixmap
 from Components.Label import Label
 import gettext
@@ -147,7 +146,7 @@ def webPixmap(url,image_id="openStoreImage",params={}):
 		uri = metrixDefaults.PLUGIN_DIR + "images/missing.png"
 	return uri
 
-def log(errormessage,e=None,solution="MyMetrix"):
+def log(errormessage,e=None,solution="OpenStore"):
 	HEADER = '\033[95m'
 	OKBLUE = '\033[94m'
 	OKGREEN = '\033[92m'
@@ -295,6 +294,20 @@ def getUnixTime():
 	return int(time.time())
 
 
-
+def getBoxInfo():
+	try:
+		import oeainfo
+		return oeainfo.getInfo()
+	except:
+		import e2info
+		return e2info.getInfo()
+	
+def getBoxStatusBarInfo(session):
+	try:
+		import oeainfo
+		return oeainfo.getStatusInfo2(session)
+	except:
+		import e2info
+		return e2info.getStatusInfo2(session)
 
 		

@@ -1,4 +1,4 @@
-<skinpartwidget screenname="InfoBar,SecondInfoBar">
+<skinpartwidget screenname="InfoBar,SecondInfoBar,MoviePlayer,EMCMediaCenter">
 
 <!-- /* WEATHER WIDGET  -->
 <eLabel position="46,40" size="213,70" backgroundColor="metrixBackground" />

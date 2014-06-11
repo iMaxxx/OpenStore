@@ -43,7 +43,7 @@ def getSyncRow(area,category,keyname,keydescription,value,order=0):
 
 def syncNow(sync_data):
 	try:
-		url = metrixDefaults.URL_STORE_API + 'v2.set.info'
+		url = metrixDefaults.URL_STORE_API + 'set.info'
 		params = {'data':sync_data}
 		metrixCore.getWeb(url,True,params)
 	except:

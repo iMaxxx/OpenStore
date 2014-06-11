@@ -66,7 +66,6 @@ from metrixTools import getHex, getHexColor
 from xml.dom.minidom import parseString, parse
 import os
 import socket
-import e2info
 import threading
 import time
 import store_Settings

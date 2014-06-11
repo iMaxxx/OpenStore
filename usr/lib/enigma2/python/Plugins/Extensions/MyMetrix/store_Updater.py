@@ -33,7 +33,6 @@ import metrixTools
 import metrix_PackageTools
 from os import environ, listdir, remove, rename, system
 from skin import parseColor
-import e2info
 from Components.Pixmap import Pixmap
 from Components.Label import Label
 import gettext
@@ -64,22 +63,29 @@ config = metrixDefaults.loadDefaults()
 
 
 def getUpdatedFiles():
+	metrixTools.log("Searching update for build "+metrixDefaults.BUILD+ "...")
 	data = metrixCore.getWeb(metrixDefaults.URL_GET_UPDATE_FILES,True)
 	dom = parseString(data)
-	for files in dom.getElementsByTagName('file'):
-		update = False
-		path = str(files.getAttributeNode('path').nodeValue)
-		url = str(files.getAttributeNode('url').nodeValue)
-		date_modified = int(files.getAttributeNode('date_modified').nodeValue)
-		if not fileExists(path):
-			update = True
-		else:
-			if int(date_modified) > int(os.path.getmtime(path)):
-				update = True
-		if update:
-			metrixTools.downloadFile(url,path,forceOverwrite=True)
-			config.plugins.MetrixUpdater.RebootRequired.value = True
-			config.plugins.MetrixUpdater.UpdatePopup_Self.value = True
+	for update in dom.getElementsByTagName('update'):
+		build = str(update.getAttributeNode('build').nodeValue)
+		metrixTools.log("Lastest release: build "+build)
+		if build > metrixDefaults.BUILD:
+			for files in update.getElementsByTagName('file'):
+				update = False
+				path = str(files.getAttributeNode('path').nodeValue)
+				url = str(files.getAttributeNode('url').nodeValue)
+				date_modified = int(files.getAttributeNode('date_modified').nodeValue)
+				if not fileExists(path):
+					update = True
+				else:
+					if int(date_modified) > int(os.path.getmtime(path)):
+						update = True
+				if update:
+					metrixTools.downloadFile(url,path,forceOverwrite=True)
+					config.plugins.MetrixUpdater.RebootRequired.value = True
+					config.plugins.MetrixUpdater.UpdatePopup_Self.value = True
+	metrixTools.downloadFile(metrixDefaults.URL_IMAGE_LOADING,metrixDefaults.URI_IMAGE_LOADING,forceOverwrite = True)
+	metrixTools.downloadFile(metrixDefaults.URL_IMAGE_SPONSOR,metrixDefaults.URI_IMAGE_SPONSOR,forceOverwrite = True)
 
 
 def getUpdatedPackages():
@@ -91,22 +97,20 @@ def getUpdatedPackages():
 			if "<exception status=""error""" in data:
 				raise Exception("Error loading data")
 			dom = parseString(data)
-			for design in dom.getElementsByTagName('entry'):
+			for package in dom.getElementsByTagName('entry'):
 				isinstalled = False
 				updateavailable = False
-				item_id = str(design.getAttributeNode('id').nodeValue)
-				file_link = str(design.getAttributeNode('file_link').nodeValue)
-				build = int(design.getAttributeNode('build').nodeValue)
+				item_id = str(package.getAttributeNode('id').nodeValue)
+				file_link = str(package.getAttributeNode('file_link').nodeValue)
+				build = int(package.getAttributeNode('build').nodeValue)
 				localbuild = int(metrixDefaults.cfg(metrixDefaults.CONFIG_INSTALLEDPACKAGES,item_id,"build","int"))
 				# add when not only updates or (only updates and online build is higher)
 				if (not localbuild == metrixDefaults.NONEINT):
 					isinstalled = True
 				if build > localbuild:
 					updateavailable = True
-				if build > localbuild:
 					metrix_PackageTools.installPackage(file_link,True,True,item_id,build)
 					config.plugins.MetrixUpdater.RebootRequired.value = True
-					config.plugins.MetrixUpdater.UpdatePopup_Packages.value = True
 		except Exception, e:
 			metrixTools.log('Error getting packages via web',e)
 

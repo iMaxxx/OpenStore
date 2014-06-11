@@ -66,7 +66,7 @@ class OpenScreen(ConfigListScreen, Screen):
 <eLabel position="644,40" size="5,60" backgroundColor="#000000ff" />
 <widget position="500,61" size="136,40" name="sort" foregroundColor="#00bbbbbb" font="Regular; 25" valign="center" backgroundColor="#40000000" transparent="1" halign="right" />
   <eLabel font="Regular; 20" foregroundColor="#00ffffff" backgroundColor="#40000000" halign="left" position="695,619" size="174,33" text="%s" transparent="1" />
- <widget name="menu" backgroundColorSelected="#00282828" foregroundColorSelected="#00ffffff" position="55,122" scrollbarMode="showNever" size="605,555" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
+ <widget name="menu" backgroundColorSelected="#00555555" foregroundColorSelected="#00ffffff" position="55,122" scrollbarMode="showNever" size="605,555" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
   <widget position="55,55" size="453,50" name="title" noWrap="1" foregroundColor="#00ffffff" font="SetrixHD; 33" valign="center" transparent="1" backgroundColor="#40000000" />
   <widget position="679,585" size="533,32" name="isInstalled" foregroundColor="#00ffffff" font="Regular; 20" valign="center" halign="left" transparent="1" backgroundColor="#40000000" />
   <eLabel position="681,620" size="5,40" backgroundColor="#0000ff00" />

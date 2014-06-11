@@ -71,9 +71,11 @@ def _(txt):
 		
 
 class OpenScreen(ConfigListScreen, Screen):
-	skin = """<screen name="OpenStore-Categories" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	skin = """
+<screen name="OpenStore-Categories" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
 <eLabel position="0,0" size="1280,720" backgroundColor="#b0ffffff" zPosition="-50" />
 <eLabel position="30,25" size="1222,668" backgroundColor="#40111111" zPosition="-1" />
+<eLabel position="356,36" size="538,51" text="sponsored by www.ac-sat-corner.eu" foregroundColor="#00ffffff" font="SetrixHD; 32" valign="center" transparent="1" backgroundColor="#40000000" halign="center" />
 <ePixmap position="60,40" size="200,70" transparent="1" alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/images/openstore-logo-small.png" />
 <widget name="list1" backgroundColorSelected="#00009cff" foregroundColorSelected="#00ffffff" position="60,125" scrollbarMode="showNever" size="290,568" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
 <widget name="list2" backgroundColorSelected="#00009cff" foregroundColorSelected="#00ffffff" position="350,125" scrollbarMode="showNever" size="290,568" transparent="1" foregroundColor="#00ffffff" backgroundColor="#40000000" />
