@@ -260,7 +260,7 @@ def getBrand():
 	return boxinfo['brand']
 
 def getRestrictions():
-	if config.plugins.MyMetrix.Store.IgnoreRestrictions.value:
+	if config.plugins.MyMetrix.Store.IgnoreRestrictions.value == True:
 		return "%"
 	CONFIG_SYSTEM_DESC = "/etc/systemdescription.cfg"
 	restriction = "%image::"+ metrixDefaults.getImageName() +"%"
@@ -270,21 +270,19 @@ def getRestrictions():
 	return restriction
 
 def getImageRestriction():
-	if config.plugins.MyMetrix.Store.IgnoreRestrictions.value:
+	if config.plugins.MyMetrix.Store.IgnoreRestrictions.value == True:
 		return "%"
 	CONFIG_SYSTEM_DESC = "/etc/systemdescription.cfg"
 	restriction = "%image::"+ metrixDefaults.getImageName() +"%"
 	if config.plugins.MyMetrix.logLevel.value in ["debug"]:
-		log("RESTRICTIONS: "+restriction)
+		log("RESTRICTION-IMAGE: "+restriction)
 	return restriction
 
 def getOERestriction():
-	if config.plugins.MyMetrix.Store.IgnoreRestrictions.value:
-		return "%"
 	CONFIG_SYSTEM_DESC = "/etc/systemdescription.cfg"
 	restriction =  "%oe::"+metrixDefaults.getOEVersion()+"%"
 	if config.plugins.MyMetrix.logLevel.value in ["debug"]:
-		log("RESTRICTIONS: "+restriction)
+		log("RESTRICTION-OE: "+restriction)
 	return restriction
 
 def getFileDiff(oldfile,newfile):

@@ -91,7 +91,8 @@ def getUpdatedFiles():
 def getUpdatedPackages():
 		menu = []
 		try:
-			params = {'restrictions':metrixTools.getRestrictions(),
+			params = {'restriction-oe':metrixTools.getOERestriction(),
+					'restriction-image':metrixTools.getImageRestriction(),
 					  'category_id':"%"}
 			data = metrixCore.getWeb(metrixDefaults.URL_GET_PACKAGES,True,params)
 			if "<exception status=""error""" in data:
