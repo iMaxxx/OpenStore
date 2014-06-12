@@ -186,7 +186,8 @@ class OpenScreen(ConfigListScreen, Screen ):
 	def getPackages(self):
 		menu = []
 		try:
-			params = {'restrictions':metrixTools.getRestrictions(),
+			params = {'restriction-oe':metrixTools.getOERestriction(),
+					'restriction-image':metrixTools.getImageRestriction(),
 					  'orderby':self.orderby+" "+self.limit,
 					  'category_id':str(self.category_id)}
 			data = metrixCore.getWeb(self.url,True,params)

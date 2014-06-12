@@ -158,7 +158,7 @@ class OpenScreen(ConfigListScreen, Screen):
 		
 		list.append(getConfigListEntry(_("Plugin Developer"),config.plugins.MyMetrix.Store.Plugin_Developer))
 		list.append(getConfigListEntry(_("Log level"),config.plugins.MyMetrix.logLevel))
-		list.append(getConfigListEntry(_("Ignore restrictions (danger!)"),config.plugins.MyMetrix.Store.IgnoreRestrictions))
+		list.append(getConfigListEntry(_("Ignore image restrictions"),config.plugins.MyMetrix.Store.IgnoreRestrictions))
 		
 		self.UpdatePicture()
 		self.onLayoutFinish.append(self.UpdateComponents)

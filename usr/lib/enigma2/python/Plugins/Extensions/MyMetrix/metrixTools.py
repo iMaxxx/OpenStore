@@ -269,6 +269,24 @@ def getRestrictions():
 		log("RESTRICTIONS: "+restriction)
 	return restriction
 
+def getImageRestriction():
+	if config.plugins.MyMetrix.Store.IgnoreRestrictions.value:
+		return "%"
+	CONFIG_SYSTEM_DESC = "/etc/systemdescription.cfg"
+	restriction = "%image::"+ metrixDefaults.getImageName() +"%"
+	if config.plugins.MyMetrix.logLevel.value in ["debug"]:
+		log("RESTRICTIONS: "+restriction)
+	return restriction
+
+def getOERestriction():
+	if config.plugins.MyMetrix.Store.IgnoreRestrictions.value:
+		return "%"
+	CONFIG_SYSTEM_DESC = "/etc/systemdescription.cfg"
+	restriction =  "%oe::"+metrixDefaults.getOEVersion()+"%"
+	if config.plugins.MyMetrix.logLevel.value in ["debug"]:
+		log("RESTRICTIONS: "+restriction)
+	return restriction
+
 def getFileDiff(oldfile,newfile):
 	old_lines = set((line.strip() for line in open(oldfile, 'r+')))
 	file_new = open(newfile, 'r+')
