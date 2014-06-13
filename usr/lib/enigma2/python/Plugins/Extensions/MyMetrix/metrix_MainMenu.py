@@ -125,7 +125,7 @@ class OpenScreen(Screen):
 		self.list.append(self.MetrixListEntry(_("OpenStore"), "OpenStore"))
 		self.list.append(self.MetrixListEntry(_("SkinPart Settings"), "SkinParts"))
 		self.list.append(self.MetrixListEntry(_("MetrixColors Settings"), "metrixColors"))
-		self.list.append(self.MetrixListEntry(_("General Settings"),"general"))
+		self.list.append(self.MetrixListEntry(_("Skin Settings"),"general"))
 		self.list.append(self.MetrixListEntry(_("OpenStore Settings"),"openstoresettings"))
 		self.list.append(self.MetrixListEntry(_("Save My Skin"), "generate"))
 			
