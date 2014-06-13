@@ -61,23 +61,11 @@ import metrixCore
 
 config = metrixDefaults.loadDefaults()
 
-lang = language.getLanguage()
-environ["LANGUAGE"] = lang[:2]
-gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-gettext.textdomain("enigma2")
-gettext.bindtextdomain("MyMetrix", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/MyMetrix/locale/"))
-
 def _(txt):
 	t = gettext.dgettext("MyMetrix", txt)
 	if t == txt:
 		t = gettext.gettext(txt)
 	return t
-
-def translateBlock(block):
-	for x in TranslationHelper:
-		if block.__contains__(x[0]):
-			block = block.replace(x[0], x[1])
-	return block
 
 
 
