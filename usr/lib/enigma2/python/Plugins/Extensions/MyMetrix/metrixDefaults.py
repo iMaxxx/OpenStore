@@ -2,9 +2,8 @@
 # -*- coding: iso-8859-1 -*-
 #######################################################################
 #
-#    MyMetrix for VU+
+#    MyMetrix for enigma2
 #    Coded by iMaxxx (c) 2013
-#    Support: www.vuplus-support.com
 #
 #
 #  This plugin is licensed under the Creative Commons
@@ -51,7 +50,7 @@ import ConfigParser
 
 #############################################################
 VERSION = "2.2a"
-BUILD = '140612'
+BUILD = '140613'
 PLUGIN_DIR = "/usr/lib/enigma2/python/Plugins/Extensions/MyMetrix/"
 SKINS_ROOT = "/usr/share/enigma2/"
 TEMPLATES_DIR = PLUGIN_DIR + "skintemplates/"
